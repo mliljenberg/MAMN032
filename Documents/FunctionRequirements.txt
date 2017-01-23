@@ -1,0 +1,20 @@
+Funktions Krav för spel1 (Funktioner som måste finnas)
+
+
+- Ett Spelrum ska kunna skapas med en unik nyckel.
+
+- Folk ska kunna ansluta till rummet via sin device.
+
+- Det ska finnas en Spelledare (Server) och flera spelare (antal ej bestämt)
+
+- Spelledaren ska kunna presentera ett ord som spelarna då ska kunna läsa.
+
+- Spelledaren ska kunna automatiskt utifrån spelets regler interagera med spelarna.
+
+- Spelarna måste kunna interagera (skicka meddelanden till Spelledaren).
+
+- Spelledaren ska kunna presentera svar och resultat för spelarna.
+
+- Spelarna ska kunna välja sitt favorit svar.
+
+- Poäng ska räknas av spelledaren och visas av denne också, även vilket svar som var rätt ska visas.
