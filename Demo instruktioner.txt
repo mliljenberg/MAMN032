@@ -1,1 +1,9 @@
 Demo Instruktioner
+
+1 öppna Client mappen med Atom eller Webstorm. (ifall du kör Atom instrallera följande extensions: react och terminal-plus)
+
+2 kör kommandot: npm install (krävs att senaste versionen av node är installerad.) (ifall web storm används kan du behöva ändra javascript i prefrences från ES5 till JSX)
+
+3 För att starta kör kommandot: npm start -s
+
+4 programmet ska nu köras utan några problem enjoy 
