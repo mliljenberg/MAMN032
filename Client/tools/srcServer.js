@@ -3,6 +3,7 @@ import webpack from 'webpack';
 import path from 'path';
 import config from '../webpack.config.dev';
 import open from 'open';
+import socket from 'socket.io';
 
 /* eslint-disable no-console */
 
