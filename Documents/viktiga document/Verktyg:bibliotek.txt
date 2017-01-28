@@ -1,0 +1,6 @@
+Biblotek vi tänkte använda oss av
+
+
+Server: Node,express,socket.io
+
+Client: react,jquery,bootstrap
