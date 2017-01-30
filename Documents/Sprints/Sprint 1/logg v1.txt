@@ -13,3 +13,5 @@ Till nästa handledarmöte:
 - Testa wireframes( lo- fi prototyper) på personer i vår primära målgrupp
 - Skapa en slutgitligt wireframe
 - Läs på och få förståelse för de verktyg vi ska använda
+- skapa use cases
+- Ludvig skapar testplan
