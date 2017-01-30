@@ -7,6 +7,8 @@
 - Bestämt att vi ska ses varje måndag för att jobba på projektet
 - Bestämt att vi ska ha handledning varrannan torsdag
 - Bestämt att vi ska ha 2 veckors iterationer
+- Skapat måldokument
+- Skapat functionrequirements
 
 
 Till nästa handledarmöte:
