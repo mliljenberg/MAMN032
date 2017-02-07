@@ -1,7 +1,16 @@
 Vad som gjort under förra sprinten:
-- Börjat testa wireframes( lo- fi prototyper) på personer i vår primära målgrupp
 - Skapa en slutgiltigt wireframe
 - Läst på och få förståelse för de verktyg vi ska använda.
 
-Mål för sprint 2:
+Info:
 Sprint möten kommer hållas klockan 12 måndag lunch.
+
+Mål för sprint 2:
+Sätta upp arkitekturen enligt wireframe.
+Skapa ett overleaf document för rapporten.
+Fylla i sprint 1 i rapporten.
+Bestämma en taskmanager porgram.
+Skriv testmanus och testfrågor.
+Bryta ner baseline i tasks som går att implementera.
+Sätta upp en branch på allas dator.
+Testa wireframes (pilot tester)
