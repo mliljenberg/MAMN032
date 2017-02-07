@@ -11,9 +11,9 @@
 - Skapat functionrequirements
 - skapat use cases
 - Ludvig skapar testplan
+- Skapat en slutgitligt wireframe
 
 Till nästa handledarmöte:
 - Testa wireframes( lo- fi prototyper) på personer i vår primära målgrupp
-- Skapa en slutgitligt wireframe
 - Läs på och få förståelse för de verktyg vi ska använda
 
