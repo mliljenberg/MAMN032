@@ -1,4 +1,4 @@
-- Bestämt vilka verktyg som ska användas
+﻿- Bestämt vilka verktyg som ska användas
 - Skapat 2 versioner för wireframes som ska testas på testpersoner
 - Haft vårt första handledarmöte
 - Bestämt vår idé till rappakalja
@@ -10,9 +10,10 @@
 - Skapat måldokument
 - Skapat functionrequirements
 - skapat use cases
+- Ludvig skapar testplan
 
 Till nästa handledarmöte:
 - Testa wireframes( lo- fi prototyper) på personer i vår primära målgrupp
 - Skapa en slutgitligt wireframe
 - Läs på och få förståelse för de verktyg vi ska använda
-- Ludvig skapar testplan
+
