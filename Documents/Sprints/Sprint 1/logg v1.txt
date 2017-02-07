@@ -1,4 +1,5 @@
-﻿- Bestämt vilka verktyg som ska användas
+Avklarade tasks:
+- Bestämt vilka verktyg som ska användas
 - Skapat 2 versioner för wireframes som ska testas på testpersoner
 - Haft vårt första handledarmöte
 - Bestämt vår idé till rappakalja
@@ -13,7 +14,7 @@
 - Ludvig skapar testplan
 - Skapat en slutgitligt wireframe
 
-Till nästa handledarmöte:
+Kvar:
 - Testa wireframes( lo- fi prototyper) på personer i vår primära målgrupp
 - Läs på och få förståelse för de verktyg vi ska använda
 
