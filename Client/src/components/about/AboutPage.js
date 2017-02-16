@@ -8,7 +8,7 @@ class AboutPage extends React.Component {
     return (
       <div>
         <h1>About</h1>
-        <p>This application uses React, Redux, React Router and a variety of other helpful libraries.</p>
+        <p>This is a project made for a course at Lunds University, And also we are awesome ;) exept Joel who is a faggot.</p>
       </div>
     );
   }
