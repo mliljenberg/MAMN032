@@ -1,0 +1,11 @@
+Gjorts:
+
+
+Kvar:
+- Fylla i sprint 1 och 2 i rapporten.
+- Bryta ner baseline i tasks som går att implementera.
+- Sätta upp en branch på allas dator.
+- Byggt skelettet till koden
+- Satt upp en Architektur/Plan för koden.
+
+

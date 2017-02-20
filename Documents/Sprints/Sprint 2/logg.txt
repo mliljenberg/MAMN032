@@ -4,9 +4,9 @@ Gjorts:
 - Skapa ett overleaf document för rapporten. https://www.overleaf.com/8222541nhnvhdfmrxjz#/29078405/
 - Bestämma en taskmanager porgram. Trello
 - Testa wireframes (pilot tester), några, behöver nån mer
+- Sätta upp arkitekturen enligt wireframe.
 
 Kvar:
-- Sätta upp arkitekturen enligt wireframe.
 - Fylla i sprint 1 i rapporten.
 - Bryta ner baseline i tasks som går att implementera.
 - Sätta upp en branch på allas dator.
