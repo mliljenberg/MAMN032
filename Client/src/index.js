@@ -14,7 +14,6 @@ import {loadCourses} from './actions/courseAction';
 
 
 const store= configureStore();
-
 store.dispatch(loadCourses());
 
 render(
