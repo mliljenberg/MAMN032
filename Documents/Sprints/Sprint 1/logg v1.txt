@@ -1,3 +1,4 @@
+Avklarade tasks:
 - Bestämt vilka verktyg som ska användas
 - Skapat 2 versioner för wireframes som ska testas på testpersoner
 - Haft vårt första handledarmöte
@@ -7,9 +8,13 @@
 - Bestämt att vi ska ses varje måndag för att jobba på projektet
 - Bestämt att vi ska ha handledning varrannan torsdag
 - Bestämt att vi ska ha 2 veckors iterationer
+- Skapat måldokument
+- Skapat functionrequirements
+- skapat use cases
+- Ludvig skapar testplan
+- Skapat en slutgitligt wireframe
 
-
-Till nästa handledarmöte:
+Kvar:
 - Testa wireframes( lo- fi prototyper) på personer i vår primära målgrupp
-- Skapa en slutgitligt wireframe
 - Läs på och få förståelse för de verktyg vi ska använda
+

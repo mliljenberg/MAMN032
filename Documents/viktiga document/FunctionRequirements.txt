@@ -5,7 +5,7 @@ Funktions Krav för spel1 (Funktioner som måste finnas)
 
 - Folk ska kunna ansluta till rummet via sin device.
 
-- Det ska finnas en Spelledare (Server) och flera spelare (antal ej bestämt)
+- Det ska finnas en Spelledare (Server)(som ska styras automatiskt) och flera spelare (antal ej bestämt)
 
 - Spelledaren ska kunna presentera ett ord som spelarna då ska kunna läsa.
 
@@ -18,3 +18,8 @@ Funktions Krav för spel1 (Funktioner som måste finnas)
 - Spelarna ska kunna välja sitt favorit svar.
 
 - Poäng ska räknas av spelledaren och visas av denne också, även vilket svar som var rätt ska visas.
+- En vinnare ska kunna presenteras i slutet av spelet.
+
+- När spelet är över ska en möjlighet till nytt spel ges.
+
+- Endast de svarsalternativ som spelaren kan välja ska presenteras på dennes device (man ska inte kunna rösta på sitt eget svar.
