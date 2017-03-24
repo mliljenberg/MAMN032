@@ -1,5 +1,5 @@
 Gjorts:
-
+gjort egen branch (ludde)
 
 Kvar:
 - Fylla i sprint 1 och 2 i rapporten.
