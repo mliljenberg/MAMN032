@@ -6,6 +6,8 @@ import HostPage from './components/host/HostPage';
 import PlayerPage from './components/player/PlayerPage';
 import AboutPage from './components/about/AboutPage';
 import ManageCoursePage from './components/about/ManageCoursePage';
+import createGame from './components/createGame/CreateGame';
+import joinGame from './components/joinGame/joinGame';
 
 
 export default (
@@ -16,5 +18,7 @@ export default (
     <Route path="about" component={AboutPage} />
     <Route path="course" component={ManageCoursePage} />
     <Route path="course/:id" component={ManageCoursePage} />
+    <Route path="createGame" component={createGame} />
+    <Route path="joinGame" component={joinGame} />
   </Route>
 );

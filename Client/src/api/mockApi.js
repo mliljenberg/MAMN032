@@ -35,6 +35,8 @@ class Api {
       }, delay);
     });
   }
+
+
 }
 
 export default Api;

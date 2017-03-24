@@ -30,7 +30,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
       //här bindar du alla dina actiones tror inte du behöver ändra den
-        actions: bindActionCreators(actions, dispatch)
+      //  actions: bindActionCreators(actions, dispatch)
     };
 }
 
