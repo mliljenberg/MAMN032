@@ -1,11 +1,14 @@
 Gjorts:
-gjort egen branch (ludde)
+gjort egen branch (alla)
+- Satt upp en Architektur/Plan för koden.(valt att avakta med denna då vi inte förstår hur koden funkar, vi testar med att böra implementera några lätta useCases innan vi börjar med detta i en senare sprint)
+- Byggt skelettet till koden (flyttat till sprint 4)
+- Bryta ner baseline i tasks som går att implementera. (detta kommer göras efter sklettet i sprint 4 är skapat så vi får lite koll på vad som behövs)
 
 Kvar:
 - Fylla i sprint 1 och 2 i rapporten.
-- Bryta ner baseline i tasks som går att implementera.
-- Sätta upp en branch på allas dator.
-- Byggt skelettet till koden
-- Satt upp en Architektur/Plan för koden.
+
+
+
+
 
 
