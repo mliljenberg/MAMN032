@@ -35,6 +35,13 @@ class Api {
       }, delay);
     });
   }
+  static SendMessage() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        //sätt in koden här men ta bort timeouten
+      }, delay);
+    });
+  }
 
 
 }
