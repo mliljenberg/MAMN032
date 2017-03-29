@@ -6,12 +6,17 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as courseActions from '../../actions/courseAction';
 import CourseList from './CourseList';
+import {browserHistory} from 'react-router';
 
 class AboutPage extends React.Component {
   constructor(props,context){
     super(props,context);
+    this.redirectToAddCoursePage = this.redirectToAddCoursePage.bind(this);
   }
 
+  redirectToAddCoursePage(){
+    browserHistory.push('/course');
+}
 
 
  render () {
@@ -19,7 +24,8 @@ class AboutPage extends React.Component {
     return(
       <div>
        <h1>AboutPage</h1>
-        <p>Some about us stuff, currently used as a example of how we should use redux</p>
+        <p>Some about us stuff, currently used as a example of how we should use redu</p>
+        <button className="btn btn-success" onClick={this.redirectToAddCoursePage}>Add Course</button>
         <CourseList courses={courses}/>
       </div>
     );
