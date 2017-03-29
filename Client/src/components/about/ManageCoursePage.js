@@ -30,6 +30,7 @@ updateCourseState(event) {
 }
 saveCourse(event){
       event.preventDefault();
+      debugger;
       this.props.actions.saveCourse(this.state.course);
       this.context.router.push('/about');
 }

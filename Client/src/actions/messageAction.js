@@ -1,6 +1,6 @@
 
 import * as types from './ActionTypes';
-import courseApi from '../api/mockApi';
+import api from '../api/mockApi';
 
 
 export function loadMessagesSuccsess(messages) {
@@ -11,11 +11,14 @@ export function addMessageSuccsess(message) {
   return { type: types.ADD_MESSAGE_SUCCESS, message};
 
 }
+export function updateMessageSuccess(message) {
+  return {type: types.UPDATE_MESSAGE_SUCCESS, message};
+}
 
 
 export function loadMessages() {
   return function (dispatch) {
-    return courseApi.GetMessages().then(messages => {
+    return api.GetMessages().then(messages => {
       dispatch(loadMessagesSuccsess(messages));
     }).catch((error) => {
 
@@ -24,13 +27,10 @@ export function loadMessages() {
   };
 }
 
-export function addMessage() {
+export function addMessage(message) {
   return function(dispatch) {
-    return (message => {
-      dispatch(addMessageSuccsess(message));
-    }).catch((error) => {
-
-      throw error;
+    return api.SaveMessage(message).then(message => {
+      message.id ? dispatch(updateMessageSuccess(message)) : dispatch(addMessageSuccsess(message));
     });
   };
 

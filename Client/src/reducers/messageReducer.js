@@ -13,13 +13,14 @@ export default function messageReducer(state = initialState.messages,action) {
         ...state,
         Object.assign({}, action.message)
       ];
-/**
+
+
     case types.UPDATE_MESSAGE_SUCCESS:
       return [
         ...state.filter(message => message.id !== action.message.id),
         Object.assign({}, action.message)
       ];
- */
+
 
     default: return state;
   }

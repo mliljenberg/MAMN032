@@ -9,14 +9,16 @@ class PlayerPage extends React.Component {
     constructor(props, context) {
         super(props, context);
       this.state = {
+
         message: Object.assign({}, props.message)
 
       };
+      this.updatePlayerState = this.updatePlayerState.bind(this);
       this.savePlayer = this.savePlayer.bind(this);
     }
 
-    addPlayer(event){
-    let field = event.target.value;
+    updatePlayerState(event){
+    let field = event.target.name;
       let message = this.state.message;
       message[field] = event.target.value;
       return this.setState({message: message});
@@ -35,7 +37,6 @@ class PlayerPage extends React.Component {
             <div>
               <h1>Player Page</h1>
               <ul className="list-group">
-
                 {messages.map(message =>
                   <li className="list-group-item" key={message.id}>
                     {message.value}
@@ -46,9 +47,9 @@ class PlayerPage extends React.Component {
 
               <div>
 
-              <TextInput name="input" label="User Name" onChange={this.addPlayer}/>
+              <TextInput name="value" label="User Name" onChange={this.updatePlayerState}/>
 
-              <button className="btn btn-success" onClick={this.addPlayer}>Join Game</button>
+              <button className="btn btn-success" onClick={this.savePlayer}>Join Game</button>
             </div>
             </div>
         );
@@ -65,9 +66,11 @@ PlayerPage.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
-    return {
+  const message = {id:'3',value:''};
+  return {
         messages: state.messages,
-        message: state.message
+        message: message
+
     };
 }
 function mapDispatchToProps(dispatch) {

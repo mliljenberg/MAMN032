@@ -27,7 +27,7 @@ const messages = [
 
 //This would be performed on the server in a real app. Just stubbing in.
 const generateId = () => {
-  return 1;
+  return Math.random(0,10000);
 };
 
 class Api {
@@ -50,6 +50,16 @@ class Api {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(Object.assign([], messages));
+      }, delay);
+    });
+  }
+  static SaveMessage(message) {
+    message = Object.assign({},message);
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        message.id = generateId();
+        messages.push(message);
+        resolve(message);
       }, delay);
     });
   }
