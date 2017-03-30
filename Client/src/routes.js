@@ -12,7 +12,7 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={HomePage} />
     <Route path="host" component={HostPage} />
-    <Route path="player" component={PlayerPage} />
+    <Route path="room/:id" component={PlayerPage} />
     <Route path="about" component={AboutPage} />
     <Route path="course" component={ManageCoursePage} />
     <Route path="course/:id" component={ManageCoursePage} />
