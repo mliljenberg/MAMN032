@@ -24,6 +24,18 @@ const messages = [
   }
 
 ];
+const players = [
+  {
+    id:"0",
+    value: 'Marcus'
+  },
+  {
+    id:"1",
+    value: 'Ludde'
+  }
+
+];
+
 
 //This would be performed on the server in a real app. Just stubbing in.
 const generateId = () => {
@@ -46,6 +58,7 @@ class Api {
       }, delay);
     });
   }
+
   static GetMessages() {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -53,8 +66,9 @@ class Api {
       }, delay);
     });
   }
+
   static SaveMessage(message) {
-    message = Object.assign({},message);
+    message = Object.assign({}, message);
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         message.id = generateId();
@@ -63,6 +77,26 @@ class Api {
       }, delay);
     });
   }
+
+  static GetPlayers() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(Object.assign([], players));
+      }, delay);
+    });
+  }
+
+  static SavePlayer(player) {
+    player = Object.assign({}, player);
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+
+        messages.push(player);
+        resolve(player);
+      }, delay);
+    });
+  }
 }
+
 
 export default Api;
