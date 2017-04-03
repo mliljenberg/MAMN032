@@ -3,5 +3,7 @@
  */
 export default {
   authors: [],
-  courses: []
+  courses: [],
+  messages: [],
+  players: []
 };
