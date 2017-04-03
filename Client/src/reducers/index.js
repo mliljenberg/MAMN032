@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
   messages: messages,
   players: players,
   words: words,
-  room: room
+  room: room,
   answers: answers,
   myself: myself
 });
