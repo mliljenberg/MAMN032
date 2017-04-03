@@ -5,8 +5,8 @@ class HostPage extends React.Component {
   render() {
     return (
       <div>
-      </div>
 
+      </div>
     );
   }
 }

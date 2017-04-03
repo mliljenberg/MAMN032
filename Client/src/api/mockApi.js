@@ -53,6 +53,8 @@ const words =[
   }
 ];
 
+const answers = [];
+
 
 //This would be performed on the server in a real app. Just stubbing in.
 const generateId = () => {
@@ -135,6 +137,37 @@ class Api {
   }
 
 
+
+  static GetAnswers() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(Object.assign([], answers));
+      }, delay);
+    });
+  }
+
+  static SaveAnswer(answer) {
+    answer = Object.assign({}, answer);
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+
+        answers.push(answer);
+        resolve(answer);
+      }, delay);
+    });
+  }
+
+
+  static AddMyself(myself) {
+    myself = Object.assign({}, myself);
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+
+        myself.push(myself);
+        resolve(myself);
+      }, delay);
+    });
+  }
 }
 
 

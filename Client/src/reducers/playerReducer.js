@@ -4,7 +4,7 @@ import initialState from './initialState';
 
 export default function messageReducer(state = initialState.players,action) {
   switch(action.type){
-    case types.LOAD_PLAYERS_SUCCSESS:
+    case types.LOAD_PLAYERS_SUCCESS:
       return action.players;
 
     case types.ADD_PLAYER_SUCCESS:

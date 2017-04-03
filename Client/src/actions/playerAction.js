@@ -3,11 +3,11 @@ import * as types from './ActionTypes';
 import api from '../api/mockApi';
 
 
-export function loadPlayersSuccsess(players) {
-  return { type: types.LOAD_PLAYERS_SUCCSESS, players};
+export function loadPlayersSuccess(players) {
+  return { type: types.LOAD_PLAYERS_SUCCESS, players};
 
 }
-export function addPlayerSuccsess(player) {
+export function addPlayerSuccess(player) {
   return { type: types.ADD_PLAYER_SUCCESS, player};
 
 }
@@ -19,7 +19,7 @@ export function updatePlayersSuccess(player) {
 export function loadPlayers() {
   return function (dispatch) {
     return api.GetPlayers().then(players => {
-      dispatch(loadPlayersSuccsess(players));
+      dispatch(loadPlayersSuccess(players));
     }).catch((error) => {
 
       throw error;
@@ -30,7 +30,7 @@ export function loadPlayers() {
 export function addPlayer(player) {
   return function(dispatch) {
     return api.SavePlayer(player).then(player => {
-      player.id ? dispatch(updatePlayersSuccess(player)) : dispatch(addPlayerSuccsess(player));
+      player.id ? dispatch(updatePlayersSuccess(player)) : dispatch(addPlayerSuccess(player));
     });
   };
 
