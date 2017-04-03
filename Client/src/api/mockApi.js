@@ -91,7 +91,7 @@ class Api {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
 
-        messages.push(player);
+        players.push(player);
         resolve(player);
       }, delay);
     });

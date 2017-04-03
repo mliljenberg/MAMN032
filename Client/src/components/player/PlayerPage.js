@@ -32,6 +32,7 @@ class PlayerPage extends React.Component {
 
   savePlayer(event){
     event.preventDefault();
+
     this.props.actions.addPlayer(this.state.player);
 
   }
@@ -76,7 +77,7 @@ class PlayerPage extends React.Component {
               <div>
                 <ul className="list-group">
                   {players.map(player =>
-                    <li className="list-group-item" key={player.id}>
+                    <li className="list-group-item" key={player.value}>
                       {player.value}
                     </li>
                   )}
