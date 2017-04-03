@@ -3,7 +3,9 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as messageActions from '../../actions/messageAction';
 import * as playerActions from '../../actions/playerAction';
+import * as roomActions from '../../actions/roomAction';
 import TextInput from '../common/TextInput';
+import {Link, browserHistory}  from 'react-router';
 
 
 class PlayerPage extends React.Component {
@@ -12,28 +14,43 @@ class PlayerPage extends React.Component {
       this.state = {
 
         message: Object.assign({}, props.message),
-        player: Object.assign({}, props.player)
+        player: Object.assign({}, props.player),
+        room: Object.assign({}, props.room)
 
 
       };
       this.updatePlayerState = this.updatePlayerState.bind(this);
-      this.savePlayer = this.savePlayer.bind(this);
+      this.joinRoom = this.joinRoom.bind(this);
+      this.updateRoomState = this.updateRoomState.bind(this);
     }
 
     updatePlayerState(event){
+
     let field = event.target.name;
       let player = this.state.player;
 
       player[field] = event.target.value;
-      player['id'] = event.target.value;
       return this.setState({player: player});
 
     }
+  updateRoomState(event){
 
-  savePlayer(event){
+    let field = event.target.name;
+    let room = this.state.room;
+
+    room[field] = event.target.value;
+    return this.setState({room: room});
+
+  }
+
+
+  joinRoom(event){
     event.preventDefault();
 
     this.props.actions.addPlayer(this.state.player);
+    this.props.actions.joinRoom(this.state.room);
+
+    browserHistory.push('/game/'+ this.state.room.id);
 
   }
   updateMessageState(event){
@@ -56,23 +73,6 @@ class PlayerPage extends React.Component {
       const {players} = this.props;
         return (
             <div>
-              <h1>Player Page</h1>
-              <ul className="list-group">
-                {messages.map(message =>
-                  <li className="list-group-item" key={message.id}>
-                    {message.value}
-                  </li>
-                )}
-
-              </ul>
-
-              <div>
-
-
-              <TextInput name="value" label="User Name" onChange={this.updateMessageState}/>
-
-              <button className="btn btn-success" onClick={this.saveMessage}>Join Game</button>
-            </div>
 
               <div>
                 <ul className="list-group">
@@ -88,8 +88,9 @@ class PlayerPage extends React.Component {
 
 
                   <TextInput name="value" label="User Name" onChange={this.updatePlayerState}/>
+                  <TextInput name="id" label="Room" onChange={this.updateRoomState}/>
 
-                  <button className="btn btn-success" onClick={this.savePlayer}>Join Game</button>
+                  <button className="btn btn-success" onClick={this.joinRoom}>Join Game</button>
                 </div>
               </div>
 
@@ -104,7 +105,8 @@ PlayerPage.propTypes = {
   actions: PropTypes.object.isRequired,
   messages: PropTypes.array.isRequired,
   players: PropTypes.array.isRequired,
-  player : PropTypes.object.isRequired
+  player : PropTypes.object.isRequired,
+  room: PropTypes.object.isRequired
     //myprop: PropTypes.string.isRequired
 
 };
@@ -118,13 +120,16 @@ function mapStateToProps(state, ownProps) {
         messages: state.messages,
         players: state.players,
         message: message,
-        player: player
+        player: player,
+        room: state.room
 
     };
 }
 function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(Object.assign({},messageActions,playerActions), dispatch)
+
+  return {
+
+        actions: bindActionCreators(Object.assign({},messageActions,playerActions,roomActions), dispatch)
     };
 }
 

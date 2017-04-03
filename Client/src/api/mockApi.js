@@ -2,6 +2,8 @@
  * Created by mliljenberg on 2017-03-24.
  */
 import delay from './delay';
+import * as playerAction from '../actions/playerAction';
+
 
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
@@ -36,6 +38,21 @@ const players = [
 
 ];
 
+const words =[
+  {
+    word: "Snopp",
+    def: "Något Martin saknar"
+  },
+  {
+    word: "Vagina",
+    def: "Något Martin har"
+  },
+  {
+    word: "Stor Snopp",
+    def: "Något Joel har"
+  }
+];
+
 
 //This would be performed on the server in a real app. Just stubbing in.
 const generateId = () => {
@@ -52,6 +69,13 @@ class Api {
   }
 
   static CreateRoom() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        //sätt in koden här men ta bort timeouten
+      }, delay);
+    });
+  }
+  static JoinRoom() {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         //sätt in koden här men ta bort timeouten
@@ -96,6 +120,18 @@ class Api {
       }, delay);
     });
   }
+
+  static ServerUppdate() {
+    let player = Object.assign({}, player);
+    //socket stuff
+    let exempel = {};
+    if (exempel.type === 'player'){
+      playerAction.updatePlayersSuccess(player);
+    }
+
+  }
+
+
 }
 
 

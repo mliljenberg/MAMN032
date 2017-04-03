@@ -4,12 +4,20 @@ import path from 'path';
 import config from '../webpack.config.dev';
 import open from 'open';
 import socket from 'socket.io';
+import words from './words';
 
 /* eslint-disable no-console */
 
 const port = 3000;
 const app = express();
 const compiler = webpack(config);
+
+const server = require('http').createServer(app);
+const io = require('socket.io').listen(server);
+server.listen(3000);
+console.log('server running...');
+
+//console.log(words[0].def);
 
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
@@ -22,10 +30,31 @@ app.get('*', function(req, res) {
   res.sendFile(path.join( __dirname, '../src/index.html'));
 });
 
-app.listen(port, function(err) {
+/*app.listen(port, function(err) {
   if (err) {
     console.log(err);
   } else {
     open(`http://localhost:${port}`);
   }
+});*/
+
+io.sockets.on('connection', function (socket) {
+  console.log("A player connected");
+
+  socket.on('join room', function (data) {
+    console.log("Trying to join room: "+data);
+    socket.join(data);
+  });
+
+  console.log('new connection');
+  socket.on('disconnection', function (data) {
+    console.log('disconnection');
+
+  });
+
+  socket.on('send message', function (data) {
+    console.log("Trying to send data to only room: "+data);
+    io.to(data).emit('new message');
+  });
+
 });

@@ -5,5 +5,7 @@ export default {
   authors: [],
   courses: [],
   messages: [],
-  players: []
+  players: [],
+  room: {},
+  words: []
 };
