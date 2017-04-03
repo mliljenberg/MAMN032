@@ -1,0 +1,8 @@
+Gjorts:
+
+
+Kvar:
+- Implementera tasks i Trello.
+- Sätt upp en Architektur.
+- Skriv om sprint 2 och 3 i rapporten.
+
