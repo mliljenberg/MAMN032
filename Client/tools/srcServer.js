@@ -7,8 +7,8 @@ import open from 'open';
 import socket from 'socket.io';
 import words from './words';
 
-let users = [];
-let connections = [];
+const users = [];
+const connections = [];
 
 /* eslint-disable no-console */
 
@@ -22,13 +22,6 @@ server.listen(3000);
 console.log('server running...');
 
 //console.log(words[0].def);
-
-
-const server = require('http').createServer(app);
-const io = require('socket.io').listen(server);
-
-server.listen(3000);
-console.log('Server running...');
 
 
 app.use(require('webpack-dev-middleware')(compiler, {
@@ -75,7 +68,7 @@ io.sockets.on('connection', function (socket) {
 });
 
 
-
+/**
 
 io.sockets.on('connection', function(socket) {
 
@@ -106,3 +99,4 @@ io.sockets.on('connection', function(socket) {
 
 
 });
+ **/
