@@ -3,8 +3,12 @@ import webpack from 'webpack';
 import path from 'path';
 import config from '../webpack.config.dev';
 import open from 'open';
+
 import socket from 'socket.io';
 import words from './words';
+
+let users = [];
+let connections = [];
 
 /* eslint-disable no-console */
 
@@ -19,6 +23,14 @@ console.log('server running...');
 
 //console.log(words[0].def);
 
+
+const server = require('http').createServer(app);
+const io = require('socket.io').listen(server);
+
+server.listen(3000);
+console.log('Server running...');
+
+
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath
@@ -30,7 +42,10 @@ app.get('*', function(req, res) {
   res.sendFile(path.join( __dirname, '../src/index.html'));
 });
 
-/*app.listen(port, function(err) {
+
+/*
+app.listen(port, function(err) {
+
   if (err) {
     console.log(err);
   } else {
@@ -56,5 +71,38 @@ io.sockets.on('connection', function (socket) {
     console.log("Trying to send data to only room: "+data);
     io.to(data).emit('new message');
   });
+
+});
+
+
+
+
+io.sockets.on('connection', function(socket) {
+
+  connections.push(socket);
+  console.log("New socket connected");
+  console.log(connections.length + " connections established");
+
+
+  socket.on('disconnect', function (data) {
+
+    connections.splice(connections.indexOf(socket), 1);
+    console.log(connections.length + " connections established");
+    connections.slice(connections.indexOf(socket), 1);
+
+
+  });
+
+//Hantera messages
+  socket.on('send message', function(data) {
+    io.sockets.emit('new message', {
+      name: data.name,
+      room: data.room
+      //user: socket.username
+    });
+  });
+
+
+
 
 });

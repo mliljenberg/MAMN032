@@ -75,13 +75,16 @@ class Api {
       }, delay);
     });
   }
+
   static JoinRoom() {
+
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         //sätt in koden här men ta bort timeouten
       }, delay);
     });
   }
+
 
   static GetMessages() {
     return new Promise((resolve, reject) => {
