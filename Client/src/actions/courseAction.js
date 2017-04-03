@@ -3,12 +3,12 @@ import courseApi from '../api/mockCourseApi';
 import authorApi from '../api/mockAuthorApi';
 //import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 
-export function loadCoursesSuccsess(courses) {
-  return { type: types.LOAD_COURSES_SUCCSESS, courses};
+export function loadCoursesSuccess(courses) {
+  return { type: types.LOAD_COURSES_SUCCESS, courses};
 
 }
-export function loadAuthorsSuccsess(authors) {
-  return { type: types.LOAD_AUTHORS_SUCCSESS, authors};
+export function loadAuthorsSuccess(authors) {
+  return { type: types.LOAD_AUTHORS_SUCCESS, authors};
 
 }
 export function createCourseSuccess(course) {
@@ -22,7 +22,7 @@ export function updateCourseSuccess(course) {
 export function loadCourses() {
   return function (dispatch) {
     return courseApi.getAllCourses().then(courses => {
-      dispatch(loadCoursesSuccsess(courses));
+      dispatch(loadCoursesSuccess(courses));
     }).catch((error) => {
 
       throw error;
@@ -33,7 +33,7 @@ export function loadCourses() {
   export function loadAuthors() {
     return function(dispatch) {
       return authorApi.getAllAuthors().then(authors => {
-        dispatch(loadAuthorsSuccsess(authors));
+        dispatch(loadAuthorsSuccess(authors));
       }).catch((error) => {
 
         throw error;
