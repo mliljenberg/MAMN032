@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import * as messageActions from '../../actions/messageAction';
 import * as playerActions from '../../actions/playerAction';
 import * as roomActions from '../../actions/roomAction';
+import * as mySelfActions from '../../actions/myselfAction';
 import TextInput from '../common/TextInput';
 import {Link, browserHistory}  from 'react-router';
 
@@ -15,13 +16,15 @@ class PlayerPage extends React.Component {
 
         message: Object.assign({}, props.message),
         player: Object.assign({}, props.player),
-        room: Object.assign({}, props.room)
+        room: Object.assign({}, props.room),
+        myself: Object.assign({}, props.myself)
 
 
       };
       this.updatePlayerState = this.updatePlayerState.bind(this);
       this.joinRoom = this.joinRoom.bind(this);
       this.updateRoomState = this.updateRoomState.bind(this);
+
     }
 
     updatePlayerState(event){
@@ -47,8 +50,10 @@ class PlayerPage extends React.Component {
   joinRoom(event){
     event.preventDefault();
 
+    this.props.actions.addMyself(this.state.player);
     this.props.actions.addPlayer(this.state.player);
     this.props.actions.joinRoom(this.state.room);
+
 
     browserHistory.push('/game/'+ this.state.room.id);
 
@@ -106,7 +111,8 @@ PlayerPage.propTypes = {
   messages: PropTypes.array.isRequired,
   players: PropTypes.array.isRequired,
   player : PropTypes.object.isRequired,
-  room: PropTypes.object.isRequired
+  room: PropTypes.object.isRequired,
+  myself: PropTypes.object.isRequired
     //myprop: PropTypes.string.isRequired
 
 };
@@ -121,7 +127,8 @@ function mapStateToProps(state, ownProps) {
         players: state.players,
         message: message,
         player: player,
-        room: state.room
+        room: state.room,
+        myself: state.myself
 
     };
 }
@@ -129,7 +136,7 @@ function mapDispatchToProps(dispatch) {
 
   return {
 
-        actions: bindActionCreators(Object.assign({},messageActions,playerActions,roomActions), dispatch)
+        actions: bindActionCreators(Object.assign({},messageActions,playerActions,roomActions, mySelfActions), dispatch)
     };
 }
 

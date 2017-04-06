@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import io from 'socket.io-client';
 const socket = io.connect();
 import $ from 'jquery';
-
+import * as myselfAction from '../../actions/myselfAction';
 
 class GamePage extends React.Component {
   constructor(props, context) {
@@ -12,6 +12,7 @@ class GamePage extends React.Component {
 
     socket.emit('join room', window.location.href.substr(window.location.href.lastIndexOf('/') + 1));
     console.log("Trying to join room/client");
+
 
     socket.on('new message', function () {
       $('#list').append('<li> Tryckte på knappen </li>');
@@ -24,11 +25,19 @@ class GamePage extends React.Component {
   }
 
   render() {
+    const {players} = this.props;
+
     return (
       <div>
-        GAMEPAGE
-        <br/>
-        <button className="btn btn-default" onClick={this.buttonClicked}>Click me</button>
+        <ul className="list-group">
+          {players.map(player =>
+            <li className="list-group-item" key={player.value}>
+              {player.value}
+            </li>
+          )}
+
+        </ul>
+
         <ul id="list"></ul>
       </div>
     );
@@ -37,19 +46,27 @@ class GamePage extends React.Component {
 
 }
 GamePage.propTypes = {
-  //myprop: PropTypes.string.isRequired
+
+
+
+  myself : PropTypes.object.isRequired,
+  players: PropTypes.array.isRequired
 
 };
 
 function mapStateToProps(state, ownProps) {
+ debugger;
   return {
-    // dina props : state.dina props
+
+    myself: state.myself,
+    players: state.players
+
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    //här bindar du alla dina actiones tror inte du behöver ändra den
-    //actions: bindActionCreators(actions, dispatch)
+
+    actions: bindActionCreators(Object.assign({},myselfAction), dispatch)
   };
 }
 

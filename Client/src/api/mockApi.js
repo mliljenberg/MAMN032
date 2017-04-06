@@ -3,6 +3,7 @@
  */
 import delay from './delay';
 import * as playerAction from '../actions/playerAction';
+import * as myselfAction from '../actions/myselfAction';
 
 
 // This file mocks a web API by working with the hard-coded data below.
@@ -54,6 +55,8 @@ const words =[
 ];
 
 const answers = [];
+
+let myself={};
 
 
 //This would be performed on the server in a real app. Just stubbing in.
@@ -158,17 +161,16 @@ class Api {
   }
 
 
-  static AddMyself(myself) {
-    myself = Object.assign({}, myself);
+  static AddMyself(m) {
+    m = Object.assign({}, m);
     return new Promise((resolve, reject) => {
       setTimeout(() => {
 
-        myself.push(myself);
-        resolve(myself);
+        myself=m;
+        resolve(m);
       }, delay);
     });
   }
 }
-
 
 export default Api;

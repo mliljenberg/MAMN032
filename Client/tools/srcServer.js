@@ -3,12 +3,14 @@ import webpack from 'webpack';
 import path from 'path';
 import config from '../webpack.config.dev';
 import open from 'open';
+import players from './players';
 
 import socket from 'socket.io';
 import words from './words';
 
 const users = [];
 const connections = [];
+const playersList = players;
 
 /* eslint-disable no-console */
 
@@ -20,6 +22,7 @@ const server = require('http').createServer(app);
 const io = require('socket.io').listen(server);
 server.listen(3000);
 console.log('server running...');
+console.log(playersList[0].player +" is in room "+ playersList[0].room);
 
 //console.log(words[0].def);
 
@@ -68,35 +71,3 @@ io.sockets.on('connection', function (socket) {
 });
 
 
-/**
-
-io.sockets.on('connection', function(socket) {
-
-  connections.push(socket);
-  console.log("New socket connected");
-  console.log(connections.length + " connections established");
-
-
-  socket.on('disconnect', function (data) {
-
-    connections.splice(connections.indexOf(socket), 1);
-    console.log(connections.length + " connections established");
-    connections.slice(connections.indexOf(socket), 1);
-
-
-  });
-
-//Hantera messages
-  socket.on('send message', function(data) {
-    io.sockets.emit('new message', {
-      name: data.name,
-      room: data.room
-      //user: socket.username
-    });
-  });
-
-
-
-
-});
- **/
