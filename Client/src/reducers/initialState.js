@@ -9,5 +9,5 @@ export default {
   room: {},
   words: [],
   answers: [],
-  myself: []
+  myself: {}
 };

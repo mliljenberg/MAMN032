@@ -55,7 +55,6 @@ GamePage.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
- debugger;
   return {
 
     myself: state.myself,
