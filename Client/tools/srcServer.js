@@ -4,7 +4,7 @@ import path from 'path';
 import config from '../webpack.config.dev';
 import open from 'open';
 import players from './players';
-
+import * as header from '../src/headerConstants';
 import socket from 'socket.io';
 import words from './words';
 
@@ -13,10 +13,17 @@ const connections = [];
 const playersList = players;
 
 /* eslint-disable no-console */
-
+const rooms = new Map();
 const port = 3000;
 const app = express();
 const compiler = webpack(config);
+const player = {id:"", points:0};
+const word = {word:"", def:""};
+const answer = {player:{},word:{}, def:""};
+const clientState = () => {
+
+  return {room:"", words:[],players:[],url:"",answers:[] };
+};
 
 const server = require('http').createServer(app);
 const io = require('socket.io').listen(server);
@@ -52,9 +59,24 @@ app.listen(port, function(err) {
 io.sockets.on('connection', function (socket) {
   console.log("A player connected");
 
-  socket.on('join room', function (data) {
+  socket.on(header.JOIN_ROOM, function (data) {
     console.log("Trying to join room: "+data);
     socket.join(data);
+    let temp = clientState();
+    temp.room = data;
+    rooms.set(data, Object.assign({}, temp));
+
+  });
+  socket.on(header.GET_PLAYERS, function (data) {
+    io.to(data).emit('new message',["1",'2','3']);
+    setTimeout(() => {
+      io.to(data).emit('new message',["3",'2','1']);
+      console.log("sent seconda data message");
+    }, 10);
+    setTimeout(() => {
+      io.to(data).emit(header.GET_PLAYERS,["3",'3','3']);
+      console.log("sent third data message");
+    }, 3000);
   });
 
   console.log('new connection');
@@ -64,7 +86,8 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('send message', function (data) {
-    console.log("Trying to send data to only room: "+data);
+    console.log("Trying to send data to only room: "+ data);
+
     io.to(data).emit('new message');
   });
 

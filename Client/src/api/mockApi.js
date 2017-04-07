@@ -4,7 +4,8 @@
 import delay from './delay';
 import * as playerAction from '../actions/playerAction';
 import * as myselfAction from '../actions/myselfAction';
-
+import io from 'socket.io-client';
+import * as header from '../headerConstants';
 
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
@@ -57,6 +58,9 @@ const words =[
 const answers = [];
 
 let myself={};
+const socket = io.connect();
+
+
 
 
 //This would be performed on the server in a real app. Just stubbing in.
@@ -110,9 +114,19 @@ class Api {
     });
   }
 
-  static GetPlayers() {
+  static GetPlayers(room) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
+
+        socket.emit(header.JOIN_ROOM, '1');
+        console.log("Trying to join room/client");
+        socket.emit(header.GET_PLAYERS, "1");
+        socket.on(header.GET_PLAYERS, function (data) {
+          console.log(data);
+          return data;
+        });
+
+
         resolve(Object.assign([], players));
       }, delay);
     });
@@ -130,12 +144,11 @@ class Api {
   }
 
   static ServerUppdate() {
-    let player = Object.assign({}, player);
-    //socket stuff
-    let exempel = {};
-    if (exempel.type === 'player'){
-      playerAction.updatePlayersSuccess(player);
-    }
+    //här bör nog alla lyssnare för socket.on ske alternativt bara rakt i utan någon funktion....
+    socket.on('new message', function (data) {
+      console.log(data);
+      return data;
+    });
 
   }
 
