@@ -8,6 +8,7 @@ import AboutPage from './components/about/AboutPage';
 import ManageCoursePage from './components/about/ManageCoursePage';
 import GamePage from './components/game/GamePage';
 import JoinGamePage from './components/joinGame/JoinGamePage';
+import AnswerPage from './components/game/AnswerPage';
 
 
 export default (
@@ -23,6 +24,7 @@ export default (
     <Route path="game/:id" component={GamePage} />
 
     <Route path="joinGame" component={JoinGamePage} />
+    <Route path="answer" component={AnswerPage} />
 
 
   </Route>

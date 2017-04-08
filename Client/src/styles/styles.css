@@ -62,9 +62,10 @@ html, body{
 }
 
 .myJoinButton{
-  height: 110px;
+  height: 150px;
   margin-top: 20px;
   font-size: 50px;
+  font-weight: bold;
   border-radius: 5px;
   background-color: darkseagreen;
   border-color: black;
@@ -72,9 +73,10 @@ html, body{
 }
 
 .myCreateButton{
-  height:110px;
+  height:150px;
   margin-top: 20px;
   font-size: 50px;
+  font-weight: bold;
   border-radius: 5px;
   background-color: lightblue;
   border-color: black;
@@ -82,16 +84,17 @@ html, body{
 }
 
 .myNeutralButton{
-  height: 110px;
+  height: 150px;
   margin-top: 20px;
   font-size: 50px;
+  font-weight: bold;
   border-radius: 5px;
   background-color: #fffefb;
   border-color: black;
   color: black;
 }
 
-#gameTitle{
+.myLargeText{
   font-size: 250px;
   font-weight: 900;
   color: white;
@@ -198,4 +201,15 @@ html, body{
   padding-top: 50px;
   border-radius: 5px;
   border: 10px black;
+}
+
+.descriptionInput{
+  height: 400px;
+  margin-top: 20px;
+  border-radius: 5px;
+
+  border-color: black;
+  font-size: 50px;
+
+
 }

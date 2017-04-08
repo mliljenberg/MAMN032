@@ -68,7 +68,9 @@ class GamePage extends React.Component {
 
 
           </div>
-          <button className="myJoinButton" onClick={this.changeReady}>OK</button>
+          <div className="col-xs-0 col-md-3"></div>
+          <button className="myJoinButton col-xs-12 col-md-6" onClick={this.changeReady}>OK</button>
+          <div className="col-xs-0 col-md-3"></div>
         </div>
       );
     }
