@@ -1,13 +1,11 @@
-import React from 'react';
-
-class Description extends React.Component{
-  render(){
-    return(
-      <div>
-        DESCRIPTION
-      </div>
-    );
+export default [
+  {
+    description: "This is a game of competence and trickyness."
+  },
+  {
+    description: "To win the game you must do this and that."
+  },
+  {
+    description: "You're awarded points for this and that."
   }
-}
-
-export default Description;
+];

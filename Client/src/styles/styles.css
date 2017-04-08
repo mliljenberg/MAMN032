@@ -47,12 +47,12 @@ html, body{
 }
 
 .myInput{
-  height: 70px;
+  height: 110px;
   margin-top: 20px;
   border-radius: 5px;
 
   border-color: black;
-  font-size: 20px;
+  font-size: 50px;
 }
 
 .container-fluid{
@@ -62,9 +62,9 @@ html, body{
 }
 
 .myJoinButton{
-  height: 70px;
+  height: 110px;
   margin-top: 20px;
-  font-size: 40px;
+  font-size: 50px;
   border-radius: 5px;
   background-color: darkseagreen;
   border-color: black;
@@ -72,9 +72,9 @@ html, body{
 }
 
 .myCreateButton{
-  height: 70px;
+  height:110px;
   margin-top: 20px;
-  font-size: 40px;
+  font-size: 50px;
   border-radius: 5px;
   background-color: lightblue;
   border-color: black;
@@ -82,9 +82,9 @@ html, body{
 }
 
 .myNeutralButton{
-  height: 70px;
+  height: 110px;
   margin-top: 20px;
-  font-size: 40px;
+  font-size: 50px;
   border-radius: 5px;
   background-color: #fffefb;
   border-color: black;
@@ -189,4 +189,13 @@ html, body{
 .horizontalList{
   margin-top: 50px;
   text-align: center;
+}
+
+.description{
+  background-color: white;
+  height: 50%;
+  padding-bottom: 50px;
+  padding-top: 50px;
+  border-radius: 5px;
+  border: 10px black;
 }

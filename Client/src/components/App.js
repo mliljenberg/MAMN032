@@ -7,7 +7,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="container-fluid">
-        <GameTitle/>
+
         <Header/>
         {this.props.children}
       </div>

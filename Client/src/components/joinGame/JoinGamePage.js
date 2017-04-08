@@ -1,12 +1,14 @@
 import React from 'react';
 import JoinGameInput from './JoinGameInput';
 import {Link, IndexLink} from 'react-router';
+import GameTitle from '../common/GameTitle';
 
 
 class JoinGamePage extends React.Component {
   render() {
     return (
       <div>
+        <GameTitle/>
         <JoinGameInput label="Name"/>
         <JoinGameInput label="Room"/>
         <div className="col-xs-12">
