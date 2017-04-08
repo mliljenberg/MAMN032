@@ -68,6 +68,7 @@ html, body{
   border-radius: 5px;
   background-color: darkseagreen;
   border-color: black;
+  color: black;
 }
 
 .myCreateButton{
@@ -77,6 +78,17 @@ html, body{
   border-radius: 5px;
   background-color: lightblue;
   border-color: black;
+  color: black;
+}
+
+.myNeutralButton{
+  height: 70px;
+  margin-top: 20px;
+  font-size: 40px;
+  border-radius: 5px;
+  background-color: #fffefb;
+  border-color: black;
+  color: black;
 }
 
 #gameTitle{
@@ -107,4 +119,74 @@ html, body{
   -2px 7px 0 #000,
   2px -7px 0 #000,
   -2px -7px 0 #000;
+}
+
+.myMediumText{
+  font-size: 100px;
+  font-weight: 900;
+  color: white;
+  text-shadow: 7px 7px 0 #000,
+  -7px 7px 0 #000,
+  7px -7px 0 #000,
+  -7px -7px 0 #000,
+  0px 7px 0 #000,
+  0px -7px 0 #000,
+  -7px 0px 0 #000,
+  7px 0px 0 #000,
+  2px 2px 0 #000,
+  -2px 2px 0 #000,
+  2px -2px 0 #000,
+  -2px -2px 0 #000,
+  0px 2px 0 #000,
+  0px -2px 0 #000,
+  -2px 0px 0 #000,
+  2px 0px 0 #000,
+  7px 2px 0 #000,
+  -7px 2px 0 #000,
+  7px -2px 0 #000,
+  -7px -2px 0 #000,
+  2px 7px 0 #000,
+  -2px 7px 0 #000,
+  2px -7px 0 #000,
+  -2px -7px 0 #000;
+}
+
+.mySmallText{
+  font-size: 50px;
+  font-weight: 900;
+  color: white;
+  text-shadow: 7px 7px 0 #000,
+  -7px 7px 0 #000,
+  7px -7px 0 #000,
+  -7px -7px 0 #000,
+  0px 7px 0 #000,
+  0px -7px 0 #000,
+  -7px 0px 0 #000,
+  7px 0px 0 #000,
+  2px 2px 0 #000,
+  -2px 2px 0 #000,
+  2px -2px 0 #000,
+  -2px -2px 0 #000,
+  0px 2px 0 #000,
+  0px -2px 0 #000,
+  -2px 0px 0 #000,
+  2px 0px 0 #000,
+  7px 2px 0 #000,
+  -7px 2px 0 #000,
+  7px -2px 0 #000,
+  -7px -2px 0 #000,
+  2px 7px 0 #000,
+  -2px 7px 0 #000,
+  2px -7px 0 #000,
+  -2px -7px 0 #000;
+}
+
+.horizontalListItem{
+  display: inline-block;
+  width: 30%;
+
+}
+.horizontalList{
+  margin-top: 50px;
+  text-align: center;
 }

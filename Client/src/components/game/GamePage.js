@@ -5,6 +5,8 @@ import io from 'socket.io-client';
 const socket = io.connect();
 import $ from 'jquery';
 import * as myselfAction from '../../actions/myselfAction';
+import {Link, IndexLink} from 'react-router';
+
 
 class GamePage extends React.Component {
   constructor(props, context) {
@@ -31,18 +33,18 @@ class GamePage extends React.Component {
     const {players} = this.props;
     return (
       <div>
-
-        <ul className="list-group">
+        <div className="myMediumText">Room: 1234</div>
+        <ul className="horizontalList">
           {players.map(player =>
-            <li className="list-group-item" key={player.value}>
-              {player.value}
+            <li className="horizontalListItem" key={player.value}>
+              <div className="mySmallText col-xs-4"> {player.value}</div>
             </li>
           )}
 
         </ul>
-
-        <ul id="list"></ul>
-
+        <div className="col-md-3 col-xs-0"></div>
+        <Link to="/game"> <button className="myNeutralButton col-md-6 col-xs-12">Leave</button></Link>
+        <div className="col-md-3 col-xs-0"></div>
       </div>
     );
   }
@@ -58,7 +60,7 @@ GamePage.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
-  debugger;
+
   return {
 
     myself: state.myself,
