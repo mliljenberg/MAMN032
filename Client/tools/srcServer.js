@@ -50,7 +50,7 @@ app.listen(port, function(err) {
 });*/
 
 io.sockets.on('connection', function (socket) {
-  console.log("A player connected");
+  console.log("A game connected");
 
   socket.on('join room', function (data) {
     console.log("Trying to join room: "+data);

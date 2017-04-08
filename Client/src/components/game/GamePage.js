@@ -10,25 +10,28 @@ class GamePage extends React.Component {
   constructor(props, context) {
     super(props, context);
 
+
     socket.emit('join room', window.location.href.substr(window.location.href.lastIndexOf('/') + 1));
     console.log("Trying to join room/client");
-
 
     socket.on('new message', function () {
       $('#list').append('<li> Tryckte på knappen </li>');
     });
+
+
   }
 
-  buttonClicked(){
+  buttonClicked() {
     socket.emit('send message', window.location.href.substr(window.location.href.lastIndexOf('/') + 1));
 
   }
 
+
   render() {
     const {players} = this.props;
-
     return (
       <div>
+
         <ul className="list-group">
           {players.map(player =>
             <li className="list-group-item" key={player.value}>
@@ -39,23 +42,23 @@ class GamePage extends React.Component {
         </ul>
 
         <ul id="list"></ul>
+
       </div>
     );
   }
-
-
 }
+
+
 GamePage.propTypes = {
 
 
-
-  myself : PropTypes.object.isRequired,
+  myself: PropTypes.object.isRequired,
   players: PropTypes.array.isRequired
 
 };
 
 function mapStateToProps(state, ownProps) {
- debugger;
+  debugger;
   return {
 
     myself: state.myself,
@@ -66,7 +69,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
   return {
 
-    actions: bindActionCreators(Object.assign({},myselfAction), dispatch)
+    actions: bindActionCreators(Object.assign({}, myselfAction), dispatch)
   };
 }
 
