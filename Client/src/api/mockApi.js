@@ -42,12 +42,13 @@ const players = [
   },
   {
     id:"3",
-    value: 'Ludd3'
+    value: 'sas'
   },
   {
     id:"4",
-    value: 'Ludd4'
+    value: 'HEJSAN'
   }
+
 
 ];
 

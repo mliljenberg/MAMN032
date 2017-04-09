@@ -2,8 +2,6 @@
 #app {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #4d4d4d;
-  min-width: 550px;
-  max-width: 850px;
   margin: 0 auto;
   height: 100%;
   text-align: center;
@@ -123,7 +121,35 @@ html, body{
   2px -7px 0 #000,
   -2px -7px 0 #000;
 }
-
+.myMediumLargeText{
+  font-size: 150px;
+  font-weight: 900;
+  color: white;
+  text-shadow: 7px 7px 0 #000,
+  -7px 7px 0 #000,
+  7px -7px 0 #000,
+  -7px -7px 0 #000,
+  0px 7px 0 #000,
+  0px -7px 0 #000,
+  -7px 0px 0 #000,
+  7px 0px 0 #000,
+  2px 2px 0 #000,
+  -2px 2px 0 #000,
+  2px -2px 0 #000,
+  -2px -2px 0 #000,
+  0px 2px 0 #000,
+  0px -2px 0 #000,
+  -2px 0px 0 #000,
+  2px 0px 0 #000,
+  7px 2px 0 #000,
+  -7px 2px 0 #000,
+  7px -2px 0 #000,
+  -7px -2px 0 #000,
+  2px 7px 0 #000,
+  -2px 7px 0 #000,
+  2px -7px 0 #000,
+  -2px -7px 0 #000;
+}
 .myMediumText{
   font-size: 100px;
   font-weight: 900;
@@ -186,12 +212,13 @@ html, body{
 
 .horizontalListItem{
   display: inline-block;
-  width: 30%;
+
 
 }
 .horizontalList{
   margin-top: 50px;
-  text-align: center;
+  display: inline;
+  float: none;
 }
 
 .description{
@@ -201,6 +228,7 @@ html, body{
   padding-top: 50px;
   border-radius: 5px;
   border: 10px black;
+  font-size: 30px;
 }
 
 .descriptionInput{
@@ -212,4 +240,8 @@ html, body{
   font-size: 50px;
 
 
+}
+
+.myMargin{
+ margin-top: 50px;
 }
