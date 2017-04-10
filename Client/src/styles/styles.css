@@ -14,6 +14,7 @@ a.active {
 nav {
   padding-top: 20px;
 }
+
 .crossRotate {
   background-color: orange;
   -webkit-transition-duration: 1s;
@@ -34,65 +35,60 @@ nav {
 
 }
 
-
-
-html, body{
+html, body {
   height: 100%;
   background-image: url("http://68.media.tumblr.com/297bca135cc211b869c1a659664e46b9/tumblr_nsqazrgxAY1rnfgtmo4_500.gif");
-  background-size:     cover;
+  background-size: cover;
   text-align: center;
 
 }
 
-.myInput{
-  height: 110px;
-  margin-top: 20px;
+.myInput {
+  height: 10vh;
+  margin-top: 15px;
   border-radius: 5px;
 
   border-color: black;
   font-size: 50px;
 }
 
-.container-fluid{
+.container-fluid {
   position: relative;
   top: 50%;
-  transform: 			translateY(-50%);
+  transform: translateY(-50%);
 }
 
-.myJoinButton{
-  height: 150px;
-  margin-top: 20px;
+.myJoinButton {
+  height: 10vh;
+  margin-top: 15px;
   font-size: 50px;
-  font-weight: bold;
   border-radius: 5px;
   background-color: darkseagreen;
   border-color: black;
   color: black;
 }
 
-.myCreateButton{
-  height:150px;
-  margin-top: 20px;
+.myCreateButton {
+  height: 10vh;
+  margin-top: 15px;
   font-size: 50px;
-  font-weight: bold;
   border-radius: 5px;
   background-color: lightblue;
   border-color: black;
   color: black;
 }
 
-.myNeutralButton{
-  height: 150px;
-  margin-top: 20px;
+.myNeutralButton {
+  height: 10vh;
+  margin-top: 15px;
   font-size: 50px;
-  font-weight: bold;
   border-radius: 5px;
   background-color: #fffefb;
   border-color: black;
   color: black;
 }
 
-.myLargeText{
+.myLargeText {
   font-size: 250px;
   font-weight: 900;
   color: white;
@@ -121,7 +117,8 @@ html, body{
   2px -7px 0 #000,
   -2px -7px 0 #000;
 }
-.myMediumLargeText{
+
+.myMediumLargeText {
   font-size: 150px;
   font-weight: 900;
   color: white;
@@ -150,7 +147,8 @@ html, body{
   2px -7px 0 #000,
   -2px -7px 0 #000;
 }
-.myMediumText{
+
+.myMediumText {
   font-size: 100px;
   font-weight: 900;
   color: white;
@@ -180,7 +178,7 @@ html, body{
   -2px -7px 0 #000;
 }
 
-.mySmallText{
+.mySmallText {
   font-size: 50px;
   font-weight: 900;
   color: white;
@@ -210,18 +208,18 @@ html, body{
   -2px -7px 0 #000;
 }
 
-.horizontalListItem{
+.horizontalListItem {
   display: inline-block;
 
-
 }
-.horizontalList{
+
+.horizontalList {
   margin-top: 50px;
   display: inline;
   float: none;
 }
 
-.description{
+.description {
   background-color: white;
   height: 50%;
   padding-bottom: 50px;
@@ -231,7 +229,7 @@ html, body{
   font-size: 30px;
 }
 
-.descriptionInput{
+.descriptionInput {
   height: 400px;
   margin-top: 20px;
   border-radius: 5px;
@@ -239,9 +237,13 @@ html, body{
   border-color: black;
   font-size: 50px;
 
-
 }
 
-.myMargin{
- margin-top: 50px;
+.myMargin {
+  margin-top: 50px;
 }
+
+.noPadding {
+  padding: 0px
+}
+
