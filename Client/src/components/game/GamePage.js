@@ -13,11 +13,11 @@ import Description from './Description';
 class GamePage extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this.state = {ready: false, leftOver: 0};
+    this.state = { leftOver: 0};
     socket.emit('join room', window.location.href.substr(window.location.href.lastIndexOf('/') + 1));
     console.log("Trying to join room/client");
     this.render = this.render.bind(this);
-    this.changeReady = this.changeReady.bind(this);
+    this.startAnimation = this.startAnimation.bind(this);
     socket.on('new message', function () {
       $('#list').append('<li> Tryckte på knappen </li>');
     });
@@ -30,11 +30,25 @@ class GamePage extends React.Component {
 
   }
 
-  changeReady() {
-    return this.setState({ready: true});
+  startAnimation() {
 
+
+    $("#descriptionContainer").slideToggle("slow", function () {
+      $("#playersContainer").slideToggle("slow", function () {
+
+      });
+
+
+    });
   }
 
+
+
+  introAnimation() {
+    $("#descriptionContainer").slideToggle("slow", function () {
+
+    });
+  }
 
   render() {
     const {players} = this.props;
@@ -57,61 +71,67 @@ class GamePage extends React.Component {
 
     }
 
-    if (this.state.ready) {
+
       return (
         <div>
+          <div id="descriptionContainer">
 
-          <div className="myMediumLargeText">Room: 1234</div>
-          <div className="col-xs-12">
-            <div className="col-xs-0 col-md-2"></div>
-            <div className="horizontalList col-xs-12 col-md-8">
-              {leftOverRow1}
-              {players.map(player =>
-                <div className={leftOverClass} key={player.value}>
+            <div className="col-xs-12">
+              <div className="col-xs-0 col-md-1"></div>
+              <div className="description col-xs-12 col-md-10">
+                <div className="col-xs-1"></div>
+                <div className="col-xs-10">
+                  <div className="myMargin"></div>
 
-                  <div className="mySmallText"> {player.value}</div>
-
+                  {Description[0].description}<br/><br/>
+                  {Description[1].description}<br/><br/>
+                  {Description[2].description}
                 </div>
-              )}
+                <div className="col-xs-1"></div>
+              </div>
 
+              <div className="col-xs-0 col-md-1"></div>
             </div>
-            <div className="col-xs-0 col-md-2"></div>
-          </div>
-
-          <div className="col-xs-12 myMargin">
-            <div className="col-md-3 col-xs-0"></div>
-
-            <Link to="/game">
-              <button className="myNeutralButton col-md-6 col-xs-12">Leave</button>
-            </Link>
-            <div className="col-md-3 col-xs-0"></div>
-          </div>
-        </div>);
-    } else {
-      return (
-        <div >
-          <div className="col-xs-12">
             <div className="col-xs-0 col-md-3"></div>
-            <div className="description col-xs-12 col-md-6">
-
-              <div className="myMediumText">Game</div>
-              <div className="myMargin"></div>
-
-              {Description[0].description}<br/><br/>
-              {Description[1].description}<br/><br/>
-              {Description[2].description}
-
-            </div>
-
+            <button className="myNeutralButton col-xs-12 col-md-6" onClick={this.startAnimation}>OK</button>
             <div className="col-xs-0 col-md-3"></div>
           </div>
-          <div className="col-xs-0 col-md-3"></div>
-          <button className="myJoinButton col-xs-12 col-md-6" onClick={this.changeReady}>OK</button>
-          <div className="col-xs-0 col-md-3"></div>
+
+          <div id="playersContainer">
+
+            <div className="myMediumLargeText">Room: 1234</div>
+            <div className="col-xs-12">
+              <div className="col-xs-0 col-md-2"></div>
+              <div className="horizontalList col-xs-12 col-md-8">
+                {leftOverRow1}
+                {players.map(player =>
+                  <div className={leftOverClass} key={player.value}>
+
+                    <div className="mySmallText"> {player.value}</div>
+
+                  </div>
+                )}
+
+              </div>
+              <div className="col-xs-0 col-md-2"></div>
+            </div>
+
+            <div className="col-xs-12 myMargin">
+              <div className="col-md-3 col-xs-0"></div>
+
+              <Link to="/game">
+                <button className="myNeutralButton col-md-6 col-xs-12">Leave</button>
+              </Link>
+              <div className="col-md-3 col-xs-0"></div>
+            </div>
+          </div>
         </div>
       );
     }
-  }
+
+
+
+
 }
 
 

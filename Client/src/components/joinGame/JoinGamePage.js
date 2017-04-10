@@ -1,13 +1,25 @@
 import React from 'react';
 import JoinGameInput from './JoinGameInput';
-import {Link, IndexLink} from 'react-router';
+import {Link, IndexLink, browserHistory} from 'react-router';
 import GameTitle from '../common/GameTitle';
+import $ from 'jquery';
 
 
 class JoinGamePage extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.goToGame = this.goToGame.bind(this);
+  }
+
+    goToGame(){
+    $("#joinGamePage").slideToggle("slow", function () {
+      browserHistory.push("/game");
+    });
+  }
   render() {
     return (
-      <div>
+      <div id="joinGamePage">
         <div>
           <GameTitle/>
         </div>
@@ -16,9 +28,9 @@ class JoinGamePage extends React.Component {
           <JoinGameInput label="Room"/>
           <div className="col-xs-12">
             <div className="col-md-3 col-xs-0"></div>
-            <Link to="/game">
-              <button className="myJoinButton col-md-6 col-xs-12">Join</button>
-            </Link>
+
+              <button className="myJoinButton col-md-6 col-xs-12" onClick={this.goToGame}>Join</button>
+
             <div className="col-md-3 col-xs-0"></div>
           </div>
           <div className="col-xs-12">
