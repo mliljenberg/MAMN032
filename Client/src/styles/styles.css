@@ -276,7 +276,7 @@ html, body {
 
 .voteBox{
   height: 17vh;
-  background-color: white;
+  background: white;
   border-radius: 5px;
   border-color: black;
   display: none;
@@ -285,4 +285,8 @@ html, body {
 
 .myPadding{
   padding: 10px;
+}
+
+#listOfAnswers{
+  padding: 20px;
 }

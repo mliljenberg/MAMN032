@@ -12,7 +12,7 @@ class VotePagePlayer extends React.Component {
   componentDidMount() {
     for (let i = 0; i < 4; i++) {
       setTimeout(function () {
-        $("#listOfAnswers").append($("<div/>", {class:'col-md-6 col-xs-12 myPadding voteBox', id:'voteBox'+i, display:'none'}));
+        $("#listOfAnswers").append($("<div/>", {class:'col-md-6 myMargin'}).append($("<div/>", {class:'col-md-1'}),$("<div/>", {class:'col-md-10 col-xs-12 myPadding voteBox', id:'voteBox'+i, display:'none', text:'HEJ'}), $("<div/>", {class:'col-md-1'})));
         $("#voteBox"+i).slideToggle("slow", function () {
 
         });
