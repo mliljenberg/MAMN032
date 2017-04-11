@@ -97,7 +97,7 @@ class GamePage extends React.Component {
             <div className="col-xs-0 col-md-3"></div>
           </div>
 
-          <div id="playersContainer">
+          <div id="playersContainer" className="hideFromStart">
 
             <div className="myMediumLargeText">Room: 1234</div>
             <div className="col-xs-12">

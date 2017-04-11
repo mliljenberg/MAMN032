@@ -232,7 +232,7 @@ html, body {
 }
 
 .descriptionInput {
-  height: 400px;
+  height: 30vh;
   margin-top: 20px;
   border-radius: 5px;
 
@@ -269,8 +269,20 @@ html, body {
 
 
 
-#playersContainer{
+.hideFromStart{
   display: none;
 }
 
 
+.voteBox{
+  height: 17vh;
+  background-color: white;
+  border-radius: 5px;
+  border-color: black;
+  display: none;
+
+}
+
+.myPadding{
+  padding: 10px;
+}

@@ -9,6 +9,7 @@ import ManageCoursePage from './components/about/ManageCoursePage';
 import GamePage from './components/game/GamePage';
 import JoinGamePage from './components/joinGame/JoinGamePage';
 import AnswerPage from './components/game/AnswerPage';
+import VotePagePlayer from './components/game/VotePagePlayer';
 
 
 export default (
@@ -25,6 +26,8 @@ export default (
 
     <Route path="joinGame" component={JoinGamePage} />
     <Route path="answer" component={AnswerPage} />
+
+    <Route path="vote" component={VotePagePlayer} />
 
 
   </Route>
