@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 const socket = io.connect();
 import $ from 'jquery';
 import * as myselfAction from '../../actions/myselfAction';
-import {Link, IndexLink} from 'react-router';
+import {Link, IndexLink, browserHistory} from 'react-router';
 
 import Description from './Description';
 
@@ -35,7 +35,11 @@ class GamePage extends React.Component {
 
     $("#descriptionContainer").slideToggle("slow", function () {
       $("#playersContainer").slideToggle("slow", function () {
-
+        setTimeout(function () {
+          $("#playersContainer").slideToggle("slow", function () {
+              browserHistory.push("/answer");
+          });
+        }, 3000);
       });
 
 
@@ -44,7 +48,7 @@ class GamePage extends React.Component {
 
 
 
-  introAnimation() {
+  componentDidMount(){
     $("#descriptionContainer").slideToggle("slow", function () {
 
     });
@@ -74,7 +78,7 @@ class GamePage extends React.Component {
 
       return (
         <div>
-          <div id="descriptionContainer">
+          <div id="descriptionContainer" className="hideFromStart">
 
             <div className="col-xs-12">
               <div className="col-xs-0 col-md-1"></div>

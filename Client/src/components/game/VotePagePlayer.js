@@ -10,15 +10,20 @@ class VotePagePlayer extends React.Component {
   }
 
   componentDidMount() {
-    for (let i = 0; i < 4; i++) {
+    $("#totalContainer").slideToggle("slow", function () {
       setTimeout(function () {
-        $("#listOfAnswers").append($("<div/>", {class:'col-md-6 myMargin'}).append($("<div/>", {class:'col-md-1'}),$("<div/>", {class:'col-md-10 col-xs-12 myPadding voteBox', id:'voteBox'+i, display:'none', text:'HEJ'}), $("<div/>", {class:'col-md-1'})));
-        $("#voteBox"+i).slideToggle("slow", function () {
+        for (let i = 0; i < 4; i++) {
+          setTimeout(function () {
+            $("#listOfAnswers").append($("<div/>", {class:'col-md-6 col-xs-12'}).append($("<div/>", {class:'col-md-0'}),$("<div/>", {class:'col-md-12 col-xs-12 voteBox', id:'voteBox'+i, display:'none'}).append($("<text/>", {class: 'centeredText', text: "HEJ"})), $("<div/>", {class:'col-md-0'})));
+            $("#voteBox"+i).slideToggle("slow", function () {
 
-        });
-      }, i * 3000);
+            });
+          }, i * 3000);
 
-    }
+        }
+      }, 1000);
+    });
+
 
   }
 
@@ -26,10 +31,11 @@ class VotePagePlayer extends React.Component {
   render() {
 
     return (
-      <div>
+      <div id="totalContainer" className="hideFromStart">
 
         <div className="mySmallText">"The word" means</div>
         <div id="listOfAnswers" className="col-xs-12">
+
 
         </div>
 

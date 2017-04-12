@@ -1,20 +1,32 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {browserHistory} from 'react-router';
 import $ from 'jquery';
 
 class AnswerPagePlayer extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this.test = "";
+    this.state = { ready: 1};
+    this.submitted = this.submitted.bind(this);
   }
 
   submitted(){
     $("#answerContainer").slideToggle("slow", function () {
       $("#waitingContainer").slideToggle("slow", function () {
 
-      });
+        setTimeout(function () {
+          $("#waitingContainer").slideToggle("slow", function () {
+            browserHistory.push("/vote");
+          });
 
+        }, 3000);
+      });
+    });
+  }
+
+  componentDidMount(){
+    $("#answerContainer").slideToggle("slow", function () {
 
     });
   }
@@ -23,7 +35,7 @@ class AnswerPagePlayer extends React.Component {
   render() {
     return (
       <div>
-        <div id="answerContainer">
+        <div id="answerContainer" className="hideFromStart">
           <div className="myLargeText">Word</div>
           <div className="col-xs-12">
             <div className="col-xs-0 col-md-2"></div>
@@ -38,7 +50,7 @@ class AnswerPagePlayer extends React.Component {
         </div>
         <div id="waitingContainer" className="hideFromStart" >
           <div className="myMediumText">Waiting on other players</div> <br/>
-         <div className="mySmallText">3/4 submitted</div>
+         <div className="mySmallText">{this.state.ready}/4 submitted</div>
         </div>
       </div>
     );

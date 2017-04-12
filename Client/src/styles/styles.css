@@ -275,11 +275,11 @@ html, body {
 
 
 .voteBox{
-  height: 17vh;
-  background: white;
-  border-radius: 5px;
-  border-color: black;
+  height: 250px;
+  background: url("http://2.bp.blogspot.com/-dS_3P8TGZ_g/T5nCMf_iz0I/AAAAAAAABEU/sceGjdRC2Tc/s1600/Ripped_Paper_Notes.png");
+  background-size: 100% 100%;
   display: none;
+  text-align: center;
 
 }
 
@@ -289,4 +289,12 @@ html, body {
 
 #listOfAnswers{
   padding: 20px;
+
 }
+.centeredText{
+  text-align: center;
+  position: absolute;
+  vertical-align: middle;
+}
+
+
