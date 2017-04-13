@@ -69,6 +69,8 @@ const generateId = () => {
 };
 
 class Api {
+
+
   static ConnectToRoom() {
     return new Promise((resolve, reject) => {
       setTimeout(() => {

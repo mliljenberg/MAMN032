@@ -21,7 +21,6 @@ export function loadPlayers() {
     return api.GetPlayers().then(players => {
       dispatch(loadPlayersSuccess(players));
     }).catch((error) => {
-
       throw error;
     });
   };
@@ -33,6 +32,4 @@ export function addPlayer(player) {
       player.id ? dispatch(updatePlayersSuccess(player)) : dispatch(addPlayerSuccess(player));
     });
   };
-
-
 }

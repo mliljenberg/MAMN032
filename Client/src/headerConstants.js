@@ -1,3 +1,17 @@
-export const GET_PLAYERS='GET_PLAYERS';
-export const JOIN_ROOM='JOIN_ROOM';
-export const CHANGE_STATE='CHANGE_STATE';
+/**
+ * Constants used for host/client <-> server communication
+ * **/
+
+export const CREATE_ROOM_REQ = 'CREATE_ROOM_REQ';
+export const CREATE_ROOM_ANS = 'CREATE_ROOM_ANS';
+
+
+export const GET_PLAYERS_REQ = 'GET_PLAYERS_REQ';
+export const GET_PLAYERS_ANS = 'GET_PLAYERS_ANS';
+
+export const JOIN_ROOM_REQ = 'JOIN_ROOM_REQ';
+export const JOIN_ROOM_ANS = 'JOIN_ROOM_ANS';
+
+export const CHANGE_STATE_REQ = 'CHANGE_STATE_REQ';
+export const CHANGE_STATE_ANS = 'CHANGE_STATE_ANS';
+

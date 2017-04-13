@@ -8,31 +8,16 @@ import * as header from '../src/headerConstants';
 import socket from 'socket.io';
 import words from './words';
 
-const users = [];
-const connections = [];
-const playersList = players;
-
 /* eslint-disable no-console */
-const rooms = new Map();
 const port = 3000;
 const app = express();
 const compiler = webpack(config);
-const player = {id:"", points:0};
-const word = {word:"", def:""};
-const answer = {player:{},word:{}, def:""};
-const clientState = () => {
-
-  return {room:"", words:[],players:[],url:"",answers:[] };
-};
-
 const server = require('http').createServer(app);
 const io = require('socket.io').listen(server);
-server.listen(3000);
+
+
+server.listen(port);
 console.log('server running...');
-console.log(playersList[0].player +" is in room "+ playersList[0].room);
-
-//console.log(words[0].def);
-
 
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
@@ -46,49 +31,73 @@ app.get('*', function(req, res) {
 });
 
 
-/*
-app.listen(port, function(err) {
+/**
+ * Server methods
+ **/
 
-  if (err) {
-    console.log(err);
-  } else {
-    open(`http://localhost:${port}`);
-  }
-});*/
+let rooms = [];
+let hostrooms = map(); //Key: hostSocket. Value: room key
+let legalChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 io.sockets.on('connection', function (socket) {
-  console.log("A player connected");
+  console.log("New connection");
+  allClients.push(socket);
 
-  socket.on(header.JOIN_ROOM, function (data) {
-    console.log("Trying to join room: "+data);
-    socket.join(data);
-    let temp = clientState();
-    temp.room = data;
-    rooms.set(data, Object.assign({}, temp));
 
-  });
-  socket.on(header.GET_PLAYERS, function (data) {
-    io.to(data).emit('new message',["1",'2','3']);
-    setTimeout(() => {
-      io.to(data).emit('new message',["3",'2','1']);
-      console.log("sent seconda data message");
-    }, 10);
-    setTimeout(() => {
-      io.to(data).emit(header.GET_PLAYERS,["3",'3','3']);
-      console.log("sent third data message");
-    }, 3000);
-  });
 
-  console.log('new connection');
-  socket.on('disconnection', function (data) {
-    console.log('disconnection');
+  /**
+   * Create new room.
+   * @Params: null
+   * @Return: room key
+   * **/
+  socket.on(header.CREATE_ROOM_REQ, function () {
+    console.log("Creating new room");
+    let key;
+    do{
+      for(var i = 0; i < 5; i++){
+        key += legalChars.charAt(Math.floor(Math.random() * legalChars.length));
+      }
+    }while(rooms.contains(key));
 
+    hostrooms.set(socket, key);
+    rooms.push(key);
+    socket.emit(header.CREATE_ROOM_ANS, key);
   });
 
-  socket.on('send message', function (data) {
-    console.log("Trying to send data to only room: "+ data);
 
-    io.to(data).emit('new message');
+/**
+ * Join existing room.
+ * @Params: username, room key
+ * @Return: success/failure
+ * **/
+  socket.on(header.JOIN_ROOM_REQ, function (data) {
+    try{
+      if(rooms.contains(data)){
+        socket.join(data);
+        socket.emit(header.JOIN_ROOM_ANS, true);
+      } else {
+        socket.emit(header.JOIN_ROOM_ANS, false);
+      }
+    } catch (err){
+      socket.emit(header.JOIN_ROOM_ANS, false);
+      console.log(err.message);
+    }
+  });
+
+
+  /**
+   * Client/Host disconnect
+   * @Params: null
+   * @return: null
+   * **/
+  socket.on('disconnection', function () {
+    console.log("Disconnection");
+
+    if(hostrooms.has(socket)){ //Frigör rumsnyckel ifall det är en host som dc.
+      rooms.splice(hostrooms.get(socket) ,1);
+      hostrooms.delete(socket);
+      console.log("Host dc");
+    }
   });
 
 });
