@@ -6,13 +6,3 @@ import io from 'socket.io-client';
 import * as header from '../headerConstants';
 
 
-
-var socket = io.connect('//localhost');
-
-class Api{
-
-  static CreateRoom(){
-
-  }
-}
-

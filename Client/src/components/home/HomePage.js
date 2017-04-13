@@ -8,7 +8,6 @@ class HomePage extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-
     socket.on('new message', function(data) {
 
       $('#list').append('<li> '+data.name+ " joined the game in room "+data.room +'</li>');

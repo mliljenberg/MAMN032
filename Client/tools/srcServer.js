@@ -36,14 +36,11 @@ app.get('*', function(req, res) {
  **/
 
 let rooms = [];
-let hostrooms = map(); //Key: hostSocket. Value: room key
+let hostrooms = new Map(); //Key: hostSocket. Value: room key
 let legalChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 io.sockets.on('connection', function (socket) {
   console.log("New connection");
-  allClients.push(socket);
-
-
 
   /**
    * Create new room.
@@ -57,7 +54,7 @@ io.sockets.on('connection', function (socket) {
       for(var i = 0; i < 5; i++){
         key += legalChars.charAt(Math.floor(Math.random() * legalChars.length));
       }
-    }while(rooms.contains(key));
+    }while(rooms.includes(key));
 
     hostrooms.set(socket, key);
     rooms.push(key);
@@ -72,8 +69,8 @@ io.sockets.on('connection', function (socket) {
  * **/
   socket.on(header.JOIN_ROOM_REQ, function (data) {
     try{
-      if(rooms.contains(data)){
-        socket.join(data);
+      if(rooms.includes(data)){
+        socket.join(data); //join room if exists
         socket.emit(header.JOIN_ROOM_ANS, true);
       } else {
         socket.emit(header.JOIN_ROOM_ANS, false);
@@ -98,6 +95,8 @@ io.sockets.on('connection', function (socket) {
       hostrooms.delete(socket);
       console.log("Host dc");
     }
+
+    //Kick all clients from room
   });
 
 });
