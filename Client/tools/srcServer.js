@@ -48,8 +48,7 @@ io.sockets.on('connection', function (socket) {
    * @Return: room key
    * **/
   socket.on(header.CREATE_ROOM_REQ, function () {
-    console.log("Creating new room");
-    let key;
+    let key = '';
     do{
       for(var i = 0; i < 5; i++){
         key += legalChars.charAt(Math.floor(Math.random() * legalChars.length));
@@ -59,6 +58,7 @@ io.sockets.on('connection', function (socket) {
     hostrooms.set(socket, key);
     rooms.push(key);
     socket.emit(header.CREATE_ROOM_ANS, key);
+    console.log("New room " + key);
   });
 
 
