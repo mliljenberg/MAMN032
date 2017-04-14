@@ -14,7 +14,18 @@ class ScorePage extends React.Component {
   }
 
   componentDidMount() {
+    const {players} = this.props;
     $("#scoreContainer").slideToggle("slow", function () {
+      setTimeout(function () {
+        $("#scoreContainer").slideToggle("slow", function () {
+          $("#scoreBoardContainer").slideToggle("slow", function () {
+
+
+          });
+
+        });
+      }, 3000);
+
 
     });
 
@@ -24,19 +35,36 @@ class ScorePage extends React.Component {
   render() {
     const {players} = this.props;
     return (
-      <div id="scoreContainer" className="hideFromStart">
-        <div className="myMediumLargeText">Score</div>
-        <div className="col-xs-12 myMargin"></div>
+      <div>
+        <div id="scoreContainer" className="hideFromStart">
+          <div className="myMediumLargeText">Score</div>
+          <div className="col-xs-12 myMargin"></div>
           {players.map(player =>
-            <div className="col-xs-12 mySmallText">
+            <div className="col-xs-12 mySmallText" key={player.value}>
               <div className="col-xs-3"></div>
-              <div className="col-xs-3 text-left">{player.value}</div>
-              <div className="col-xs-3 text-right">1p</div>
+              <div className="col-xs-5 text-left">{player.value}</div>
+              <div className="col-xs-1 text-right">1p</div>
               <div className="col-xs-3"></div>
             </div>
           )}
-
-
+        </div>
+        <div id="scoreBoardContainer" className="hideFromStart">
+          <div className="myMediumLargeText">ScoreBoard</div>
+          <div className="col-xs-12 myMargin"></div>
+          {players.map(player =>
+            <div className="col-xs-12 mySmallText" key={player.value}>
+              <div className="col-xs-3"></div>
+              <div className="col-xs-5 text-left">{players.indexOf(player) + 1} . {player.value}</div>
+              <div className="col-xs-1 text-right">1p</div>
+              <div className="col-xs-3"></div>
+            </div>
+          )}
+          <div className="col-xs-12">
+            <div className="col-md-3"></div>
+            <button className="myNeutralButton col-md-6 col-xs-12">Ready</button>
+            <div className="col-md-3"></div>
+          </div>
+        </div>
       </div>
     );
   }
