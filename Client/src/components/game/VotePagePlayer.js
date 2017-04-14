@@ -6,16 +6,21 @@ import $ from 'jquery';
 class VotePagePlayer extends React.Component {
   constructor(props, context) {
     super(props, context);
+    this.componentDidMount = this.componentDidMount.bind(this);
 
   }
 
   componentDidMount() {
-    $("#totalContainer").slideToggle("slow", function () {
+    $("#voteContainer").slideToggle("slow", function () {
       setTimeout(function () {
         for (let i = 0; i < 4; i++) {
           setTimeout(function () {
-            $("#listOfAnswers").append($("<div/>", {class:'col-md-6 col-xs-12 voteBox', id:'voteBox'+i, display:'none'}).append($("<text/>", {class: 'centeredText', text: "HEJ"})));
-            $("#voteBox"+i).slideToggle("slow", function () {
+            $("#listOfAnswers").append($("<div/>", {
+              class: 'col-md-6 col-xs-12 voteBox',
+              id: 'voteBox' + i,
+              display: 'none'
+            }).append($("<text/>", {class: 'centeredText', text: "HEJ"})));
+            $("#voteBox" + i).slideToggle("slow", function () {
 
             });
           }, i * 3000);
@@ -31,14 +36,19 @@ class VotePagePlayer extends React.Component {
   render() {
 
     return (
-      <div id="totalContainer" className="hideFromStart">
+      <div>
+        <div id="voteContainer" className="hideFromStart">
 
-        <div className="mySmallText">"The word" means</div>
-        <div id="listOfAnswers" className="col-xs-12">
+          <div className="mySmallText">"The word" means</div>
+          <div id="listOfAnswers" className="col-xs-12">
 
+
+          </div>
 
         </div>
-
+        <div id="waitContainer" className="hideFromStart">
+          WAITING
+        </div>
       </div>
 
     );
