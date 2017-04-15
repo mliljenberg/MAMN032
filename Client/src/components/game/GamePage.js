@@ -46,6 +46,12 @@ class GamePage extends React.Component {
     });
   }
 
+  leaveGame(){
+    $("#playersContainer").slideToggle("slow", function () {
+      browserHistory.push("/joinGame");
+    });
+  }
+
 
 
   componentDidMount(){
@@ -124,7 +130,7 @@ class GamePage extends React.Component {
               <div className="col-md-3 col-xs-0"></div>
 
               <Link to="/game">
-                <button className="myNeutralButton col-md-6 col-xs-12">Leave</button>
+                <button className="myNeutralButton col-md-6 col-xs-12" onClick={this.leaveGame}>Leave</button>
               </Link>
               <div className="col-md-3 col-xs-0"></div>
             </div>

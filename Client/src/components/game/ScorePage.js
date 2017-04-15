@@ -17,6 +17,7 @@ class ScorePage extends React.Component {
   componentDidMount() {
     const {players} = this.props;
     $("#scoreContainer").slideToggle("slow", function () {
+
       setTimeout(function () {
         $("#scoreContainer").slideToggle("slow", function () {
           $("#scoreBoardContainer").slideToggle("slow", function () {
