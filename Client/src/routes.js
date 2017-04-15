@@ -8,10 +8,10 @@ import AboutPage from './components/about/AboutPage';
 import ManageCoursePage from './components/about/ManageCoursePage';
 import GamePage from './components/game/GamePage';
 import JoinGamePage from './components/joinGame/JoinGamePage';
-import AnswerPage from './components/game/AnswerPage';
-import VotePagePlayer from './components/game/VotePagePlayer';
-import ScorePage from './components/game/ScorePage';
-import ResultPage from './components/game/ResultPage';
+import AnswerPage from './components/answer/AnswerPage';
+import VotePagePlayer from './components/vote/VotePagePlayer';
+import ScorePage from './components/score/ScorePage';
+import ResultPage from './components/result/ResultPage';
 
 
 export default (
