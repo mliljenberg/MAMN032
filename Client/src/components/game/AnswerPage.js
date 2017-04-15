@@ -26,6 +26,7 @@ class AnswerPagePlayer extends React.Component {
   }
 
   componentDidMount(){
+
     $("#answerContainer").slideToggle("slow", function () {
 
     });
@@ -51,6 +52,14 @@ class AnswerPagePlayer extends React.Component {
         <div id="waitingContainer" className="hideFromStart" >
           <div className="myMediumText">Waiting on other players</div> <br/>
          <div className="mySmallText">{this.state.ready}/4 submitted</div>
+        </div>
+        <div id="rightAnswerContainer" className="hideFromStart">
+          <div className="myMediumSmallText">You have the true description</div>
+          <div className="col-xs-12 myMargin"></div>
+          <div className="mySmallText myMargin">A word means blablablabla A word means blablablabla</div>
+          <div className="col-md-3"></div>
+          <button className="myNeutralButton col-xs-12 col-md-6">Submit</button>
+          <div className="col-md-3"></div>
         </div>
       </div>
     );

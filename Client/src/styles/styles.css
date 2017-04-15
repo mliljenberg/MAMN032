@@ -208,6 +208,36 @@ html, body {
   -2px -7px 0 #000;
 }
 
+.myMediumSmallText {
+  font-size: 75px;
+  font-weight: 900;
+  color: white;
+  text-shadow: 7px 7px 0 #000,
+  -7px 7px 0 #000,
+  7px -7px 0 #000,
+  -7px -7px 0 #000,
+  0px 7px 0 #000,
+  0px -7px 0 #000,
+  -7px 0px 0 #000,
+  7px 0px 0 #000,
+  2px 2px 0 #000,
+  -2px 2px 0 #000,
+  2px -2px 0 #000,
+  -2px -2px 0 #000,
+  0px 2px 0 #000,
+  0px -2px 0 #000,
+  -2px 0px 0 #000,
+  2px 0px 0 #000,
+  7px 2px 0 #000,
+  -7px 2px 0 #000,
+  7px -2px 0 #000,
+  -7px -2px 0 #000,
+  2px 7px 0 #000,
+  -2px 7px 0 #000,
+  2px -7px 0 #000,
+  -2px -7px 0 #000;
+}
+
 .horizontalListItem {
   display: inline-block;
 

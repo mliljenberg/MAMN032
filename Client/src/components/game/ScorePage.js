@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as playerActions from '../../actions/playerAction';
 import $ from 'jquery';
+import {browserHistory}  from 'react-router';
 
 
 class ScorePage extends React.Component {
@@ -20,7 +21,6 @@ class ScorePage extends React.Component {
         $("#scoreContainer").slideToggle("slow", function () {
           $("#scoreBoardContainer").slideToggle("slow", function () {
 
-
           });
 
         });
@@ -29,6 +29,13 @@ class ScorePage extends React.Component {
 
     });
 
+
+  }
+
+  clickedReady(){
+    $("#scoreBoardContainer").slideToggle("slow", function () {
+      browserHistory.push('/answer');
+    });
 
   }
 
@@ -61,7 +68,7 @@ class ScorePage extends React.Component {
           )}
           <div className="col-xs-12">
             <div className="col-md-3"></div>
-            <button className="myNeutralButton col-md-6 col-xs-12">Ready</button>
+            <button className="myNeutralButton col-md-6 col-xs-12" onClick={this.clickedReady}>Ready</button>
             <div className="col-md-3"></div>
           </div>
         </div>
