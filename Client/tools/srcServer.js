@@ -35,7 +35,7 @@ app.get('*', function(req, res) {
  * Server methods
  **/
 
-let rooms = [];
+let activeRooms = [];
 let hostrooms = new Map(); //Key: hostSocket. Value: room key
 let legalChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -43,33 +43,36 @@ io.sockets.on('connection', function (socket) {
   console.log("New connection");
 
   /**
-   * Create new room.
-   * @Params: null
-   * @Return: room key
+   * @desc: Creating a new room with a unique key.
+   * @param:
+   * @return: room key
    * **/
   socket.on(header.CREATE_ROOM_REQ, function () {
-    let key = '';
-    do{
-      for(var i = 0; i < 5; i++){
-        key += legalChars.charAt(Math.floor(Math.random() * legalChars.length));
-      }
-    }while(rooms.includes(key));
+    if(!hostrooms.has(socket)) { //Är redan socketen relaterad till ett rum
+      let key = '';
+      do {
+        for (var i = 0; i < 5; i++) {
+          key += legalChars.charAt(Math.floor(Math.random() * legalChars.length));
+        }
+      } while (activeRooms.includes(key));
 
-    hostrooms.set(socket, key);
-    rooms.push(key);
-    socket.emit(header.CREATE_ROOM_ANS, key);
-    console.log("New room " + key);
+      hostrooms.set(socket, key);
+      activeRooms.push(key);
+      socket.emit(header.CREATE_ROOM_ANS, key);
+      console.log("New room " + key);
+      //Skicka även words
+    }
   });
 
 
 /**
- * Join existing room.
- * @Params: username, room key
- * @Return: success/failure
+ * @desc: Method for a player to join a room if it exists.
+ * @param: room key
+ * @return: success/failure
  * **/
   socket.on(header.JOIN_ROOM_REQ, function (data) {
     try{
-      if(rooms.includes(data)){
+      if(activeRooms.includes(data)){
         socket.join(data); //join room if exists
         socket.emit(header.JOIN_ROOM_ANS, true);
       } else {
@@ -83,20 +86,29 @@ io.sockets.on('connection', function (socket) {
 
 
   /**
-   * Client/Host disconnect
-   * @Params: null
-   * @return: null
+   * @desc: Broadcast message to all sockets in room.
+   * @param: username, message
+   * @return: success/failure
+   * **/
+  socket.on(header.SEND_MESSAGE_REQ, function (msg) {
+
+  });
+
+
+  /**
+   * @desc: Handles the disconnection of a socket. If the socket is a host all clients will be kicked from the room.
+   * @param:
+   * @return:
    * **/
   socket.on('disconnection', function () {
     console.log("Disconnection");
 
     if(hostrooms.has(socket)){ //Frigör rumsnyckel ifall det är en host som dc.
-      rooms.splice(hostrooms.get(socket) ,1);
+      activeRooms.splice(hostrooms.get(socket) ,1);
       hostrooms.delete(socket);
+      //Kick all clients from room
       console.log("Host dc");
     }
-
-    //Kick all clients from room
   });
 
 });
