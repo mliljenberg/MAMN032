@@ -36,7 +36,20 @@ const players = [
   {
     id:"1",
     value: 'Ludde'
+  },
+  {
+    id:"2",
+    value: 'Ludde2'
+  },
+  {
+    id:"3",
+    value: 'sas'
+  },
+  {
+    id:"4",
+    value: 'HEJSAN'
   }
+
 
 ];
 

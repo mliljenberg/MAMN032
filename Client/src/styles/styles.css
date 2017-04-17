@@ -2,9 +2,9 @@
 #app {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #4d4d4d;
-  min-width: 550px;
-  max-width: 850px;
   margin: 0 auto;
+  height: 100%;
+  text-align: center;
 }
 
 a.active {
@@ -14,6 +14,7 @@ a.active {
 nav {
   padding-top: 20px;
 }
+
 .crossRotate {
   background-color: orange;
   -webkit-transition-duration: 1s;
@@ -32,6 +33,268 @@ nav {
   transform: rotate(180deg) scale(5) translate(-50px, -20px);
   background-color: red;
 
+}
+
+html, body {
+  height: 100%;
+  background-image: url("http://68.media.tumblr.com/297bca135cc211b869c1a659664e46b9/tumblr_nsqazrgxAY1rnfgtmo4_500.gif");
+  background-size: cover;
+  text-align: center;
+
+}
+
+.myInput {
+  height: 10vh;
+  margin-top: 15px;
+  border-radius: 5px;
+
+  border-color: black;
+  font-size: 50px;
+}
+
+.container-fluid {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.myJoinButton {
+  height: 10vh;
+  margin-top: 15px;
+  font-size: 50px;
+  border-radius: 5px;
+  background-color: darkseagreen;
+  border-color: black;
+  color: black;
+}
+
+.myCreateButton {
+  height: 10vh;
+  margin-top: 15px;
+  font-size: 50px;
+  border-radius: 5px;
+  background-color: lightblue;
+  border-color: black;
+  color: black;
+}
+
+.myNeutralButton {
+  height: 10vh;
+  margin-top: 15px;
+  font-size: 50px;
+  border-radius: 5px;
+  background-color: #fffefb;
+  border-color: black;
+  color: black;
+}
+
+.myLargeText {
+  font-size: 250px;
+  font-weight: 900;
+  color: white;
+  text-shadow: 7px 7px 0 #000,
+  -7px 7px 0 #000,
+  7px -7px 0 #000,
+  -7px -7px 0 #000,
+  0px 7px 0 #000,
+  0px -7px 0 #000,
+  -7px 0px 0 #000,
+  7px 0px 0 #000,
+  2px 2px 0 #000,
+  -2px 2px 0 #000,
+  2px -2px 0 #000,
+  -2px -2px 0 #000,
+  0px 2px 0 #000,
+  0px -2px 0 #000,
+  -2px 0px 0 #000,
+  2px 0px 0 #000,
+  7px 2px 0 #000,
+  -7px 2px 0 #000,
+  7px -2px 0 #000,
+  -7px -2px 0 #000,
+  2px 7px 0 #000,
+  -2px 7px 0 #000,
+  2px -7px 0 #000,
+  -2px -7px 0 #000;
+}
+
+.myMediumLargeText {
+  font-size: 150px;
+  font-weight: 900;
+  color: white;
+  text-shadow: 7px 7px 0 #000,
+  -7px 7px 0 #000,
+  7px -7px 0 #000,
+  -7px -7px 0 #000,
+  0px 7px 0 #000,
+  0px -7px 0 #000,
+  -7px 0px 0 #000,
+  7px 0px 0 #000,
+  2px 2px 0 #000,
+  -2px 2px 0 #000,
+  2px -2px 0 #000,
+  -2px -2px 0 #000,
+  0px 2px 0 #000,
+  0px -2px 0 #000,
+  -2px 0px 0 #000,
+  2px 0px 0 #000,
+  7px 2px 0 #000,
+  -7px 2px 0 #000,
+  7px -2px 0 #000,
+  -7px -2px 0 #000,
+  2px 7px 0 #000,
+  -2px 7px 0 #000,
+  2px -7px 0 #000,
+  -2px -7px 0 #000;
+}
+
+.myMediumText {
+  font-size: 100px;
+  font-weight: 900;
+  color: white;
+  text-shadow: 7px 7px 0 #000,
+  -7px 7px 0 #000,
+  7px -7px 0 #000,
+  -7px -7px 0 #000,
+  0px 7px 0 #000,
+  0px -7px 0 #000,
+  -7px 0px 0 #000,
+  7px 0px 0 #000,
+  2px 2px 0 #000,
+  -2px 2px 0 #000,
+  2px -2px 0 #000,
+  -2px -2px 0 #000,
+  0px 2px 0 #000,
+  0px -2px 0 #000,
+  -2px 0px 0 #000,
+  2px 0px 0 #000,
+  7px 2px 0 #000,
+  -7px 2px 0 #000,
+  7px -2px 0 #000,
+  -7px -2px 0 #000,
+  2px 7px 0 #000,
+  -2px 7px 0 #000,
+  2px -7px 0 #000,
+  -2px -7px 0 #000;
+}
+
+.mySmallText {
+  font-size: 50px;
+  font-weight: 900;
+  color: white;
+  text-shadow: 7px 7px 0 #000,
+  -7px 7px 0 #000,
+  7px -7px 0 #000,
+  -7px -7px 0 #000,
+  0px 7px 0 #000,
+  0px -7px 0 #000,
+  -7px 0px 0 #000,
+  7px 0px 0 #000,
+  2px 2px 0 #000,
+  -2px 2px 0 #000,
+  2px -2px 0 #000,
+  -2px -2px 0 #000,
+  0px 2px 0 #000,
+  0px -2px 0 #000,
+  -2px 0px 0 #000,
+  2px 0px 0 #000,
+  7px 2px 0 #000,
+  -7px 2px 0 #000,
+  7px -2px 0 #000,
+  -7px -2px 0 #000,
+  2px 7px 0 #000,
+  -2px 7px 0 #000,
+  2px -7px 0 #000,
+  -2px -7px 0 #000;
+}
+
+.horizontalListItem {
+  display: inline-block;
+
+}
+
+.horizontalList {
+  margin-top: 50px;
+  display: inline;
+  float: none;
+}
+
+.description {
+  background: url("http://www.dailyfreepsd.com/wp-content/uploads/2013/06/Broken-scroll-paperparchment-leather-vector.png");
+  background-size: cover;
+
+  padding-bottom: 50px;
+  padding-top: 50px;
+  border-radius: 5px;
+  border: 10px black;
+  font-size: 30px;
+
+}
+
+.descriptionInput {
+  height: 30vh;
+  margin-top: 20px;
+  border-radius: 5px;
+
+  border-color: black;
+  font-size: 50px;
+
+}
+
+.myMargin {
+  margin-top: 50px;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: #3498DB;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.toggle-btn {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  left: 0;
+  margin: auto;
+  width: 80px;
+}
+
+
+
+
+.hideFromStart{
+  display: none;
+}
+
+
+.voteBox{
+  height: 250px;
+  background: url("http://2.bp.blogspot.com/-dS_3P8TGZ_g/T5nCMf_iz0I/AAAAAAAABEU/sceGjdRC2Tc/s1600/Ripped_Paper_Notes.png");
+  background-size: 100% 100%;
+  display: none;
+  text-align: center;
+
+}
+
+.myPadding{
+  padding: 10px;
+}
+
+#listOfAnswers{
+  padding: 20px;
+
+}
+.centeredText{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 

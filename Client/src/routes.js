@@ -3,10 +3,13 @@ import { Route, IndexRoute } from 'react-router';
 import App from './components/App';
 import HomePage from './components/home/HomePage';
 import HostPage from './components/host/HostPage';
-import PlayerPage from './components/player/PlayerPage';
+import PlayerPage from './components/game/PlayerPage';
 import AboutPage from './components/about/AboutPage';
 import ManageCoursePage from './components/about/ManageCoursePage';
-import GamePage from './components/player/GamePage';
+import GamePage from './components/game/GamePage';
+import JoinGamePage from './components/joinGame/JoinGamePage';
+import AnswerPage from './components/game/AnswerPage';
+import VotePagePlayer from './components/game/VotePagePlayer';
 
 
 export default (
@@ -20,6 +23,12 @@ export default (
 
     <Route path="game" component={GamePage} />
     <Route path="game/:id" component={GamePage} />
+
+    <Route path="joinGame" component={JoinGamePage} />
+    <Route path="answer" component={AnswerPage} />
+
+    <Route path="vote" component={VotePagePlayer} />
+
 
   </Route>
 );
