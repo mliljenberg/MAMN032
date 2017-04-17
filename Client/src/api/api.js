@@ -11,7 +11,8 @@ const maxNbrPlayers = 4;
 let words = []; //Koppla till redux!
 let players = []; // Koppla till redux!
 
-let instance = null; //socket
+let socket = null;
+let instance = null;
 
 class NetworkHandler{
 
@@ -22,8 +23,10 @@ class NetworkHandler{
    * **/
   constructor(){
     if(!instance){
-      instance = io.connect();
+      socket = io.connect();
+      instance = this;
     }
+    return instance;
   }
 
   /**
@@ -32,7 +35,7 @@ class NetworkHandler{
    * @return:
    * **/
   CreateRoom(){
-    instance.emit(header.CREATE_ROOM_REQ);
+    socket.emit(header.CREATE_ROOM_REQ);
   }
 
   /**
@@ -42,7 +45,7 @@ class NetworkHandler{
    * **/
   JoinRoom(roomKey, username){
     key = roomKey;
-    instance.emit(header.JOIN_ROOM_REQ, key, username);
+    socket.emit(header.JOIN_ROOM_REQ, key, username);
   }
 
 
@@ -60,7 +63,7 @@ class NetworkHandler{
         "answer":answer
       };
 
-      instance.emit(header.SUBMIT_ANSWER_REQ, key, ans);
+      socket.emit(header.SUBMIT_ANSWER_REQ, key, ans);
     }
   }
 
@@ -70,7 +73,7 @@ class NetworkHandler{
    * @return:
    * **/
   ChangeState(key, state){
-    instance.emit(header.CHANGE_STATE_REQ, key, state);
+    socket.emit(header.CHANGE_STATE_REQ, key, state);
   }
 
 
@@ -87,7 +90,7 @@ class NetworkHandler{
      * @param:
      * @return: unique room KEY.
      * **/
-    instance.on(header.CREATE_ROOM_ANS, function (key) {
+    socket.on(header.CREATE_ROOM_ANS, function (key) {
       //key from server
     });
 
@@ -96,12 +99,12 @@ class NetworkHandler{
      * @param: username.
      * @return: true/false.
      * **/
-    instance.on(header.JOIN_ROOM_REQ, function (socket, username) {
+    socket.on(header.JOIN_ROOM_REQ, function (socket, username) {
       if(players.length < maxNbrPlayers && state == header.STATE_WAIT_4_PLAYERS){
         players.push(username);
-        instance.emit(header.JOIN_ROOM_ANS, socket, true, key, username);
+        socket.emit(header.JOIN_ROOM_ANS, socket, true, key, username);
       } else {
-        instance.emit(header.JOIN_ROOM_ANS, socket, false, null, null);
+        socket.emit(header.JOIN_ROOM_ANS, socket, false, null, null);
       }
     });
 
@@ -110,7 +113,7 @@ class NetworkHandler{
      * @param:
      * @return: true/false
      * **/
-    instance.on(header.JOIN_ROOM_ANS, function (ans) {
+    socket.on(header.JOIN_ROOM_ANS, function (ans) {
       if(ans == true){
         //gör ngt
       } else {
@@ -124,7 +127,7 @@ class NetworkHandler{
      * @param:
      * @return: true/false/JSON answer
      * **/
-    instance.on(header.SUBMIT_ANSWER_ANS, function (ans) {
+    socket.on(header.SUBMIT_ANSWER_ANS, function (ans) {
       if(ans == true){
         //gör ngt
       } else if(ans == false){
