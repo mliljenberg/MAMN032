@@ -5,7 +5,9 @@
 import io from 'socket.io-client';
 import * as header from '../headerConstants';
 
-let roomId;
+let key = null;
+let state = null;
+const maxNbrPlayers = 4;
 let words = []; //Koppla till redux!
 let players = []; // Koppla till redux!
 
@@ -35,34 +37,104 @@ class NetworkHandler{
 
   /**
    * @desc: Method to join a room
-   * @param: Unique KEY to a room.
+   * @param: room key, username
    * @return:
    * **/
-  JoinRoom(key){
-    roomId = key;
-    instance.emit(header.JOIN_ROOM_REQ, key);
+  JoinRoom(roomKey, username){
+    key = roomKey;
+    instance.emit(header.JOIN_ROOM_REQ, key, username);
   }
 
-  SendMessage(username, message){
-    let msg = {
-      "username":username,
-      "message":message
-    };
 
-    instance.emit(header.SEND_MESSAGE_REQ, msg);
+  /**
+   * @desc: Submit answer by username for word to room.
+   * @param: username, word, answer.
+   * @return:
+   * **/
+  SubmitAnswer(username, word, answer){
+    if(key){
+
+      let ans = {
+        "username":username,
+        "word":word,
+        "answer":answer
+      };
+
+      instance.emit(header.SUBMIT_ANSWER_REQ, key, ans);
+    }
   }
+
+  /**
+   * @desc: Method for the host to change state.
+   * @param: key, state.
+   * @return:
+   * **/
+  ChangeState(key, state){
+    instance.emit(header.CHANGE_STATE_REQ, key, state);
+  }
+
+
+  /********************************ANSWERS*****************************************/
+
 
   /**
    * @desc: Contains all answers from the server.
    * **/
   ServerUpdate(){//Bör enligt markus innehålla samtliga ".on"
-    instance.on(header.CREATE_ROOM_ANS, function () {
 
+    /**
+     * @desc: Answer from server that a room has been created.
+     * @param:
+     * @return: unique room KEY.
+     * **/
+    instance.on(header.CREATE_ROOM_ANS, function (key) {
+      //key from server
     });
 
-    instance.on(header.JOIN_ROOM_ANS, function () {
-
+    /**
+     * @desc: Host allows/denies a player to join the game.
+     * @param: username.
+     * @return: true/false.
+     * **/
+    instance.on(header.JOIN_ROOM_REQ, function (socket, username) {
+      if(players.length < maxNbrPlayers && state == header.STATE_WAIT_4_PLAYERS){
+        players.push(username);
+        instance.emit(header.JOIN_ROOM_ANS, socket, true, key, username);
+      } else {
+        instance.emit(header.JOIN_ROOM_ANS, socket, false, null, null);
+      }
     });
+
+    /**
+     * @desc: Answer from server if joining a room succeeded/failed.
+     * @param:
+     * @return: true/false
+     * **/
+    instance.on(header.JOIN_ROOM_ANS, function (ans) {
+      if(ans == true){
+        //gör ngt
+      } else {
+        //gör ngt
+      }
+    });
+
+
+    /**
+     * @desc: Response from server on success/failure to submit answer OR answer from another player.
+     * @param:
+     * @return: true/false/JSON answer
+     * **/
+    instance.on(header.SUBMIT_ANSWER_ANS, function (ans) {
+      if(ans == true){
+        //gör ngt
+      } else if(ans == false){
+        //skicka igen?
+      } else {
+        //display
+      }
+    });
+
+
   }
 
 }

@@ -34,9 +34,8 @@ app.get('*', function(req, res) {
 /**
  * Server methods
  **/
-
-let activeRooms = [];
-let hostrooms = new Map(); //Key: hostSocket. Value: room key
+let roomHost = new Map(); //Key: room key Value: hostSocket
+let hostRoom = new Map(); //Key: hostSocket. Value: room key
 let legalChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 io.sockets.on('connection', function (socket) {
@@ -45,23 +44,22 @@ io.sockets.on('connection', function (socket) {
   /**
    * @desc: Creating a new room with a unique key.
    * @param:
-   * @return: room key
+   * @return: key
    * **/
   socket.on(header.CREATE_ROOM_REQ, function () {
-    if(!hostrooms.has(socket)) { //Är redan socketen relaterad till ett rum
+    if(!hostRoom.has(socket)) {
       let key;
       do {
         key = '';
         for (var i = 0; i < 5; i++) {
           key += legalChars.charAt(Math.floor(Math.random() * legalChars.length));
         }
-      } while (activeRooms.includes(key));
+      } while (roomHost.has(key));
 
-      hostrooms.set(socket, key);
-      activeRooms.push(key);
+      hostRoom.set(socket, key);
+      roomHost.set(key, socket);
+
       socket.emit(header.CREATE_ROOM_ANS, key);
-      console.log("New room " + key);
-      //Skicka även words
     }
   });
 
@@ -69,30 +67,56 @@ io.sockets.on('connection', function (socket) {
 /**
  * @desc: Method for a player to join a room if it exists.
  * @param: room key
- * @return: success/failure
+ * @return: true/false.
  * **/
-  socket.on(header.JOIN_ROOM_REQ, function (data) {
-    try{
-      if(activeRooms.includes(data)){
-        socket.join(data); //join room if exists
-        socket.emit(header.JOIN_ROOM_ANS, true);
-      } else {
-        socket.emit(header.JOIN_ROOM_ANS, false);
-      }
-    } catch (err){
+  socket.on(header.JOIN_ROOM_REQ, function (key, username) {
+    if(roomHost.has(key)){
+      roomHost.get(key).emit(header.JOIN_ROOM_REQ, socket, username);
+    } else {
       socket.emit(header.JOIN_ROOM_ANS, false);
-      console.log(err.message);
     }
   });
 
 
   /**
-   * @desc: Broadcast message to all sockets in room.
-   * @param: username, message
-   * @return: success/failure
+   * @desc: The response from the host if specific player was allowed/denied to join. Forwarded to the player.
+   * @param:
+   * @return: true/false.
    * **/
-  socket.on(header.SEND_MESSAGE_REQ, function (msg) {
+  socket.on(header.JOIN_ROOM_ANS, function (playerSocket, ans, key, username) {
+    if(ans == true){
+      playerSocket.join(key);
+    }
+    playerSocket.emit(header.JOIN_ROOM_ANS, ans);
+  });
 
+
+  /**
+   * @desc: Broadcast answer to all sockets in room.
+   * @param: room key, answer
+   * @return: true/false.
+   * **/
+  socket.on(header.SUBMIT_ANSWER_REQ, function (key, ans) {
+    try{
+      socket.to(key).emit(header.SUBMIT_ANSWER_ANS, ans);
+      socket.emit(header.SUBMIT_ANSWER_ANS, true);
+    } catch (err){
+      console.log(err.message);
+      socket.emit(header.SUBMIT_ANSWER_ANS, false);
+    }
+  });
+
+  /**
+   * @desc: Broadcast a new state to all players from host.
+   * @param: key, state.
+   * @return: true/false.
+   * **/
+  socket.on(header.CHANGE_STATE_REQ, function (key, state) {
+    try{
+      socket.to(key).emit(header.CHANGE_STATE_ANS, state);
+    } catch (err) {
+      console.log(err.message);
+    }
   });
 
 
@@ -104,9 +128,9 @@ io.sockets.on('connection', function (socket) {
   socket.on('disconnection', function () {
     console.log("Disconnection");
 
-    if(hostrooms.has(socket)){ //Frigör rumsnyckel ifall det är en host som dc.
-      activeRooms.splice(hostrooms.get(socket) ,1);
-      hostrooms.delete(socket);
+    if(hostRoom.has(socket)){ //Frigör rumsnyckel ifall det är en host som dc.
+      activeRooms.splice(hostRoom.get(socket) ,1);
+      hostRoom.delete(socket);
       //Kick all clients from room
       console.log("Host dc");
     }
