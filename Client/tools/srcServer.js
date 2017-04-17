@@ -49,8 +49,9 @@ io.sockets.on('connection', function (socket) {
    * **/
   socket.on(header.CREATE_ROOM_REQ, function () {
     if(!hostrooms.has(socket)) { //Är redan socketen relaterad till ett rum
-      let key = '';
+      let key;
       do {
+        key = '';
         for (var i = 0; i < 5; i++) {
           key += legalChars.charAt(Math.floor(Math.random() * legalChars.length));
         }
