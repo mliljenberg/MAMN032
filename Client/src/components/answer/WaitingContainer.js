@@ -6,7 +6,7 @@ class WaitingContainer extends React.Component {
       <div>
         <div className="myMediumText">Waiting on other players</div>
         <br/>
-        <div className="mySmallText">3/4 submitted</div>
+        <div className="mySmallText">{this.props.ready}/4 submitted</div>
       </div>
     );
   }

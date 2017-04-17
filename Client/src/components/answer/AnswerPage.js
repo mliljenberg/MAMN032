@@ -17,8 +17,7 @@ class AnswerPagePlayer extends React.Component {
   submitted() {
     $("#answerContainer").slideToggle("slow", function () {
       $("#waitingContainer").slideToggle("slow", function () {
-
-        setTimeout(function () {
+       setTimeout(function () {
           $("#waitingContainer").slideToggle("slow", function () {
             browserHistory.push("/vote");
           });
@@ -43,7 +42,7 @@ class AnswerPagePlayer extends React.Component {
           <AnswerContainer onClick={this.submitted}/>
         </div>
         <div id="waitingContainer" className="hideFromStart">
-          <WaitingContainer/>
+          <WaitingContainer ready={this.state.ready}/>
         </div>
         <div id="rightAnswerContainer" className="hideFromStart">
           <RightAnswerContainer/>
