@@ -33,3 +33,8 @@ export function addPlayer(player) {
     });
   };
 }
+export function updatePlayer(player) {
+  return function(dispatch) {
+    dispatch(updatePlayersSuccess(player));
+  };
+}

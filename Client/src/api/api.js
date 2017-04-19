@@ -4,6 +4,7 @@
 
 import io from 'socket.io-client';
 import * as header from '../headerConstants';
+import * as playerAction from '../actions/playerAction';
 
 let key = null;
 let state = null;
@@ -32,10 +33,15 @@ class NetworkHandler{
   /**
    * @desc: Method to create room
    * @param:
-   * @return:
+   * @return: key
    * **/
   CreateRoom(){
     socket.emit(header.CREATE_ROOM_REQ);
+    return new Promise((resolve) => {
+      socket.on(header.CREATE_ROOM_ANS, function (ans) {
+        resolve(Object.assign({}, ans));
+      });
+    });
   }
 
   /**
@@ -46,6 +52,16 @@ class NetworkHandler{
   JoinRoom(roomKey, username){
     key = roomKey;
     socket.emit(header.JOIN_ROOM_REQ, key, username);
+    return new Promise((resolve, reject) => {
+      socket.on(header.JOIN_ROOM_ANS, function (ans) {
+        if(ans == true){
+          resolve(Object.assign({}, ans));
+        } else {
+          reject(Object.assign({}, ans));
+          key = null;
+        }
+      });
+    });
   }
 
 
@@ -76,7 +92,6 @@ class NetworkHandler{
     socket.emit(header.CHANGE_STATE_REQ, key, state);
   }
 
-
   /********************************ANSWERS*****************************************/
 
 
@@ -86,22 +101,13 @@ class NetworkHandler{
   ServerUpdate(){//Bör enligt markus innehålla samtliga ".on"
 
     /**
-     * @desc: Answer from server that a room has been created.
-     * @param:
-     * @return: unique room KEY.
-     * **/
-    socket.on(header.CREATE_ROOM_ANS, function (key) {
-      //key from server
-    });
-
-    /**
      * @desc: Host allows/denies a player to join the game.
      * @param: username.
      * @return: true/false.
      * **/
     socket.on(header.JOIN_ROOM_REQ, function (socket, username) {
       if(players.length < maxNbrPlayers && state == header.STATE_WAIT_4_PLAYERS){
-        players.push(username);
+        playerAction.updatePlayer(username);
         socket.emit(header.JOIN_ROOM_ANS, socket, true, key, username);
       } else {
         socket.emit(header.JOIN_ROOM_ANS, socket, false, null, null);

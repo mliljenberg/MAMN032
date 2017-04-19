@@ -79,13 +79,14 @@ io.sockets.on('connection', function (socket) {
 
 
   /**
-   * @desc: The response from the host if specific player was allowed/denied to join. Forwarded to the player.
+   * @desc: The response from the host if specific player was allowed/denied to join. Forwarded to the player. Broadcast new player joined.
    * @param:
    * @return: true/false.
    * **/
   socket.on(header.JOIN_ROOM_ANS, function (playerSocket, ans, key, username) {
     if(ans == true){
       playerSocket.join(key);
+      playerSocket.to(key).emit(header.NEW_PLAYER_JOINED, username);
     }
     playerSocket.emit(header.JOIN_ROOM_ANS, ans);
   });
@@ -112,10 +113,12 @@ io.sockets.on('connection', function (socket) {
    * @return: true/false.
    * **/
   socket.on(header.CHANGE_STATE_REQ, function (key, state) {
-    try{
-      socket.to(key).emit(header.CHANGE_STATE_ANS, state);
-    } catch (err) {
-      console.log(err.message);
+    if(roomHost.get(key) == socket){//socket är en host
+      try{
+        socket.to(key).emit(header.CHANGE_STATE_ANS, state);
+      } catch (err) {
+        console.log(err.message);
+      }
     }
   });
 
@@ -129,7 +132,7 @@ io.sockets.on('connection', function (socket) {
     console.log("Disconnection");
 
     if(hostRoom.has(socket)){ //Frigör rumsnyckel ifall det är en host som dc.
-      activeRooms.splice(hostRoom.get(socket) ,1);
+      roomHost.delete(hostRoom.get(socket));
       hostRoom.delete(socket);
       //Kick all clients from room
       console.log("Host dc");
