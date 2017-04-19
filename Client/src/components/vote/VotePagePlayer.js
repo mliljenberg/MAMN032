@@ -2,13 +2,23 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import $ from 'jquery';
+import {browserHistory}  from 'react-router';
 import VoteBox from './VoteBox';
 
 class VotePagePlayer extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.componentDidMount = this.componentDidMount.bind(this);
+    $(document).on('click', 'div', function (e) {
 
+      if (e.target.id.startsWith("voteBox")) {
+
+        $("#voteContainer").slideToggle("slow", function () {
+          browserHistory.push("score");
+        });
+
+      }
+    });
   }
 
   componentDidMount() {
