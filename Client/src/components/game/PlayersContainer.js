@@ -16,6 +16,7 @@ class PlayersContainer extends React.Component{
     let leftOverRow1 = "";
     let leftOverClass = "horizontalListItem center-block col-xs-4"
     let button="";
+    let key="";
 
 
     this.state.leftOver = players.length % 3;
@@ -38,11 +39,13 @@ class PlayersContainer extends React.Component{
     }
 
 
+
     return(
       <div>
-        <div className="myMediumLargeText">Room: 1234</div>
+        <div className="myMediumLargeText">Room: {this.props.room}</div>
         <div className="col-xs-12">
           <div className="col-xs-0 col-md-2"></div>
+          {key}
           <div className="horizontalList col-xs-12 col-md-8">
             {leftOverRow1}
             {players.map(player =>

@@ -7,13 +7,14 @@ import PlayerPage from './components/game/PlayerPage';
 import AboutPage from './components/about/AboutPage';
 import ManageCoursePage from './components/about/ManageCoursePage';
 import GamePage from './components/game/GamePage';
-import HostGamePage from './components/hostPages/game/GamePage';
 import JoinGamePage from './components/joinGame/JoinGamePage';
 import AnswerPage from './components/answer/AnswerPage';
 import VotePagePlayer from './components/vote/VotePagePlayer';
 import ScorePage from './components/score/ScorePage';
 import ResultPage from './components/result/ResultPage';
 
+import HostGamePage from './components/hostPages/game/GamePage';
+import HostAnswerPage from './components/hostPages/answer/AnswerPage';
 
 export default (
   <Route path="/" component={App}>
@@ -36,6 +37,7 @@ export default (
 
     //HOSTSIDOR
     <Route path="host/game" component={HostGamePage}/>
+    <Route path="host/answer" component={HostAnswerPage}/>
 
   </Route>
 );

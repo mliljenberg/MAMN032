@@ -18,7 +18,7 @@ class GamePage extends React.Component{
 
       <div>
         <div id="playersContainer" className="hideFromStart">
-          <PlayersContainer button="false"/>
+          <PlayersContainer button="false" room="1234"/>
 
         </div>
       </div>
