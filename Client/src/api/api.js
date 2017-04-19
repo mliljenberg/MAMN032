@@ -9,7 +9,6 @@ import * as playerAction from '../actions/playerAction';
 let key = null;
 let state = null;
 const maxNbrPlayers = 4;
-let words = []; //Koppla till redux!
 let players = []; // Koppla till redux!
 
 let socket = null;
@@ -20,7 +19,7 @@ socket = io.connect();
 class api{
 
   /**
-   * @desc: Creation of a NetworkHandler, this is a singleton class.
+   * @desc: Creation of api, this is a singleton class.
    * @param:
    * @return:
    * **/
@@ -105,7 +104,7 @@ class api{
   /**
    * @desc: Contains all answers from the server.
    * **/
-  static ServerUpdate(){//Bör enligt markus innehålla samtliga ".on"
+  ServerUpdate(){
 
     /**
      * @desc: Host allows/denies a player to join the game.
