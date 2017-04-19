@@ -1,43 +1,57 @@
-import React from 'react';
-import {Link} from 'react-router';
+import React, {PropTypes} from 'react';
+import {bindActionCreators} from 'redux';
+import {Link, browserHistory}  from 'react-router';
+import $ from 'jquery';
 import io from 'socket.io-client';
-import * as header from '../../headerConstants';
-let socket = io.connect();
-let key = '';
+import {connect} from 'react-redux';
+import * as roomActions from '../../actions/roomAction';
 
 class HostPage extends React.Component {
 
  constructor(props, context){
    super(props, context);
+   this.state = {
 
-   socket.on(header.CREATE_ROOM_ANS, function (data) {
-     key = data;
-     console.log(data);
-     //return 1;
-   });
+     room: Object.assign({}, props.room)
 
-   socket.on(header.JOIN_ROOM_ANS, function (data) {
-     console.log(data);
-   });
 
- }
+   };
 
- handleClickCreate(){
-   socket.emit(header.CREATE_ROOM_REQ);
- }
 
- handleClickJoin(){
-   socket.emit(header.JOIN_ROOM_REQ, key);
  }
 
   render() {
     return (
       <div>
-        <div className="btn btn-primary" id="createGame" onClick={this.handleClickCreate}>Create Game</div>
-        <div className="btn btn-primary" id="joinGame" onClick={this.handleClickJoin}>Join Game</div>
+          <h1>Detta är rum: {this.props.room.id} </h1>
       </div>
     );
   }
 }
+HostPage.propTypes = {
+  actions: PropTypes.object.isRequired,
+  room: PropTypes.object.isRequired
 
-export default HostPage;
+  //myprop: PropTypes.string.isRequired
+
+};
+
+function mapStateToProps(state, ownProps) {
+
+
+
+  return {
+    room: state.room
+  };
+}
+function mapDispatchToProps(dispatch) {
+
+  return {
+
+    actions: bindActionCreators(Object.assign({}, roomActions), dispatch)
+  };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(HostPage);
+

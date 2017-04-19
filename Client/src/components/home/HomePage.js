@@ -1,36 +1,54 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
+import {bindActionCreators} from 'redux';
+import {Link, browserHistory}  from 'react-router';
 import $ from 'jquery';
 import io from 'socket.io-client';
+import {connect} from 'react-redux';
+import * as roomActions from '../../actions/roomAction';
+
 const socket = io.connect();
 
 class HomePage extends React.Component {
 
   constructor(props, context) {
     super(props, context);
+    this.state = {
 
-    socket.on('new message', function(data) {
+      room: Object.assign({}, props.room)
 
-      $('#list').append('<li> '+data.name+ " joined the game in room "+data.room +'</li>');
-    });
 
+    };
+    this.createRoom = this.createRoom.bind(this);
 
 
   }
 
-  handleClick(){
-    socket.emit('send message', {name: $('#playerName').val(), room: $('#roomKey').val()});
-    $('#joinGame').remove();
-    $('#playerName').remove();
-    $('#roomKey').remove();
 
+  componentDidUpdate(){
+
+    if(this.props.room.id) {
+
+      browserHistory.push("/room/"+this.props.room.id);
+    }
+    return true;
+  }
+
+  handleClick(){
+
+  }
+
+
+  createRoom(){
+    this.props.actions.createRoom();
   }
 
 
   render() {
     return (
     <div id="total">
-      Name: <input label="Name" type="text" name="" id="playerName"/><br/>
-      Room: <input label="Key" type="text" name="" id="roomKey"/>
+
+      <div className="btn btn-primary" id="joinGame" onClick={this.createRoom}>Create Game</div>
+
       <div className="btn btn-primary" id="joinGame" onClick={this.handleClick}>Join Game</div>
     <ul id="list"></ul>
 
@@ -43,4 +61,30 @@ class HomePage extends React.Component {
   }
 }
 
-export default HomePage;
+HomePage.propTypes = {
+  actions: PropTypes.object.isRequired,
+  room: PropTypes.object.isRequired
+
+  //myprop: PropTypes.string.isRequired
+
+};
+
+function mapStateToProps(state, ownProps) {
+
+
+
+  return {
+    room: state.room
+  };
+}
+function mapDispatchToProps(dispatch) {
+
+  return {
+
+    actions: bindActionCreators(Object.assign({}, roomActions), dispatch)
+  };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+

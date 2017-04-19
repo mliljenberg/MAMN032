@@ -1,5 +1,5 @@
 import * as types from './ActionTypes';
-import api from '../api/mockApi';
+import api from '../api/api';
 
 
 export function createRoomSuccsess(room) {
@@ -12,9 +12,9 @@ export function joinRoomSuccsess(room) {
 }
 
 
-export function createRoom(room) {
+export function createRoom() {
   return function (dispatch) {
-    return api.CreateRoom(room).then(room => {
+    return api.CreateRoom().then(room => {
       dispatch(createRoomSuccsess(room));
     });
   };

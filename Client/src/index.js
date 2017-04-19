@@ -11,17 +11,19 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import {loadCourses, loadAuthors} from './actions/courseAction';
 import {loadMessages} from './actions/messageAction';
 import {loadPlayers} from './actions/playerAction';
-import api from './api/mockApi';
+import api from './api/api';
 
 
 
 
 const store= configureStore();
-api.ServerUppdate();
+var apis = new api();
+apis.ServerUpdate;
 store.dispatch(loadCourses());
 store.dispatch(loadAuthors());
 store.dispatch(loadMessages());
 store.dispatch(loadPlayers());
+
 
 render(
   <Provider store={store} >

@@ -14,6 +14,8 @@ let players = []; // Koppla till redux!
 
 let socket = null;
 let instance = null;
+socket = io.connect();
+
 
 class api{
 
@@ -24,7 +26,7 @@ class api{
    * **/
   constructor(){
     if(!instance){
-      socket = io.connect();
+
       instance = this;
     }
     return instance;
@@ -33,15 +35,21 @@ class api{
   /**
    * @desc: Create new room, sets state to wait_4_players.
    * @param:
-   * @return: key
+   *
    * **/
-  CreateRoom(){
+  static CreateRoom(){
     socket.emit(header.CREATE_ROOM_REQ);
     return new Promise((resolve) => {
+
+
       socket.on(header.CREATE_ROOM_ANS, function (ans) {
         state = header.STATE_WAIT_4_PLAYERS;
-        resolve(Object.assign({}, ans));
+        let ans2 = {id:ans};
+        console.log(ans2);
+        resolve(Object.assign({}, ans2));
       });
+
+
     });
   }
 
@@ -97,7 +105,7 @@ class api{
   /**
    * @desc: Contains all answers from the server.
    * **/
-  ServerUpdate(){//Bör enligt markus innehålla samtliga ".on"
+  static ServerUpdate(){//Bör enligt markus innehålla samtliga ".on"
 
     /**
      * @desc: Host allows/denies a player to join the game.
@@ -156,3 +164,4 @@ class api{
   }
 
 }
+export default api;
