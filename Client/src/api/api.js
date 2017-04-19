@@ -15,7 +15,7 @@ let players = []; // Koppla till redux!
 let socket = null;
 let instance = null;
 
-class NetworkHandler{
+class api{
 
   /**
    * @desc: Creation of a NetworkHandler, this is a singleton class.
@@ -29,9 +29,9 @@ class NetworkHandler{
     }
     return instance;
   }
-
+  /********************************** SETUP ************************************/
   /**
-   * @desc: Method to create room
+   * @desc: Create new room, sets state to wait_4_players.
    * @param:
    * @return: key
    * **/
@@ -39,6 +39,7 @@ class NetworkHandler{
     socket.emit(header.CREATE_ROOM_REQ);
     return new Promise((resolve) => {
       socket.on(header.CREATE_ROOM_ANS, function (ans) {
+        state = header.STATE_WAIT_4_PLAYERS;
         resolve(Object.assign({}, ans));
       });
     });
@@ -64,6 +65,7 @@ class NetworkHandler{
     });
   }
 
+  /******************************** GAME_STARTED **********************************/
 
   /**
    * @desc: Submit answer by username for word to room.
@@ -92,9 +94,6 @@ class NetworkHandler{
     socket.emit(header.CHANGE_STATE_REQ, key, state);
   }
 
-  /********************************ANSWERS*****************************************/
-
-
   /**
    * @desc: Contains all answers from the server.
    * **/
@@ -116,8 +115,8 @@ class NetworkHandler{
 
     /**
      * @desc: Answer from server if joining a room succeeded/failed.
-     * @param:
-     * @return: true/false
+     * @param: true/false.
+     * @return:
      * **/
     socket.on(header.JOIN_ROOM_ANS, function (ans) {
       if(ans == true){
@@ -125,6 +124,16 @@ class NetworkHandler{
       } else {
         //gör ngt
       }
+    });
+
+
+    /**
+     * @desc: Broadcast msg from server, new player has joined the room.
+     * @param: username
+     * @return:
+     * **/
+    socket.on(header.NEW_PLAYER_JOINED, function (username) {
+      //gör ngt
     });
 
 
