@@ -67,7 +67,7 @@ class GamePage extends React.Component {
           </div>
 
           <div id="playersContainer" className="hideFromStart">
-          <PlayersContainer onClick={this.leaveGame}/>
+          <PlayersContainer onClick={this.leaveGame} button="true"/>
 
 
 

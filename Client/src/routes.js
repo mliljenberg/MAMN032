@@ -7,6 +7,7 @@ import PlayerPage from './components/game/PlayerPage';
 import AboutPage from './components/about/AboutPage';
 import ManageCoursePage from './components/about/ManageCoursePage';
 import GamePage from './components/game/GamePage';
+import HostGamePage from './components/hostPages/game/GamePage';
 import JoinGamePage from './components/joinGame/JoinGamePage';
 import AnswerPage from './components/answer/AnswerPage';
 import VotePagePlayer from './components/vote/VotePagePlayer';
@@ -33,6 +34,8 @@ export default (
     <Route path="score" component={ScorePage}/>
     <Route path="result" component={ResultPage}/>
 
+    //HOSTSIDOR
+    <Route path="host/game" component={HostGamePage}/>
 
   </Route>
 );

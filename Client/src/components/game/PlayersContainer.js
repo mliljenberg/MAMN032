@@ -15,6 +15,7 @@ class PlayersContainer extends React.Component{
     const {players} = this.props;
     let leftOverRow1 = "";
     let leftOverClass = "horizontalListItem center-block col-xs-4"
+    let button="";
 
 
     this.state.leftOver = players.length % 3;
@@ -31,6 +32,12 @@ class PlayersContainer extends React.Component{
       leftOverRow1 = <div className="col-xs-2"></div>;
 
     }
+
+    if(this.props.button ==="true"){
+      button= <div className="col-xs-12 myMargin"><CenteredButton onClick={this.props.onClick} color="White" label="Leave"/></div>;
+    }
+
+
     return(
       <div>
         <div className="myMediumLargeText">Room: 1234</div>
@@ -49,10 +56,8 @@ class PlayersContainer extends React.Component{
           </div>
           <div className="col-xs-0 col-md-2"></div>
         </div>
-        <div className="col-xs-12 myMargin">
-          <CenteredButton onClick={this.props.onClick} color="White" label="Leave"/>
+        {button}
 
-        </div>
       </div>
     );
   }
