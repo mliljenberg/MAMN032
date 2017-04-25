@@ -22,15 +22,12 @@ let socket = io.connect();
  * @return:
  * **/
 export function JoinRoom(roomKey, username) {
-  if (isHost) {
-    return;
-  }
-  key = roomKey;
-  socket.emit(header.JOIN_ROOM_REQ, key, username);
+  socket.emit(header.JOIN_ROOM_REQ, roomKey, username);
   return new Promise((resolve, reject) => {
     socket.on(header.JOIN_ROOM_ANS, function (ans) {
       if (ans == true) {
         usrn = username;
+        key = roomKey;
         resolve(Object.assign({}, ans));
       } else {
         reject(Object.assign({}, ans));

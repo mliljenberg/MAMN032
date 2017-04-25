@@ -81,8 +81,9 @@ io.sockets.on('connection', function (socket) {
    * @param:
    * @return: true/false.
    * **/
-  socket.on(header.JOIN_ROOM_ANS, function (ans, key, username) {
+  socket.on(header.JOIN_ROOM_ANS, function (ans, username) {
     if (ans == true) {
+      let key = hostRoom.get(socket);
       pending.get(key + username).join(key);
       socket.to(key).emit(header.NEW_PLAYER_JOINED, username);
     }
@@ -130,7 +131,7 @@ io.sockets.on('connection', function (socket) {
   socket.on(header.CHANGE_STATE, function (state) {
     try {
       socket.to(hostRoom.get(socket)).emit(header.CHANGE_STATE, state);
-    } catch (err){
+    } catch (err) {
       console.log(err.message);
     }
   });

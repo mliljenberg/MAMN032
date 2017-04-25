@@ -2,9 +2,7 @@ import io from 'socket.io-client';
 import * as header from '../headerConstants';
 import * as playerAction from '../actions/playerAction';
 
-let key = null;
 let state = null;
-let usrn = '';
 
 let nbrOfPlayers;
 const maxNbrPlayers = 4;
@@ -14,7 +12,7 @@ let socket = io.connect();
 /**
  * @desc: Create new room, sets state to wait_4_players.
  * @param:
- *
+ * @return
  * **/
 export function CreateRoom() {
   socket.emit(header.CREATE_ROOM_REQ);
@@ -30,7 +28,7 @@ export function CreateRoom() {
 
 /**
  * @desc: Method for the host to change state.
- * @param: key, state.
+ * @param: state.
  * @return:
  * **/
 export function ChangeState(state) {
@@ -53,9 +51,9 @@ export function ServerUpdate() {
       };
       nbrOfPlayers++;
       playerAction.addPlayer(plr);
-      socket.emit(header.JOIN_ROOM_ANS, true, key, username);
+      socket.emit(header.JOIN_ROOM_ANS, true, username);
     } else {
-      socket.emit(header.JOIN_ROOM_ANS, false, key, username);
+      socket.emit(header.JOIN_ROOM_ANS, false, username);
     }
   });
 
@@ -66,6 +64,5 @@ export function ServerUpdate() {
    * @return:
    * **/
   socket.on('disconnection', function () {
-    key = '';
   });
 }
