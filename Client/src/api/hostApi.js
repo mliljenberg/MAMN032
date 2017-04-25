@@ -46,7 +46,7 @@ export function ServerUpdate() {
    * @return: true/false.
    * **/
   socket.on(header.JOIN_ROOM_REQ, function (username) {
-    if (players.length < maxNbrPlayers && state == header.STATE_WAIT_4_PLAYERS) {
+    if (nbrOfPlayers < maxNbrPlayers && state == header.STATE_WAIT_4_PLAYERS) {
       let plr = {
         "name": username,
         "points": 0
