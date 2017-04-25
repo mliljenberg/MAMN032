@@ -11,12 +11,20 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import {loadCourses, loadAuthors} from './actions/courseAction';
 import {loadMessages} from './actions/messageAction';
 import {loadPlayers} from './actions/playerAction';
+import * as playerApi from './api/playerApi';
+import * as hostApi from './api/hostApi';
+
+
 
 const store= configureStore();
+
 store.dispatch(loadCourses());
 store.dispatch(loadAuthors());
 store.dispatch(loadMessages());
 store.dispatch(loadPlayers());
+
+playerApi.ServerUpdate(store);
+hostApi.ServerUpdate(store);
 
 
 render(

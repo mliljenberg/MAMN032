@@ -1,6 +1,7 @@
 
 import * as types from './ActionTypes';
-import api from '../api/mockApi';
+//import api from '../api/mockApi';
+
 
 
 export function loadPlayersSuccess(players) {
@@ -16,15 +17,19 @@ export function updatePlayersSuccess(player) {
 }
 
 
-export function loadPlayers() {
+
+export function loadPlayers(store) {
   return function (dispatch) {
+    /**
     return api.GetPlayers().then(players => {
       dispatch(loadPlayersSuccess(players));
     }).catch((error) => {
       throw error;
     });
+     **/
   };
 }
+/**
 
 export function addPlayer(player) {
   return function(dispatch) {
@@ -33,6 +38,17 @@ export function addPlayer(player) {
     });
   };
 }
+ */
+export function addPlayer(player,store) {
+ // return function(dispatch) {
+    debugger;
+    console.log("hejsan");
+    store.dispatch(addPlayerSuccess(player));
+  //}
+
+
+}
+
 export function updatePlayer(player) {
   return function(dispatch) {
     dispatch(updatePlayersSuccess(player));

@@ -36,13 +36,15 @@ export function ChangeState(state) {
 }
 
 
-export function ServerUpdate() {
-
+export function ServerUpdate(store) {
   /**
    * @desc: Host allows/denies a player to join the game.
    * @param: username.
    * @return: true/false.
+   *
    * **/
+
+
   socket.on(header.JOIN_ROOM_REQ, function (username) {
     if (nbrOfPlayers < maxNbrPlayers && state == header.STATE_WAIT_4_PLAYERS) {
       let plr = {
@@ -50,7 +52,8 @@ export function ServerUpdate() {
         "points": 0
       };
       nbrOfPlayers++;
-      playerAction.addPlayer(plr);
+      console.log(plr);
+      playerAction.addPlayer(plr,store);
       socket.emit(header.JOIN_ROOM_ANS, true, username);
     } else {
       socket.emit(header.JOIN_ROOM_ANS, false, username);

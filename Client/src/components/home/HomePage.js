@@ -12,14 +12,16 @@ class HomePage extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.createRoom = this.createRoom.bind(this);
+    this.test = this.test.bind(this);
   }
-
+/**
   componentDidUpdate() {
     if (this.props.room.id) {
       browserHistory.push("/room/" + this.props.room.id);
     }
     return true;
   }
+ */
 
   createRoom() {
     let ans = this.props.actions.createRoom();
@@ -31,13 +33,20 @@ class HomePage extends React.Component {
   }
 
   joinRoom(){
-    let ans = this.props.actions.joinRoom();
+    let ans = this.props.actions.joinRoom(this.props.room.id);
     console.log(ans);
+  }
+
+  test(){
+
+   console.log(this.props.actions.joinRoom(this.props.room.id,'marcus'));
+
   }
 
   render() {
     return (
       <div id="total">
+        <button className="btn btn-danger" onClick={this.test}>Test functions</button>
         <div className="btn btn-primary" id="joinGame" onClick={this.createRoom}>Create Game</div>
         <form onSubmit={this.handleChange}>
           <label>
@@ -61,6 +70,7 @@ HomePage.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
+  console.log(state);
   return {
     room: state.room
   };
