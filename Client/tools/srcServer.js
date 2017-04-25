@@ -32,6 +32,7 @@ app.get('*', function(req, res) {
  **/
 let roomHost = new Map(); //Key: room key Value: hostSocket
 let hostRoom = new Map(); //Key: hostSocket. Value: room key
+let pending = new Map(); //Key: key+username. Value: socket
 let legalChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 io.sockets.on('connection', function (socket) {
@@ -67,7 +68,8 @@ io.sockets.on('connection', function (socket) {
  * **/
   socket.on(header.JOIN_ROOM_REQ, function (key, username) {
     if(roomHost.has(key)){
-      roomHost.get(key).emit(header.JOIN_ROOM_REQ, socket, username);
+      pending.set(key + username, socket);
+      roomHost.get(key).emit(header.JOIN_ROOM_REQ, username);
     } else {
       socket.emit(header.JOIN_ROOM_ANS, false);
     }
@@ -79,12 +81,13 @@ io.sockets.on('connection', function (socket) {
    * @param:
    * @return: true/false.
    * **/
-  socket.on(header.JOIN_ROOM_ANS, function (playerSocket, ans, key, username) {
+  socket.on(header.JOIN_ROOM_ANS, function (ans, key, username) {
     if(ans == true){
-      playerSocket.join(key);
-      playerSocket.to(key).emit(header.NEW_PLAYER_JOINED, username);
+      pending.get(key + username).join(key);
+      socket.to(key).emit(header.NEW_PLAYER_JOINED, username);
     }
-    playerSocket.emit(header.JOIN_ROOM_ANS, ans);
+    pending.get(key + username).emit(header.JOIN_ROOM_ANS, ans);
+    pending.delete(key + username);
   });
 
 
@@ -100,6 +103,22 @@ io.sockets.on('connection', function (socket) {
     } catch (err){
       console.log(err.message);
       socket.emit(header.SUBMIT_ANSWER_ANS, false);
+    }
+  });
+
+
+  /**
+   * @desc: Broadcast a vote to room.
+   * @param: key, vt.
+   * @return: true/false.
+   * **/
+  socket.on(header.SUBMIT_VOTE_REQ, function (key, vt) {
+    try{
+      socket.to(key).emit(header.SUBMIT_ANSWER_ANS, vt);
+      socket.emit(header.SUBMIT_VOTE_ANS, true);
+    } catch(err){
+      console.log(err.message);
+      socket.emit(header.SUBMIT_VOTE_ANS, false);
     }
   });
 

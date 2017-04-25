@@ -58,6 +58,7 @@ export function JoinRoom(roomKey, username) {
   });
 }
 
+
 /******************************** GAME_STARTED **********************************/
 
 /**
@@ -93,8 +94,23 @@ export function SubmitVote(author, vote){
  * @return:
  * **/
 export function ChangeState(key, state) {
+  if(!isHost){
+    return;
+  }
   socket.emit(header.CHANGE_STATE_REQ, key, state);
+  return new Promise((resolve, reject) => {
+    socket.on(header.CHANGE_STATE_ANS, function (ans) {
+      if(ans == true){
+        resolve(Object.assign({}, ans));
+      } else {
+        reject(Object.assign({}, ans));
+      }
+    });
+  });
 }
+
+
+
 
 /**
  * @desc: Contains all answers from the server.
@@ -106,25 +122,15 @@ export function ServerUpdate() {
    * @param: username.
    * @return: true/false.
    * **/
-  socket.on(header.JOIN_ROOM_REQ, function (socket, username) {
+  socket.on(header.JOIN_ROOM_REQ, function (username) {
+    if(!isHost){
+      return;
+    }
     if (players.length < maxNbrPlayers && state == header.STATE_WAIT_4_PLAYERS) {
       playerAction.updatePlayer(username);
-      socket.emit(header.JOIN_ROOM_ANS, socket, true, key, username);
+      socket.emit(header.JOIN_ROOM_ANS, true, key, username);
     } else {
-      socket.emit(header.JOIN_ROOM_ANS, socket, false, null, null);
-    }
-  });
-
-  /**
-   * @desc: Answer from server if joining a room succeeded/failed.
-   * @param: true/false.
-   * @return:
-   * **/
-  socket.on(header.JOIN_ROOM_ANS, function (ans) {
-    if (ans == true) {
-      //gör ngt
-    } else {
-      //gör ngt
+      socket.emit(header.JOIN_ROOM_ANS, false, key, username);
     }
   });
 
@@ -135,7 +141,14 @@ export function ServerUpdate() {
    * @return:
    * **/
   socket.on(header.NEW_PLAYER_JOINED, function (username) {
-    //gör ngt
+    if(isHost){
+      return;
+    }
+    if(username === usrn){ //spelarens egna username
+
+    } else {
+
+    }
   });
 
 
