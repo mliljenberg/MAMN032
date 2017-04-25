@@ -2,11 +2,7 @@ import express from 'express';
 import webpack from 'webpack';
 import path from 'path';
 import config from '../webpack.config.dev';
-import open from 'open';
-import players from './players';
 import * as header from '../src/headerConstants';
-import socket from 'socket.io';
-import words from './words';
 
 /* eslint-disable no-console */
 const port = 3000;
@@ -114,11 +110,7 @@ io.sockets.on('connection', function (socket) {
    * **/
   socket.on(header.CHANGE_STATE_REQ, function (key, state) {
     if(roomHost.get(key) == socket){//socket är en host
-      try{
         socket.to(key).emit(header.CHANGE_STATE_ANS, state);
-      } catch (err) {
-        console.log(err.message);
-      }
     }
   });
 
