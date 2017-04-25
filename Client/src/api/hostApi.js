@@ -6,7 +6,7 @@ let key = null;
 let state = null;
 let usrn = '';
 
-let players = [];
+let nbrOfPlayers;
 const maxNbrPlayers = 4;
 
 let socket = io.connect();
@@ -20,9 +20,9 @@ export function CreateRoom() {
   socket.emit(header.CREATE_ROOM_REQ);
   return new Promise((resolve) => {
     socket.on(header.CREATE_ROOM_ANS, function (ans) {
-      isHost = true;
+      nbrOfPlayers = 0;
       state = header.STATE_WAIT_4_PLAYERS;
-      resolve(Object.assign({}, {id:ans}));
+      resolve(Object.assign({}, {id: ans}));
     });
   });
 }
@@ -33,20 +33,9 @@ export function CreateRoom() {
  * @param: key, state.
  * @return:
  * **/
-export function ChangeState(key, state) {
-  socket.emit(header.CHANGE_STATE_REQ, key, state);
-  return new Promise((resolve, reject) => {
-    socket.on(header.CHANGE_STATE_ANS, function (ans) {
-      if(ans == true){
-        resolve(Object.assign({}, ans));
-      } else {
-        reject(Object.assign({}, ans));
-      }
-    });
-  });
+export function ChangeState(state) {
+  socket.emit(header.CHANGE_STATE, state);
 }
-
-
 
 
 export function ServerUpdate() {
@@ -57,11 +46,13 @@ export function ServerUpdate() {
    * @return: true/false.
    * **/
   socket.on(header.JOIN_ROOM_REQ, function (username) {
-    if(!isHost){
-      return;
-    }
     if (players.length < maxNbrPlayers && state == header.STATE_WAIT_4_PLAYERS) {
-      playerAction.updatePlayer(username);
+      let plr = {
+        "name": username,
+        "points": 0
+      };
+      nbrOfPlayers++;
+      playerAction.addPlayer(plr);
       socket.emit(header.JOIN_ROOM_ANS, true, key, username);
     } else {
       socket.emit(header.JOIN_ROOM_ANS, false, key, username);
@@ -74,7 +65,7 @@ export function ServerUpdate() {
    * @param:
    * @return:
    * **/
-  socket.on('disconnection', function() {
+  socket.on('disconnection', function () {
     key = '';
   });
 }

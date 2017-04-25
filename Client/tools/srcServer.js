@@ -22,8 +22,8 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 
-app.get('*', function(req, res) {
-  res.sendFile(path.join( __dirname, '../src/index.html'));
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, '../src/index.html'));
 });
 
 
@@ -44,7 +44,7 @@ io.sockets.on('connection', function (socket) {
    * @return: key
    * **/
   socket.on(header.CREATE_ROOM_REQ, function () {
-    if(!hostRoom.has(socket)) {
+    if (!hostRoom.has(socket)) {
       let key;
       do {
         key = '';
@@ -61,13 +61,13 @@ io.sockets.on('connection', function (socket) {
   });
 
 
-/**
- * @desc: Method for a player to join a room if it exists.
- * @param: room key
- * @return: true/false.
- * **/
+  /**
+   * @desc: Method for a player to join a room if it exists.
+   * @param: room key
+   * @return: true/false.
+   * **/
   socket.on(header.JOIN_ROOM_REQ, function (key, username) {
-    if(roomHost.has(key)){
+    if (roomHost.has(key)) {
       pending.set(key + username, socket);
       roomHost.get(key).emit(header.JOIN_ROOM_REQ, username);
     } else {
@@ -82,7 +82,7 @@ io.sockets.on('connection', function (socket) {
    * @return: true/false.
    * **/
   socket.on(header.JOIN_ROOM_ANS, function (ans, key, username) {
-    if(ans == true){
+    if (ans == true) {
       pending.get(key + username).join(key);
       socket.to(key).emit(header.NEW_PLAYER_JOINED, username);
     }
@@ -97,10 +97,10 @@ io.sockets.on('connection', function (socket) {
    * @return: true/false.
    * **/
   socket.on(header.SUBMIT_ANSWER_REQ, function (key, ans) {
-    try{
+    try {
       socket.to(key).emit(header.SUBMIT_ANSWER_ANS, ans);
       socket.emit(header.SUBMIT_ANSWER_ANS, true);
-    } catch (err){
+    } catch (err) {
       console.log(err.message);
       socket.emit(header.SUBMIT_ANSWER_ANS, false);
     }
@@ -113,10 +113,10 @@ io.sockets.on('connection', function (socket) {
    * @return: true/false.
    * **/
   socket.on(header.SUBMIT_VOTE_REQ, function (key, vt) {
-    try{
+    try {
       socket.to(key).emit(header.SUBMIT_ANSWER_ANS, vt);
       socket.emit(header.SUBMIT_VOTE_ANS, true);
-    } catch(err){
+    } catch (err) {
       console.log(err.message);
       socket.emit(header.SUBMIT_VOTE_ANS, false);
     }
@@ -127,9 +127,11 @@ io.sockets.on('connection', function (socket) {
    * @param: key, state.
    * @return: true/false.
    * **/
-  socket.on(header.CHANGE_STATE_REQ, function (key, state) {
-    if(roomHost.get(key) == socket){//socket är en host
-        socket.to(key).emit(header.CHANGE_STATE_ANS, state);
+  socket.on(header.CHANGE_STATE, function (state) {
+    try {
+      socket.to(hostRoom.get(socket)).emit(header.CHANGE_STATE, state);
+    } catch (err){
+      console.log(err.message);
     }
   });
 
@@ -140,12 +142,10 @@ io.sockets.on('connection', function (socket) {
    * @return:
    * **/
   socket.on('disconnection', function () {
-    console.log("Disconnection");
-
-    if(hostRoom.has(socket)){ //Frigör rumsnyckel ifall det är en host som dc.
+    if (hostRoom.has(socket)) {
       roomHost.delete(hostRoom.get(socket));
       hostRoom.delete(socket);
-      //Kick all clients from room
+      //TODO: Kick all clients from room
       console.log("Host dc");
     }
   });

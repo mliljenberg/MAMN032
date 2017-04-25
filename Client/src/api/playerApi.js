@@ -59,6 +59,7 @@ export function SubmitAnswer(username, word, answer) {
   }
 }
 
+/****/
 export function SubmitVote(author, vote){
   let vt = {
     "username":usrn,
@@ -68,29 +69,18 @@ export function SubmitVote(author, vote){
   socket.emit(header.SUBMIT_ANSWER_REQ);
 }
 
-
-
-
-
 /**
  * @desc: Contains all answers from the server.
  * **/
 export function ServerUpdate() {
 
   /**
-   * @desc: Broadcast msg from server, new player has joined the room.
-   * @param: username
+   * @desc: Host changed the current state.
+   * @param: state
    * @return:
    * **/
-  socket.on(header.NEW_PLAYER_JOINED, function (username) {
-    if(isHost){
-      return;
-    }
-    if(username === usrn){ //spelarens egna username
-
-    } else {
-
-    }
+  socket.on(header.CHANGE_STATE, function (state) {
+    //do stuff
   });
 
 
