@@ -79,12 +79,12 @@ export function SubmitAnswer(username, word, answer) {
 }
 
 export function SubmitVote(author, vote){
-  let vote = {
+  let vt = {
     "username":usrn,
     "author":author,
     "vote":vote
   };
-  socket.emit(header.);
+  socket.emit(header.SUBMIT_ANSWER_REQ);
 }
 
 /**
