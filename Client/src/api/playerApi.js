@@ -8,7 +8,6 @@ import * as playerAction from '../actions/playerAction';
 
 let key = null;
 let state = null;
-let isHost = false;
 let usrn = '';
 
 let players = [];
@@ -16,23 +15,6 @@ const maxNbrPlayers = 4;
 
 let socket = io.connect();
 
-
-/********************************** SETUP ************************************/
-/**
- * @desc: Create new room, sets state to wait_4_players.
- * @param:
- *
- * **/
-export function CreateRoom() {
-  socket.emit(header.CREATE_ROOM_REQ);
-  return new Promise((resolve) => {
-    socket.on(header.CREATE_ROOM_ANS, function (ans) {
-      isHost = true;
-      state = header.STATE_WAIT_4_PLAYERS;
-      resolve(Object.assign({}, {id:ans}));
-    });
-  });
-}
 
 /**
  * @desc: Method to join a room
@@ -58,8 +40,6 @@ export function JoinRoom(roomKey, username) {
   });
 }
 
-
-/******************************** GAME_STARTED **********************************/
 
 /**
  * @desc: Submit answer by username for word to room.
@@ -88,26 +68,6 @@ export function SubmitVote(author, vote){
   socket.emit(header.SUBMIT_ANSWER_REQ);
 }
 
-/**
- * @desc: Method for the host to change state.
- * @param: key, state.
- * @return:
- * **/
-export function ChangeState(key, state) {
-  if(!isHost){
-    return;
-  }
-  socket.emit(header.CHANGE_STATE_REQ, key, state);
-  return new Promise((resolve, reject) => {
-    socket.on(header.CHANGE_STATE_ANS, function (ans) {
-      if(ans == true){
-        resolve(Object.assign({}, ans));
-      } else {
-        reject(Object.assign({}, ans));
-      }
-    });
-  });
-}
 
 
 
@@ -116,24 +76,6 @@ export function ChangeState(key, state) {
  * @desc: Contains all answers from the server.
  * **/
 export function ServerUpdate() {
-
-  /**
-   * @desc: Host allows/denies a player to join the game.
-   * @param: username.
-   * @return: true/false.
-   * **/
-  socket.on(header.JOIN_ROOM_REQ, function (username) {
-    if(!isHost){
-      return;
-    }
-    if (players.length < maxNbrPlayers && state == header.STATE_WAIT_4_PLAYERS) {
-      playerAction.updatePlayer(username);
-      socket.emit(header.JOIN_ROOM_ANS, true, key, username);
-    } else {
-      socket.emit(header.JOIN_ROOM_ANS, false, key, username);
-    }
-  });
-
 
   /**
    * @desc: Broadcast msg from server, new player has joined the room.
@@ -153,28 +95,11 @@ export function ServerUpdate() {
 
 
   /**
-   * @desc: Response from server on success/failure to submit answer OR answer from another player.
-   * @param:
-   * @return: true/false/JSON answer
-   * **/
-  socket.on(header.SUBMIT_ANSWER_ANS, function (ans) {
-    if (ans == true) {
-      //gör ngt
-    } else if (ans == false) {
-      //skicka igen?
-    } else {
-      //display
-    }
-  });
-
-
-  /**
    * @desc: Handle the shutdown of the socket.
    * @param:
    * @return:
    * **/
   socket.on('disconnection', function() {
-    isHost = false;
     key = '';
   });
 

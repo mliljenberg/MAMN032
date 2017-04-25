@@ -1,5 +1,5 @@
 import * as types from './ActionTypes';
-import * as api from '../api/api';
+import * as api from '../api/playerApi';
 
 
 export function createRoomSuccsess(room) {
