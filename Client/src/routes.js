@@ -15,6 +15,7 @@ import ResultPage from './components/result/ResultPage';
 
 import HostGamePage from './components/hostPages/game/GamePage';
 import HostAnswerPage from './components/hostPages/answer/AnswerPage';
+import HostVotePage from './components/hostPages/vote/VotePage';
 
 export default (
   <Route path="/" component={App}>
@@ -38,6 +39,7 @@ export default (
     //HOSTSIDOR
     <Route path="host/game" component={HostGamePage}/>
     <Route path="host/answer" component={HostAnswerPage}/>
+    <Route path="host/vote" component={HostVotePage}/>
 
   </Route>
 );
