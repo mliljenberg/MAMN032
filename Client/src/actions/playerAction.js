@@ -40,13 +40,7 @@ export function addPlayer(player) {
 }
  */
 export function addPlayer(player,store) {
- // return function(dispatch) {
-    debugger;
-    console.log("hejsan");
     store.dispatch(addPlayerSuccess(player));
-  //}
-
-
 }
 
 export function updatePlayer(player) {

@@ -8,7 +8,7 @@ export default function roomReducer(state = initialState.room ,action) {
       return action.room;
 
     case types.JOIN_ROOM_SUCCESS:
-      return action.room;
+      return Object.assign({}, action.room);
 
 
     default: return state;

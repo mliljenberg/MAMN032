@@ -27,8 +27,8 @@ export function joinRoom(room,username) {
     return playerApi.JoinRoom(room,username).then(ans => {
 
       if(ans){
-        //bör inehålla ett object
-        dispatch(joinRoomSuccsess(Object.assign({},room)));
+
+        dispatch(joinRoomSuccsess(Object.assign({},{id:room})));
       }
 
     });

@@ -31,8 +31,13 @@ export function CreateRoom() {
  * @param: state.
  * @return:
  * **/
-export function ChangeState(state) {
-  socket.emit(header.CHANGE_STATE, state);
+export function ChangeState(url) {
+  return new Promise((resolve) => {
+    socket.emit(header.CHANGE_STATE, url);
+    resolve(true);
+  }
+  );
+
 }
 
 

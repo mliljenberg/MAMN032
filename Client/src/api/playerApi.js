@@ -5,6 +5,7 @@
 import io from 'socket.io-client';
 import * as header from '../headerConstants';
 import * as playerAction from '../actions/playerAction';
+import {browserHistory}  from 'react-router';
 
 let key = null;
 let state = null;
@@ -28,6 +29,7 @@ export function JoinRoom(roomKey, username) {
       if (ans == true) {
         usrn = username;
         key = roomKey;
+
         resolve(Object.assign({}, ans));
       } else {
         reject(Object.assign({}, ans));
@@ -69,15 +71,15 @@ export function SubmitVote(author, vote){
 /**
  * @desc: Contains all answers from the server.
  * **/
-export function ServerUpdate() {
+export function ServerUpdate(store) {
 
   /**
    * @desc: Host changed the current state.
    * @param: state
    * @return:
    * **/
-  socket.on(header.CHANGE_STATE, function (state) {
-    //do stuff
+  socket.on(header.CHANGE_STATE, function (url) {
+    browserHistory.push(url);
   });
 
 

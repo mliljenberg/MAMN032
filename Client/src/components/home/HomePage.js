@@ -3,6 +3,7 @@ import {bindActionCreators} from 'redux';
 import {Link, browserHistory}  from 'react-router';
 import {connect} from 'react-redux';
 import * as roomActions from '../../actions/roomAction';
+import * as stateActions from '../../actions/stateAction';
 
 class HomePage extends React.Component {
 
@@ -13,6 +14,7 @@ class HomePage extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.createRoom = this.createRoom.bind(this);
     this.test = this.test.bind(this);
+    this.joinRoom = this.joinRoom.bind(this);
   }
 /**
   componentDidUpdate() {
@@ -30,17 +32,18 @@ class HomePage extends React.Component {
 
   handleChange(event){
     this.setState({key: event.target.value});
+
   }
 
   joinRoom(){
-    let ans = this.props.actions.joinRoom(this.props.room.id);
-    console.log(ans);
+     this.props.actions.joinRoom(this.state.key);
+
   }
 
   test(){
 
-   console.log(this.props.actions.joinRoom(this.props.room.id,'marcus'));
-
+   //console.log(this.props.actions.joinRoom(this.props.room.id,'marcus'));
+    stateActions.changeState({url:'vote'});
   }
 
   render() {
@@ -54,7 +57,7 @@ class HomePage extends React.Component {
             <input type="text" value={this.state.key} onChange={this.handleChange}/>
           </label>
         </form>
-        <div className="btn btn-primary" id="joinGame" onClick={this.handleClick}>Join Game</div>
+        <div className="btn btn-primary" id="joinGame" onClick={this.joinRoom}>Join Game</div>
         <ul id="list"></ul>
       </div>
     );
@@ -78,7 +81,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Object.assign({}, roomActions), dispatch)
+    actions: bindActionCreators(Object.assign({}, roomActions, stateActions), dispatch)
   };
 }
 
