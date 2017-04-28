@@ -1,4 +1,3 @@
-
 import * as types from './ActionTypes';
 //import api from '../api/mockApi';
 
@@ -14,6 +13,9 @@ export function addPlayerSuccess(player) {
 }
 export function updatePlayersSuccess(player) {
   return {type: types.UPDATE_PLAYERS_SUCCESS, player};
+}
+export function updatePlayerVoteSuccess(vote) {
+  return {type: types.UPDATE_VOTE_SUCCESS, vote};
 }
 
 
@@ -47,4 +49,12 @@ export function updatePlayer(player) {
   return function(dispatch) {
     dispatch(updatePlayersSuccess(player));
   };
+}
+
+export function updatePlayerVote(vote,store) {
+ let players =  store.getState().players;
+ let list =[...players.filter(player => player.username === vote.username)];
+  let temp = Object.assign({},list[0]);
+  temp.points += 1;
+  store.dispatch(updatePlayersSuccess(Object.assign({},temp)));
 }

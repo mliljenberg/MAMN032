@@ -1,6 +1,7 @@
 import io from 'socket.io-client';
 import * as header from '../headerConstants';
 import * as playerAction from '../actions/playerAction';
+import * as answerAction from '../actions/answerAction';
 
 let state = null;
 
@@ -48,6 +49,9 @@ export function ServerUpdate(store) {
    * @return: true/false.
    *
    * **/
+  playerAction.addPlayer({username:1, points:0},store);
+  playerAction.addPlayer({username:'marcus', points:0},store);
+  playerAction.updatePlayerVote({username:'marcus', points:1},store);
   socket.on(header.JOIN_ROOM_REQ, function (username) {
     if (nbrOfPlayers < maxNbrPlayers && state == header.STATE_WAIT_4_PLAYERS) {
       let plr = {
@@ -69,7 +73,7 @@ export function ServerUpdate(store) {
    * @return:
    * **/
   socket.on(header.SUBMIT_ANSWER_REQ, function (ans) {
-    //redux
+    answerAction.addAnswer(ans,store);
   });
 
   /**
@@ -78,7 +82,7 @@ export function ServerUpdate(store) {
    * @return:
    * **/
   socket.on(header.SUBMIT_VOTE_REQ, function (vt) {
-    //redux
+    playerAction.updatePlayerVote(vt,store);
   });
 
   /**

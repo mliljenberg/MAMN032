@@ -13,10 +13,16 @@ export default function messageReducer(state = initialState.players,action) {
         Object.assign({}, action.player)
       ];
 
+    case types.UPDATE_VOTE_SUCCESS:
+      return [
+        ...state.filter(player => player.username === action.player.username),
+        Object.assign({}, action.player)
+      ];
+
 
     case types.UPDATE_PLAYERS_SUCCESS:
       return [
-        ...state.filter(player => player.id !== action.player.id),
+        ...state.filter(player => player.username !== action.player.username),
         Object.assign({}, action.player)
       ];
 
