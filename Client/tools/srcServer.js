@@ -84,7 +84,6 @@ io.sockets.on('connection', function (socket) {
   socket.on(header.JOIN_ROOM_ANS, function (ans, username) {
     let key = hostRoom.get(socket);
     if (ans == true) {
-
       pending.get(key + username).join(key);
       socket.to(key).emit(header.NEW_PLAYER_JOINED, username);
     }

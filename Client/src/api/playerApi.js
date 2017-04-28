@@ -59,11 +59,11 @@ export function SubmitAnswer(username, word, answer) {
 }
 
 /****/
-export function SubmitVote(author, vote){
+export function SubmitVote(author, word, vote){
   let vt = {
     "username":usrn,
     "author":author,
-    "vote":vote
+    "word":word
   };
   socket.emit(header.SUBMIT_ANSWER_REQ);
 }

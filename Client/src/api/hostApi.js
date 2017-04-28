@@ -48,8 +48,6 @@ export function ServerUpdate(store) {
    * @return: true/false.
    *
    * **/
-
-
   socket.on(header.JOIN_ROOM_REQ, function (username) {
     if (nbrOfPlayers < maxNbrPlayers && state == header.STATE_WAIT_4_PLAYERS) {
       let plr = {
@@ -65,6 +63,23 @@ export function ServerUpdate(store) {
     }
   });
 
+  /**
+   * @desc: Host receives an answer from a player.
+   * @param: ans (JSON: username, word, answer).
+   * @return:
+   * **/
+  socket.on(header.SUBMIT_ANSWER_REQ, function (ans) {
+    //redux
+  });
+
+  /**
+   * @desc: Host receives a vote from a player.
+   * @param: vt (JSON: username, author, word).
+   * @return:
+   * **/
+  socket.on(header.SUBMIT_VOTE_REQ, function (vt) {
+    //redux
+  });
 
   /**
    * @desc: Handle the shutdown of the socket.
