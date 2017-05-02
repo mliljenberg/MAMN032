@@ -307,11 +307,14 @@ html, body {
 
 .voteBox{
   height: 250px;
-  background: url("http://2.bp.blogspot.com/-dS_3P8TGZ_g/T5nCMf_iz0I/AAAAAAAABEU/sceGjdRC2Tc/s1600/Ripped_Paper_Notes.png");
+  background: url("http://www.dailyfreepsd.com/wp-content/uploads/2013/06/Broken-scroll-paperparchment-leather-vector.png");
   background-size: 100% 100%;
   display: none;
+  font-size: 30px;
   text-align: center;
   cursor: pointer;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .myPadding{
@@ -326,6 +329,11 @@ html, body {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.voteBoxText{
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 
