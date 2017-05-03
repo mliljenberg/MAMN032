@@ -8,8 +8,10 @@ import AboutPage from './components/about/AboutPage';
 import ManageCoursePage from './components/about/ManageCoursePage';
 import GamePage from './components/game/GamePage';
 import JoinGamePage from './components/joinGame/JoinGamePage';
-import AnswerPage from './components/game/AnswerPage';
-import VotePagePlayer from './components/game/VotePagePlayer';
+import AnswerPage from './components/answer/AnswerPage';
+import VotePagePlayer from './components/vote/VotePagePlayer';
+import ScorePage from './components/score/ScorePage';
+import ResultPage from './components/result/ResultPage';
 
 
 export default (
@@ -29,6 +31,8 @@ export default (
     <Route path="answer" component={AnswerPage} />
 
     <Route path="vote" component={VotePagePlayer} />
+    <Route path="score" component={ScorePage}/>
+    <Route path="result" component={ResultPage}/>
 
 
   </Route>

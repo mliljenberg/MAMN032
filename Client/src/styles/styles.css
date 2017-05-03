@@ -37,7 +37,7 @@ nav {
 
 html, body {
   height: 100%;
-  background-image: url("http://68.media.tumblr.com/297bca135cc211b869c1a659664e46b9/tumblr_nsqazrgxAY1rnfgtmo4_500.gif");
+  background: url( "http://68.media.tumblr.com/297bca135cc211b869c1a659664e46b9/tumblr_nsqazrgxAY1rnfgtmo4_500.gif");
   background-size: cover;
   text-align: center;
 
@@ -58,7 +58,7 @@ html, body {
   transform: translateY(-50%);
 }
 
-.myJoinButton {
+.myGreenButton {
   height: 10vh;
   margin-top: 15px;
   font-size: 50px;
@@ -68,7 +68,7 @@ html, body {
   color: black;
 }
 
-.myCreateButton {
+.myBlueButton {
   height: 10vh;
   margin-top: 15px;
   font-size: 50px;
@@ -78,7 +78,7 @@ html, body {
   color: black;
 }
 
-.myNeutralButton {
+.myWhiteButton {
   height: 10vh;
   margin-top: 15px;
   font-size: 50px;
@@ -208,6 +208,36 @@ html, body {
   -2px -7px 0 #000;
 }
 
+.myMediumSmallText {
+  font-size: 75px;
+  font-weight: 900;
+  color: white;
+  text-shadow: 7px 7px 0 #000,
+  -7px 7px 0 #000,
+  7px -7px 0 #000,
+  -7px -7px 0 #000,
+  0px 7px 0 #000,
+  0px -7px 0 #000,
+  -7px 0px 0 #000,
+  7px 0px 0 #000,
+  2px 2px 0 #000,
+  -2px 2px 0 #000,
+  2px -2px 0 #000,
+  -2px -2px 0 #000,
+  0px 2px 0 #000,
+  0px -2px 0 #000,
+  -2px 0px 0 #000,
+  2px 0px 0 #000,
+  7px 2px 0 #000,
+  -7px 2px 0 #000,
+  7px -2px 0 #000,
+  -7px -2px 0 #000,
+  2px 7px 0 #000,
+  -2px 7px 0 #000,
+  2px -7px 0 #000,
+  -2px -7px 0 #000;
+}
+
 .horizontalListItem {
   display: inline-block;
 
@@ -280,7 +310,6 @@ html, body {
   background-size: 100% 100%;
   display: none;
   text-align: center;
-
 }
 
 .myPadding{
