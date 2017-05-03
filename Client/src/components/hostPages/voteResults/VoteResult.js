@@ -4,18 +4,43 @@ import $ from 'jquery';
 class VoteResult extends React.Component {
 
   componentDidMount() {
-
+    var rightAnswer = 3;
 
     for (var i = 0; i < 4; i++) {
-      $("#allVotes").append($("<div/>", {
-        class: 'voteBoxUnhidden col-xs-12 col-md-6'
-      }).append($("<div/>", {
-        class: 'centeredText voteBoxText',
-        text: 'HEJHÅ'
-      })).append($("<div/>", {
-        class: 'authorName',
-        text: 'Joel'
-      })));
+      if (i != rightAnswer) {
+        $("#allVotes").append($("<div/>", {
+            class: 'voteBoxUnhiddenWrongAnswer col-xs-12 col-md-6'
+          }).append($("<div/>", {
+            class: 'centeredText voteBoxText',
+            text: 'HEJHÅ'
+          })).append($("<div/>", {
+            class: 'authorName',
+            text: 'Joel'
+          })).append($("<div/>", {
+            class: 'voteStamp',
+          }).append($("<div/>", {
+            class: 'voteStampText',
+            text: 'Ludde'
+          })))
+        );
+      }
+
+      else {
+        $("#allVotes").append($("<div/>", {
+          class: 'voteBoxUnhidden col-xs-12 col-md-6'
+        }).append($("<div/>", {
+          class: 'centeredText voteBoxText',
+          text: 'HEJHÅ'
+        })).append($("<div/>", {
+          class: 'authorName',
+          text: 'Joel'
+        })).append($("<div/>", {
+          class: 'voteStamp',
+        }).append($("<div/>", {
+          class: 'voteStampText',
+          text: 'Ludde'
+        }))));
+      }
 
     }
 
@@ -29,9 +54,9 @@ class VoteResult extends React.Component {
 
               });
             });
-          }, 1); //8000
+          }, 8000); //8000
         });
-      }, 1);//3000
+      }, 3000);//3000
     });
 
 
