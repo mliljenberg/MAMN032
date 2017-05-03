@@ -36,9 +36,7 @@ export function ChangeState(url) {
   return new Promise((resolve) => {
     socket.emit(header.CHANGE_STATE, url);
     resolve(true);
-  }
-  );
-
+  });
 }
 
 
@@ -88,5 +86,6 @@ export function ServerUpdate(store) {
    * @return:
    * **/
   socket.on('disconnection', function () {
+    //TODO
   });
 }
