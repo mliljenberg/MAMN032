@@ -38,7 +38,7 @@ nav {
 
 html, body {
   height: 100%;
-  background: url( "https://cdn.dribbble.com/users/23005/screenshots/713525/2-color-animated-gif.gif");
+  background: url("https://cdn.dribbble.com/users/23005/screenshots/713525/2-color-animated-gif.gif");
   background-size: cover;
   text-align: center;
 
@@ -297,15 +297,11 @@ html, body {
   width: 80px;
 }
 
-
-
-
-.hideFromStart{
+.hideFromStart {
   display: none;
 }
 
-
-.voteBox{
+.voteBox {
   height: 250px;
   background: url("http://www.dailyfreepsd.com/wp-content/uploads/2013/06/Broken-scroll-paperparchment-leather-vector.png");
   background-size: 100% 100%;
@@ -317,23 +313,55 @@ html, body {
   padding-right: 20px;
 }
 
-.myPadding{
+.voteBoxUnhidden {
+  height: 250px;
+  background: url("http://www.dailyfreepsd.com/wp-content/uploads/2013/06/Broken-scroll-paperparchment-leather-vector.png");
+  background-size: 100% 100%;
+  font-size: 30px;
+  text-align: center;
+  cursor: pointer;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.voteBoxSingle {
+  height: 500px;
+  background: url("http://www.dailyfreepsd.com/wp-content/uploads/2013/06/Broken-scroll-paperparchment-leather-vector.png");
+  background-size: 100% 100%;
+  display: none;
+  font-size: 50px;
+  text-align: center;
+  cursor: pointer;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.myPadding {
   padding: 10px;
 }
 
-#listOfAnswers{
+#listOfAnswers {
   padding: 20px;
 
 }
-.centeredText{
+
+.centeredText {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.voteBoxText{
+.voteBoxText {
   margin-right: 20px;
   margin-left: 20px;
+}
+
+.authorName {
+  position: absolute;
+  bottom: 40px;
+  right: 60px;
+  width: 100px;
+  text-align: right;
 }
 
 
