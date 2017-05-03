@@ -49,9 +49,6 @@ export function ServerUpdate(store) {
    * @return: true/false.
    *
    * **/
-  playerAction.addPlayer({username:1, points:0},store);
-  playerAction.addPlayer({username:'marcus', points:0},store);
-  playerAction.updatePlayerVote({username:'marcus', points:1},store);
   socket.on(header.JOIN_ROOM_REQ, function (username) {
     if (nbrOfPlayers < maxNbrPlayers && state == header.STATE_WAIT_4_PLAYERS) {
       let plr = {

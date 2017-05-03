@@ -32,6 +32,7 @@ app.get('*', function (req, res) {
  **/
 let roomHost = new Map(); //Key: room key Value: hostSocket
 let hostRoom = new Map(); //Key: hostSocket. Value: room key
+
 let pending = new Map(); //Key: key+username. Value: socket
 let legalChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -44,37 +45,43 @@ io.sockets.on('connection', function (socket) {
    * @return: key
    * **/
   socket.on(header.CREATE_ROOM_REQ, function () {
-    if (!hostRoom.has(socket)) {
-      let key;
-      do {
-        key = '';
-        for (var i = 0; i < 5; i++) {
-          key += legalChars.charAt(Math.floor(Math.random() * legalChars.length));
-        }
-      } while (roomHost.has(key));
+    try {
+      if (!hostRoom.has(socket)) {
+        let key;
+        do {
+          key = '';
+          for (var i = 0; i < 5; i++) {
+            key += legalChars.charAt(Math.floor(Math.random() * legalChars.length));
+          }
+        } while (roomHost.has(key));
 
-      hostRoom.set(socket, key);
-      roomHost.set(key, socket);
-
-      socket.emit(header.CREATE_ROOM_ANS, key);
+        hostRoom.set(socket, key);
+        roomHost.set(key, socket);
+        socket.emit(header.CREATE_ROOM_ANS, key);
+      }
+    } catch (err) {
+      console.log(err.message);
     }
   });
 
 
   /**
-   * @desc: Method for a player to join a room if it exists.
+   * @desc: Method for a player to join a room if it exists. If not, false is sent back to the requesting player.
    * @param: room key
-   * @return: true/false.
+   * @return: -/false.
    * **/
   socket.on(header.JOIN_ROOM_REQ, function (key, username) {
-    if (roomHost.has(key)) {
-      pending.set(key + username, socket);
-      roomHost.get(key).emit(header.JOIN_ROOM_REQ, username);
-    } else {
-      socket.emit(header.JOIN_ROOM_ANS, false);
+    try {
+      if (roomHost.has(key)) {
+        pending.set(key + username, socket);
+        roomHost.get(key).emit(header.JOIN_ROOM_REQ, username);
+      } else {
+        socket.emit(header.JOIN_ROOM_ANS, false);
+      }
+    } catch (err) {
+      console.log(err.message);
     }
   });
-
 
   /**
    * @desc: The response from the host if specific player was allowed/denied to join. Forwarded to the player. Broadcast new player joined.
@@ -82,28 +89,38 @@ io.sockets.on('connection', function (socket) {
    * @return: true/false.
    * **/
   socket.on(header.JOIN_ROOM_ANS, function (ans, username) {
-    let key = hostRoom.get(socket);
-    if (ans == true) {
-      pending.get(key + username).join(key);
-      socket.to(key).emit(header.NEW_PLAYER_JOINED, username);
+    try {
+      if (hostRoom.has(socket)) {
+        let key = hostRoom.get(socket);
+        if (ans == true) {
+          pending.get(key + username).join(key);
+          socket.to(key).emit(header.NEW_PLAYER_JOINED, username);
+        }
+        pending.get(key + username).emit(header.JOIN_ROOM_ANS, ans);
+        pending.delete(key + username);
+      }
+
+    } catch (err) {
+      console.log(err.message);
     }
-    pending.get(key + username).emit(header.JOIN_ROOM_ANS, ans);
-    pending.delete(key + username);
+
   });
 
 
   /**
-   * @desc: Broadcast answer to all sockets in room.
-   * @param: room key, answer
-   * @return: true/false.
+   * @desc: Broadcast answer to room.
+   * @param: key, answer (JSON)
+   * @return:
    * **/
   socket.on(header.SUBMIT_ANSWER_REQ, function (key, ans) {
     try {
-      socket.to(key).emit(header.SUBMIT_ANSWER_ANS, ans);
-      socket.emit(header.SUBMIT_ANSWER_ANS, true);
+      if (roomHost.has(key)) {
+        roomHost.get(key).emit(header.SUBMIT_ANSWER_REQ, ans);
+      } else {
+        socket.emit(header.SUBMIT_ANSWER_ERR, ans);
+      }
     } catch (err) {
       console.log(err.message);
-      socket.emit(header.SUBMIT_ANSWER_ANS, false);
     }
   });
 
@@ -111,17 +128,20 @@ io.sockets.on('connection', function (socket) {
   /**
    * @desc: Broadcast a vote to room.
    * @param: key, vt.
-   * @return: true/false.
+   * @return: false (if key not valid)
    * **/
   socket.on(header.SUBMIT_VOTE_REQ, function (key, vt) {
     try {
-      socket.to(key).emit(header.SUBMIT_ANSWER_ANS, vt);
-      socket.emit(header.SUBMIT_VOTE_ANS, true);
+      if (roomHost.has(key)) {
+        roomHost.get(key).emit(header.SUBMIT_VOTE_REQ, vt);
+      } else {
+        socket.emit(header.SUBMIT_VOTE_ERR, vt);
+      }
     } catch (err) {
       console.log(err.message);
-      socket.emit(header.SUBMIT_VOTE_ANS, false);
     }
   });
+
 
   /**
    * @desc: Broadcast a new state to all players from host.
@@ -143,14 +163,15 @@ io.sockets.on('connection', function (socket) {
    * @return:
    * **/
   socket.on('disconnection', function () {
-    if (hostRoom.has(socket)) {
-      roomHost.delete(hostRoom.get(socket));
-      hostRoom.delete(socket);
-      //TODO: Kick all clients from room
-      console.log("Host dc");
+    try {
+      if (hostRoom.has(socket)) {
+        roomHost.delete(hostRoom.get(socket));
+        hostRoom.delete(socket);
+      }
+    } catch (err) {
+      console.log(err.message);
     }
   });
-
 });
 
 

@@ -1,18 +1,11 @@
-/**
- *API which contains methods for HOST and CLIENT to communicate with the server.
- * **/
-
 import io from 'socket.io-client';
 import * as header from '../headerConstants';
 import * as playerAction from '../actions/playerAction';
 import {browserHistory}  from 'react-router';
 
-let key = null;
-let state = null;
+let connectedToRoom = false;
+let key = '';
 let usrn = '';
-
-let players = [];
-const maxNbrPlayers = 4;
 
 let socket = io.connect();
 
@@ -20,7 +13,7 @@ let socket = io.connect();
 /**
  * @desc: Method to join a room
  * @param: room key, username
- * @return:
+ * @return: Promise(true/false)
  * **/
 export function JoinRoom(roomKey, username) {
   socket.emit(header.JOIN_ROOM_REQ, roomKey, username);
@@ -29,11 +22,11 @@ export function JoinRoom(roomKey, username) {
       if (ans == true) {
         usrn = username;
         key = roomKey;
-
+        connectedToRoom = true;
         resolve(Object.assign({}, ans));
       } else {
+        key = '';
         reject(Object.assign({}, ans));
-        key = null;
       }
     });
   });
@@ -45,51 +38,83 @@ export function JoinRoom(roomKey, username) {
  * @param: username, word, answer.
  * @return:
  * **/
-export function SubmitAnswer(username, word, answer) {
-  if (key) {
-
+export function SubmitAnswer(word, answer) {
+  if (connectedToRoom) {
     let ans = {
-      "username": username,
+      "username": usrn,
       "word": word,
       "answer": answer
     };
-
     socket.emit(header.SUBMIT_ANSWER_REQ, key, ans);
   }
 }
 
-/****/
-export function SubmitVote(author, word, vote){
-  let vt = {
-    "username":usrn,
-    "author":author,
-    "word":word
-  };
-  socket.emit(header.SUBMIT_ANSWER_REQ);
+/**
+ * @desc: Submit a vote for a specific answer (not our own).
+ * @param: author, word.
+ * @return:
+ * **/
+export function SubmitVote(author, word) {
+  if (connectedToRoom) {
+    let vt = {
+      "username": usrn,
+      "author": author,
+      "word": word
+    };
+    socket.emit(header.SUBMIT_ANSWER_REQ, key, vt);
+  }
 }
 
 /**
- * @desc: Contains all answers from the server.
+ * @desc:
  * **/
 export function ServerUpdate(store) {
 
   /**
    * @desc: Host changed the current state.
-   * @param: state
+   * @param: url
    * @return:
    * **/
   socket.on(header.CHANGE_STATE, function (url) {
     browserHistory.push(url);
   });
 
+  /**
+   *@desc: New player joined.
+   * @param: username
+   * @return:
+   * **/
+  socket.on(header.NEW_PLAYER_JOINED, function (usr) {
+    //TODO
+  });
+
+  /**
+   *@desc: An error has occurred while submitting an answer.
+   * @param: ans (which was unsuccessfully delivered).
+   * @return:
+   * **/
+  socket.on(header.SUBMIT_ANSWER_ERR, function (ans) {
+    //TODO
+  });
+
+  /**
+   *@desc: An error has occurred while submitting a vote.
+   * @param: vt (which was unsuccessfully delivered).
+   * @return:
+   * **/
+  socket.on(header.SUBMIT_VOTE_ERR, function (vt) {
+    //TODO
+  });
 
   /**
    * @desc: Handle the shutdown of the socket.
    * @param:
    * @return:
    * **/
-  socket.on('disconnection', function() {
+  socket.on('disconnection', function () {
+    connectedToRoom = false;
     key = '';
+    socket.close();
   });
 
 }
