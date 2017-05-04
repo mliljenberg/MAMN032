@@ -8,15 +8,15 @@ class VoteResult extends React.Component {
 
     for (var i = 0; i < 4; i++) {
       if (i != rightAnswer) {
-        $("#allVotes").append($("<div/>", {
-            class: 'voteBoxUnhiddenWrongAnswer col-xs-12 col-md-6'
+        $("#allVotes").append($("<div/>",{class: 'col-md-6 col-xs-12'}).append($("<div/>", {
+            class: 'voteBoxUnhiddenWrongAnswer'
           }).append($("<div/>", {
             class: 'centeredText voteBoxText',
             text: 'HEJHÅ'
           })).append($("<div/>", {
             class: 'authorName',
             text: 'Joel'
-          })).append($("<div/>", {
+          }))).append($("<div/>", {
             class: 'voteStamp',
           }).append($("<div/>", {
             class: 'voteStampText',
