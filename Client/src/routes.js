@@ -18,6 +18,7 @@ import HostAnswerPage from './components/hostPages/answer/AnswerPage';
 import HostVotePage from './components/hostPages/vote/VotePage';
 import HostVoteResult from './components/hostPages/voteResults/VoteResult';
 import HostScore from './components/hostPages/score/ScorePage';
+import HostResult from './components/hostPages/result/Result';
 
 export default (
   <Route path="/" component={App}>
@@ -45,6 +46,7 @@ export default (
     <Route path="host/vote" component={HostVotePage}/>
     <Route path="host/voteResult" component={HostVoteResult}/>
     <Route path="host/score" component={HostScore}/>
+    <Route path="host/result" component={HostResult}/>
 
   </Route>
 );

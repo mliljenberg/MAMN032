@@ -23,10 +23,30 @@ class VotePage extends React.Component {
   componentDidMount() {
     $("#voteContainer").slideToggle("slow", function () {
       setTimeout(function () {
+
+        var numberOfVotes = 4;
+        var voteWidth="";
+        switch(numberOfVotes) {
+          case 1:
+            voteWidth = "col-xs-12";
+            break;
+          case 2:
+            voteWidth = "col-xs-12 col-md-6"
+            break;
+          case 3:
+            voteWidth = "col-xs-12 col-md-4"
+            break;
+          case 4:
+            voteWidth = "col-xs-12 col-md-6"
+            break;
+          default:
+        }
+
+
         for (let i = 0; i < 4; i++) {
           setTimeout(function () {
             $("#listOfAnswers").append($("<div/>", {
-              class: 'col-md-6 col-xs-12 voteBox',
+              class: voteWidth+ ' voteBox',
               id: 'voteBox' + i,
               cursor: 'pointer',
               display: 'none'
