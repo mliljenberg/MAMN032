@@ -1,5 +1,6 @@
 import * as types from './ActionTypes';
-import api from '../api/mockApi';
+import * as playerApi from '../api/playerApi';
+import * as hostApi from '../api/hostApi';
 
 
 export function createRoomSuccsess(room) {
@@ -12,19 +13,24 @@ export function joinRoomSuccsess(room) {
 }
 
 
-export function createRoom(room) {
+export function createRoom() {
   return function (dispatch) {
-    return api.CreateRoom(room).then(room => {
+    return hostApi.CreateRoom().then(room => {
       dispatch(createRoomSuccsess(room));
     });
   };
 }
 
 
-export function joinRoom(room) {
+export function joinRoom(room,username) {
   return function (dispatch) {
-    return api.JoinRoom(room).then(room => {
-      dispatch(joinRoomSuccsess(room));
+    return playerApi.JoinRoom(room,username).then(ans => {
+
+      if(ans){
+
+        dispatch(joinRoomSuccsess(Object.assign({},{id:room})));
+      }
+
     });
   };
 

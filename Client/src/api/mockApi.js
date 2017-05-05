@@ -82,6 +82,8 @@ const generateId = () => {
 };
 
 class Api {
+
+
   static ConnectToRoom() {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -131,10 +133,10 @@ class Api {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
 
-        socket.emit(header.JOIN_ROOM, '1');
+        socket.emit(header.JOIN_ROOM_REQ, '1');
         console.log("Trying to join room/client");
-        socket.emit(header.GET_PLAYERS, "1");
-        socket.on(header.GET_PLAYERS, function (data) {
+        socket.emit(header.GET_PLAYERS_REQ, "1");
+        socket.on(header.GET_PLAYERS_ANS, function (data) {
           console.log(data);
           return data;
         });
