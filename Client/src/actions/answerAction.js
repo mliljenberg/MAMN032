@@ -34,13 +34,10 @@ export function addAnswer(answer, store) {
   store.dispatch(addAnswerSuccess(answer));
 }
 
-export function submitAnswer(ans) {
-  return function (dispatch) {
-    return playerApi.SubmitAnswer(ans).then(ans => {
-      console.log(ans);
-    }).catch((error) => {
-
-      throw error;
-    });
-  };
+export function submitAnswer(word,answer) {
+ return function(dispatch) {
+   playerApi.SubmitAnswer(word, answer);
+ }
 }
+
+

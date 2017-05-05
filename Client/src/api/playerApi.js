@@ -61,7 +61,7 @@ export function SubmitVote(author, word) {
       "author": author,
       "word": word
     };
-    socket.emit(header.SUBMIT_ANSWER_REQ, key, vt);
+    socket.emit(header.SUBMIT_VOTE_REQ, key, vt);
   }
 }
 

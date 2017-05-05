@@ -50,11 +50,10 @@ export function ServerUpdate(store) {
   socket.on(header.JOIN_ROOM_REQ, function (username) {
     if (nbrOfPlayers < maxNbrPlayers && state == header.STATE_WAIT_4_PLAYERS) {
       let plr = {
-        "name": username,
+        "username": username,
         "points": 0
       };
       nbrOfPlayers++;
-      console.log(plr);
       playerAction.addPlayer(plr,store);
       socket.emit(header.JOIN_ROOM_ANS, true, username);
     } else {
@@ -68,6 +67,7 @@ export function ServerUpdate(store) {
    * @return:
    * **/
   socket.on(header.SUBMIT_ANSWER_REQ, function (ans) {
+
     answerAction.addAnswer(ans,store);
   });
 
@@ -77,6 +77,7 @@ export function ServerUpdate(store) {
    * @return:
    * **/
   socket.on(header.SUBMIT_VOTE_REQ, function (vt) {
+
     playerAction.updatePlayerVote(vt,store);
   });
 

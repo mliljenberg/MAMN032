@@ -4,6 +4,8 @@ import {Link, browserHistory}  from 'react-router';
 import {connect} from 'react-redux';
 import * as roomActions from '../../actions/roomAction';
 import * as stateActions from '../../actions/stateAction';
+import * as playerAction from '../../actions/playerAction';
+import * as answerAction from '../../actions/answerAction';
 
 class HomePage extends React.Component {
 
@@ -36,14 +38,16 @@ class HomePage extends React.Component {
   }
 
   joinRoom(){
-     this.props.actions.joinRoom(this.state.key);
+     this.props.actions.joinRoom(this.state.key, 'marcus');
+    this.props.actions.joinRoom(this.state.key, 'ludde');
 
   }
 
   test(){
-
    //console.log(this.props.actions.joinRoom(this.props.room.id,'marcus'));
-    stateActions.changeState({url:'vote'});
+    //stateActions.changeState({url:'vote'});
+    //this.props.actions.submitAnswer('test','test');
+    this.props.actions.submitVote('marcus','test');
   }
 
   render() {
@@ -81,7 +85,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Object.assign({}, roomActions, stateActions), dispatch)
+    actions: bindActionCreators(Object.assign({}, roomActions, stateActions,answerAction,playerAction), dispatch)
   };
 }
 
