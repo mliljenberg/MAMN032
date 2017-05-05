@@ -29,6 +29,7 @@ class VotePagePlayer extends React.Component {
             $("#listOfAnswers").append($("<div/>", {
               class: 'col-md-6 col-xs-12 voteBox',
               id: 'voteBox' + i,
+              cursor: 'pointer',
               display: 'none'
             }).append($("<text/>", {class: 'centeredText voteBoxText', text: "HEJ Hej Hej HEJ Hej Hej HEJ Hej Hej HEJ Hej Hej"})));
             $("#voteBox" + i).slideToggle("slow", function () {

@@ -17,6 +17,7 @@ import HostGamePage from './components/hostPages/game/GamePage';
 import HostAnswerPage from './components/hostPages/answer/AnswerPage';
 import HostVotePage from './components/hostPages/vote/VotePage';
 import HostVoteResult from './components/hostPages/voteResults/VoteResult';
+import HostScore from './components/hostPages/score/ScorePage';
 
 export default (
   <Route path="/" component={App}>
@@ -41,7 +42,8 @@ export default (
     <Route path="host/game" component={HostGamePage}/>
     <Route path="host/answer" component={HostAnswerPage}/>
     <Route path="host/vote" component={HostVotePage}/>
-    <Route path="host/score" component={HostVoteResult}/>
+    <Route path="host/voteResult" component={HostVoteResult}/>
+    <Route path="host/score" component={HostScore}/>
 
   </Route>
 );

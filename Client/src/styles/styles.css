@@ -302,13 +302,12 @@ html, body {
 }
 
 .voteBox {
-  height: 250px;
+  height: 220px;
   background: url("http://www.dailyfreepsd.com/wp-content/uploads/2013/06/Broken-scroll-paperparchment-leather-vector.png");
   background-size: 100% 100%;
   display: none;
   font-size: 30px;
   text-align: center;
-  cursor: pointer;
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -352,10 +351,6 @@ html, body {
   padding: 10px;
 }
 
-#listOfAnswers {
-  padding: 20px;
-
-}
 
 .centeredText {
   position: relative;
@@ -406,7 +401,4 @@ html, body {
   /* Internet Explorer */
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
-
-
-
 
