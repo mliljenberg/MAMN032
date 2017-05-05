@@ -24,6 +24,12 @@ class JoinGamePage extends React.Component {
     });
   }
 
+  goToHost() {
+    $("#joinGamePage").slideToggle("slow", function () {
+      browserHistory.push("/host/game");
+    });
+  }
+
   render() {
     return (
       <div id="joinGamePage" className="hideFromStart">
@@ -37,7 +43,7 @@ class JoinGamePage extends React.Component {
           <CenteredButton onClick={this.goToGame} label="Join" color="Green"/>
 
 
-          <CenteredButton onClick={this.goToGame} label="Create Game" color="White"/>
+          <CenteredButton onClick={this.goToHost} label="Create Game" color="White"/>
 
         </div>
       </div>

@@ -5,7 +5,7 @@ import * as playerActions from '../../actions/playerAction';
 import PositionAndPointsRow from '../common/PositionAndPointsRow';
 import CenteredButton from '../common/CenteredButton';
 
-class ScoreContainer extends React.Component{
+class ScoreContainer extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -13,16 +13,24 @@ class ScoreContainer extends React.Component{
     };
   }
 
-  render(){
+  render() {
     const {players} = this.props;
-    return(
+    var {button}="";
+    if (this.props.show=="yes") {
+       button = <CenteredButton color='White' label='Ready' onClick={this.props.onClick}/>;
+    }
+
+
+    return (
       <div>
         <div className="myMediumLargeText">ScoreBoard</div>
         <div className="col-xs-12 myMargin"></div>
         {players.map(player =>
-          <PositionAndPointsRow position={players.indexOf(player)+1+" . "}name={player.value} points="1"/>
+          <PositionAndPointsRow position={players.indexOf(player) + 1 + " . "} name={player.value} points="1"/>
         )}
-       <CenteredButton color="White" label="Ready" onClick={this.props.onClick}/>
+
+        {button}
+
       </div>
     );
   }

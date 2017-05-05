@@ -1,11 +1,10 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as playerActions from '../../actions/playerAction';
 import $ from 'jquery';
 import {browserHistory}  from 'react-router';
-import ScoreContainer from './ScoreContainer';
-import ScoreBoardContainer from './ScoreBoardContainer';
+import ScoreContainer from '../../score/ScoreContainer';
+import ScoreBoardContainer from '../../score/ScoreBoardContainer';
 
 
 class ScorePage extends React.Component {
@@ -47,10 +46,10 @@ class ScorePage extends React.Component {
     return (
       <div>
         <div id="scoreContainer" className="hideFromStart">
-         <ScoreContainer/>
+          <ScoreContainer/>
         </div>
         <div id="scoreBoardContainer" className="hideFromStart">
-         <ScoreBoardContainer show="yes" onClick={this.clickedReady}/>
+          <ScoreBoardContainer show="no" onClick={this.clickedReady}/>
         </div>
       </div>
     );
@@ -73,7 +72,7 @@ function mapStateToProps(state, ownProps) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Object.assign({}, playerActions), dispatch)
+
 
   };
 }

@@ -1,4 +1,5 @@
 /* Styles */
+
 #app {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #4d4d4d;
@@ -37,7 +38,7 @@ nav {
 
 html, body {
   height: 100%;
-  background: url( "http://68.media.tumblr.com/297bca135cc211b869c1a659664e46b9/tumblr_nsqazrgxAY1rnfgtmo4_500.gif");
+  background: url("https://cdn.dribbble.com/users/23005/screenshots/713525/2-color-animated-gif.gif");
   background-size: cover;
   text-align: center;
 
@@ -296,34 +297,108 @@ html, body {
   width: 80px;
 }
 
-
-
-
-.hideFromStart{
+.hideFromStart {
   display: none;
 }
 
-
-.voteBox{
-  height: 250px;
-  background: url("http://2.bp.blogspot.com/-dS_3P8TGZ_g/T5nCMf_iz0I/AAAAAAAABEU/sceGjdRC2Tc/s1600/Ripped_Paper_Notes.png");
+.voteBox {
+  height: 220px;
+  background: url("http://www.dailyfreepsd.com/wp-content/uploads/2013/06/Broken-scroll-paperparchment-leather-vector.png");
   background-size: 100% 100%;
   display: none;
+  font-size: 30px;
   text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-.myPadding{
+.voteBoxUnhidden {
+  height: 250px;
+  background: url("http://www.dailyfreepsd.com/wp-content/uploads/2013/06/Broken-scroll-paperparchment-leather-vector.png");
+  background-size: 100% 100%;
+  font-size: 30px;
+  text-align: center;
+  cursor: pointer;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.voteBoxUnhiddenWrongAnswer {
+  height: 250px;
+  opacity: 0.3;
+  background: url("http://www.dailyfreepsd.com/wp-content/uploads/2013/06/Broken-scroll-paperparchment-leather-vector.png");
+  background-size: 100% 100%;
+  font-size: 30px;
+  text-align: center;
+  cursor: pointer;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.voteBoxSingle {
+  height: 500px;
+  background: url("http://www.dailyfreepsd.com/wp-content/uploads/2013/06/Broken-scroll-paperparchment-leather-vector.png");
+  background-size: 100% 100%;
+  display: none;
+  font-size: 50px;
+  text-align: center;
+  cursor: pointer;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.myPadding {
   padding: 10px;
 }
 
-#listOfAnswers{
-  padding: 20px;
 
-}
-.centeredText{
+.centeredText {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
 }
 
+.voteBoxText {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.authorName {
+  position: absolute;
+  bottom: 40px;
+  right: 60px;
+  width: 100px;
+  text-align: right;
+}
+
+
+.voteStamp{
+  height: 100px;
+  width: 150px;
+  background: url("http://www.clker.com/cliparts/6/e/w/F/z/s/red-stamp.svg");
+  margin-top: -15px;
+  background-size: 100% 100%;
+  position: absolute;
+  top: 0px;
+  left: 30px;
+
+}
+
+.voteStampText{
+  font-size: 22px;
+  margin-top: 45px;
+  -webkit-transform: rotate(-33deg);
+
+  /* Firefox */
+  -moz-transform: rotate(-33deg);
+
+  /* IE */
+  -ms-transform: rotate(-33deg);
+
+  /* Opera */
+  -o-transform: rotate(-33deg);
+
+  /* Internet Explorer */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
 

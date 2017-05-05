@@ -2,13 +2,23 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import $ from 'jquery';
+import {browserHistory}  from 'react-router';
 import VoteBox from './VoteBox';
 
 class VotePagePlayer extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.componentDidMount = this.componentDidMount.bind(this);
+    $(document).on('click', 'div', function (e) {
 
+      if (e.target.id.startsWith("voteBox")) {
+
+        $("#voteContainer").slideToggle("slow", function () {
+          browserHistory.push("score");
+        });
+
+      }
+    });
   }
 
   componentDidMount() {
@@ -19,8 +29,9 @@ class VotePagePlayer extends React.Component {
             $("#listOfAnswers").append($("<div/>", {
               class: 'col-md-6 col-xs-12 voteBox',
               id: 'voteBox' + i,
+              cursor: 'pointer',
               display: 'none'
-            }).append($("<text/>", {class: 'centeredText', text: "HEJ"})));
+            }).append($("<text/>", {class: 'centeredText voteBoxText', text: "HEJ Hej Hej HEJ Hej Hej HEJ Hej Hej HEJ Hej Hej"})));
             $("#voteBox" + i).slideToggle("slow", function () {
 
             });
