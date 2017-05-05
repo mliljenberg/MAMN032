@@ -94,7 +94,6 @@ io.sockets.on('connection', function (socket) {
         let key = hostRoom.get(socket);
         if (ans == true) {
           pending.get(key + username).join(key);
-          socket.to(key).emit(header.NEW_PLAYER_JOINED, username);
         }
         pending.get(key + username).emit(header.JOIN_ROOM_ANS, ans);
         pending.delete(key + username);

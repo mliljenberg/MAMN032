@@ -80,15 +80,6 @@ export function ServerUpdate(store) {
   });
 
   /**
-   *@desc: New player joined.
-   * @param: username
-   * @return:
-   * **/
-  socket.on(header.NEW_PLAYER_JOINED, function (usr) {
-    //TODO
-  });
-
-  /**
    *@desc: An error has occurred while submitting an answer.
    * @param: ans (which was unsuccessfully delivered).
    * @return:
