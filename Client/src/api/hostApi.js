@@ -26,6 +26,22 @@ export function CreateRoom() {
   });
 }
 
+/**
+ * @desc: Distribute the current word to all players. Username included of the user who must use the real desc.
+ * @param: word, desc, username
+ * @return:
+ * **/
+export function DistributeWord(word, desc, username) {
+  let wrd = {
+    "word": word,
+    "desc": desc,
+    "username": username
+  };
+  return new Promise((resolve) => {
+    socket.emit(header.DIST_WORD, wrd);
+    resolve(true);
+  });
+}
 
 /**
  * @desc: Method for the host to change state.
@@ -54,7 +70,7 @@ export function ServerUpdate(store) {
         "points": 0
       };
       nbrOfPlayers++;
-      playerAction.addPlayer(plr,store);
+      playerAction.addPlayer(plr, store);
       socket.emit(header.JOIN_ROOM_ANS, true, username);
     } else {
       socket.emit(header.JOIN_ROOM_ANS, false, username);
@@ -67,8 +83,7 @@ export function ServerUpdate(store) {
    * @return:
    * **/
   socket.on(header.SUBMIT_ANSWER_REQ, function (ans) {
-
-    answerAction.addAnswer(ans,store);
+    answerAction.addAnswer(ans, store);
   });
 
   /**
@@ -77,8 +92,7 @@ export function ServerUpdate(store) {
    * @return:
    * **/
   socket.on(header.SUBMIT_VOTE_REQ, function (vt) {
-
-    playerAction.updatePlayerVote(vt,store);
+    playerAction.updatePlayerVote(vt, store);
   });
 
   /**

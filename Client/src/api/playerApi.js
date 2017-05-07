@@ -80,6 +80,15 @@ export function ServerUpdate(store) {
   });
 
   /**
+   * @desc: Word received from host. Username included of the player who must use the correct answer.
+   * @param: wrd JSON(word, desc, username)
+   * @return:
+   * **/
+  socket.on(header.DIST_WORD, function (wrd) {
+    //TODO
+  });
+
+  /**
    *@desc: An error has occurred while submitting an answer.
    * @param: ans (which was unsuccessfully delivered).
    * @return:
