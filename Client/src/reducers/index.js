@@ -4,7 +4,7 @@ import initialState from './initialState';
 import authors from './authorReducer';
 import messages from './messageReducer';
 import players from './playerReducer';
-import words from './wordReducer';
+import word from './wordReducer';
 import room from './roomReducer';
 import answers from './answerReducer';
 import myself from './myselfReducer';
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   authors: authors,
   messages: messages,
   players: players,
-  words: words,
+  word: word,
   room: room,
   answers: answers,
   myself: myself

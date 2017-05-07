@@ -65,6 +65,7 @@ export function SubmitVote(author, word) {
   }
 }
 
+
 /**
  * @desc:
  * **/

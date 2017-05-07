@@ -77,7 +77,6 @@ HomePage.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
-  console.log(state);
   return {
     room: state.room
   };

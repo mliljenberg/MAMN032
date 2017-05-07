@@ -4,7 +4,7 @@ import api from '../api/mockApi';
 
 
 export function updateWordsSuccess(words) {
-  return { type: types.UPDATE_WORDS_SUCCESS, words};
+  return { type: types.UPDATE_WORD_SUCCESS, words};
 
 }
 

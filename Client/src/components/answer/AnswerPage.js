@@ -6,18 +6,29 @@ import $ from 'jquery';
 import AnswerContainer from './AnswerContainer';
 import WaitingContainer from './WaitingContainer';
 import RightAnswerContainer from './RightAnswerContainer';
+import * as answerAction from '../../actions/answerAction';
 
 class AnswerPagePlayer extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this.state = {ready: 1};
+    this.state = {ready: 1, answer:''};
     this.submitted = this.submitted.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
+
+
+  componentDidMount() {
+
+    $("#answerContainer").slideToggle("slow", function () {
+
+    });
+  }
   submitted() {
+      this.props.actions.submitAnswer(this.props.word,this.state.answer);
     $("#answerContainer").slideToggle("slow", function () {
       $("#waitingContainer").slideToggle("slow", function () {
-       setTimeout(function () {
+        setTimeout(function () {
           $("#waitingContainer").slideToggle("slow", function () {
             browserHistory.push("/vote");
           });
@@ -26,20 +37,16 @@ class AnswerPagePlayer extends React.Component {
       });
     });
   }
+handleChange(event){
+    return this.setState({answer:event.target.value});
 
-  componentDidMount() {
-
-    $("#answerContainer").slideToggle("slow", function () {
-
-    });
-  }
-
+}
 
   render() {
     return (
       <div>
         <div id="answerContainer" className="hideFromStart">
-          <AnswerContainer onClick={this.submitted}/>
+          <AnswerContainer onClick={this.submitted} onChange={this.handleChange}/>
         </div>
         <div id="waitingContainer" className="hideFromStart">
           <WaitingContainer ready={this.state.ready}/>
@@ -54,21 +61,18 @@ class AnswerPagePlayer extends React.Component {
 
 }
 AnswerPagePlayer.propTypes = {
-  //myprop: PropTypes.string.isRequired
-
+  word: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    // dina props : state.dina props
+  word: state.word
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    //här bindar du alla dina actiones tror inte du behöver ändra den
-
-    //actions: bindActionCreators(actions, dispatch)
-
+    actions: bindActionCreators(Object.assign({}, answerAction), dispatch)
   };
 }
 

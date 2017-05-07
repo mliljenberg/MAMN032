@@ -7,7 +7,7 @@ export default {
   messages: [],
   players: [],
   room: {},
-  words: [],
+  word: {},
   answers: [],
   myself: {}
 };
