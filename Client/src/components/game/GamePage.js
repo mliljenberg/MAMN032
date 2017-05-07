@@ -32,11 +32,11 @@ class GamePage extends React.Component {
 
     $("#descriptionContainer").slideToggle("slow", function () {
       $("#playersContainer").slideToggle("slow", function () {
-        setTimeout(function () {
-          $("#playersContainer").slideToggle("slow", function () {
-              browserHistory.push("/answer");
-          });
-        }, 3000);
+       // setTimeout(function () {
+         // $("#playersContainer").slideToggle("slow", function () {
+           //   browserHistory.push("/answer");
+         // });
+        //}, 3000);
       });
 
 
@@ -45,7 +45,7 @@ class GamePage extends React.Component {
 
   leaveGame(){
     $("#playersContainer").slideToggle("slow", function () {
-      browserHistory.push("/joinGame");
+      browserHistory.push("");
     });
   }
 

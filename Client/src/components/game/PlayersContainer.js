@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as myselfAction from '../../actions/myselfAction';
 import CenteredButton from '../common/CenteredButton';
+import * as roomActions from '../../actions/roomAction';
+import * as playerActions from '../../actions/playerAction';
 
 class PlayersContainer extends React.Component{
   constructor(props, context) {
@@ -42,7 +44,7 @@ class PlayersContainer extends React.Component{
 
     return(
       <div>
-        <div className="myMediumLargeText">Room: {this.props.room}</div>
+        <div className="myMediumLargeText">Room: {this.props.room.id}</div>
         <div className="col-xs-12">
           <div className="col-xs-0 col-md-2"></div>
           {key}
@@ -70,7 +72,8 @@ PlayersContainer.propTypes = {
 
 
   myself: PropTypes.object.isRequired,
-  players: PropTypes.array.isRequired
+  players: PropTypes.array.isRequired,
+  room: PropTypes.object.isRequired
 
 };
 
@@ -79,14 +82,15 @@ function mapStateToProps(state, ownProps) {
   return {
 
     myself: state.myself,
-    players: state.players
+    players: state.players,
+    room: state.room
 
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
 
-    actions: bindActionCreators(Object.assign({}, myselfAction), dispatch)
+    actions: bindActionCreators(Object.assign({}, myselfAction, roomActions, playerActions), dispatch)
   };
 }
 

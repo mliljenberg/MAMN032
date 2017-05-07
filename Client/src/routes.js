@@ -21,7 +21,7 @@ import HostScore from './components/hostPages/score/ScorePage';
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={HomePage} />
+    <IndexRoute component={JoinGamePage} />
     <Route path="host" component={HostPage} />
     <Route path="room/:id" component={HostPage} />
     <Route path="player" component={PlayerPage} />

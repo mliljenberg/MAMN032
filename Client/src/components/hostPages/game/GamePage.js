@@ -1,12 +1,19 @@
-import React from 'react';
+import React,{PropTypes} from 'react';
 import PlayersContainer from '../../game/PlayersContainer';
+import {connect} from 'react-redux';
 import $ from 'jquery';
+import * as roomActions from '../../../actions/roomAction';
+import * as stateActions from '../../../actions/stateAction';
+import * as playerAction from '../../../actions/playerAction';
+import {bindActionCreators} from 'redux';
 
 class GamePage extends React.Component {
   constructor(props, context) {
     super(props, context);
     $(document).ready(function () {
       var audio = $("#clickSound")[0];
+
+
 
 
       audio.play();
@@ -29,7 +36,7 @@ class GamePage extends React.Component {
 
       <div>
         <div id="playersContainer" className="hideFromStart">
-          <PlayersContainer button="false" room="1234"/>
+          <PlayersContainer button="false" room={this.props.room.id}/>
 
 
         </div>
@@ -37,5 +44,26 @@ class GamePage extends React.Component {
     );
   }
 }
+GamePage.propTypes = {
+  actions: PropTypes.object.isRequired,
+  room: PropTypes.object.isRequired
 
-export default GamePage;
+  //myprop: PropTypes.string.isRequired
+
+};
+
+function mapStateToProps(state, ownProps) {
+  console.log(state);
+  return {
+    room: state.room
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Object.assign({}, roomActions, stateActions,playerAction), dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GamePage);
+
