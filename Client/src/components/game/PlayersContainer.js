@@ -5,12 +5,14 @@ import * as myselfAction from '../../actions/myselfAction';
 import CenteredButton from '../common/CenteredButton';
 import * as roomActions from '../../actions/roomAction';
 import * as playerActions from '../../actions/playerAction';
+import {Link, IndexLink, browserHistory} from 'react-router';
 
 class PlayersContainer extends React.Component{
   constructor(props, context) {
     super(props, context);
     this.state = { leftOver: 0};
     this.render = this.render.bind(this);
+
   }
 
   render(){

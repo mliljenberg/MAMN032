@@ -8,12 +8,18 @@ import * as myselfAction from '../../actions/myselfAction';
 import {Link, IndexLink, browserHistory} from 'react-router';
 import DescriptionContainer from './DescriptionContainer';
 import PlayersContainer from './PlayersContainer';
+import * as roomActions from '../../actions/roomAction';
+import * as stateActions from '../../actions/stateAction';
+import * as playerAction from '../../actions/playerAction';
 
 
 
 class GamePage extends React.Component {
   constructor(props, context) {
     super(props, context);
+
+
+
     this.state = { leftOver: 0};
     socket.emit('join room', window.location.href.substr(window.location.href.lastIndexOf('/') + 1));
     console.log("Trying to join room/client");
@@ -24,7 +30,10 @@ class GamePage extends React.Component {
     });
 
 
+    this.leaveGame = this.leaveGame.bind(this);
+
   }
+
 
 
   startAnimation() {
@@ -46,7 +55,13 @@ class GamePage extends React.Component {
     });
   }
 
+  componentWillMount(){
 
+    if(this.props.room.id == null){
+      browserHistory.push("/");
+      alert("Room does not exist");
+    }
+  }
 
   componentDidMount(){
     $("#descriptionContainer").slideToggle("slow", function () {
@@ -78,6 +93,29 @@ class GamePage extends React.Component {
 
 }
 
+GamePage.propTypes = {
+  actions: PropTypes.object.isRequired,
+  room: PropTypes.object.isRequired,
+  players: PropTypes.array.isRequired
 
+  //myprop: PropTypes.string.isRequired
 
-export default GamePage;
+};
+
+function mapStateToProps(state, ownProps) {
+  console.log(state);
+
+  return {
+    room: state.room,
+    players: state.players
+
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Object.assign({}, roomActions, stateActions,playerAction), dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GamePage);

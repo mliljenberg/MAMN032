@@ -22,6 +22,8 @@ class JoinGamePage extends React.Component {
   }
 
 
+
+
   componentDidMount() {
     $("#joinGamePage").slideToggle("slow", function () {
     });
@@ -36,10 +38,12 @@ class JoinGamePage extends React.Component {
 
   }
   goToGame() {
-    this.props.actions.joinRoom(this.state.key,this.state.username);
-    $("#joinGamePage").slideToggle("slow", function () {
-      browserHistory.push("/game");
-    });
+
+   this.props.actions.joinRoom(this.state.key, this.state.username);
+       $("#joinGamePage").slideToggle("slow", function () {
+         browserHistory.push("/game");
+       });
+
   }
 
   goToHost() {
