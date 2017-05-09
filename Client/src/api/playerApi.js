@@ -1,6 +1,7 @@
 import io from 'socket.io-client';
 import * as header from '../headerConstants';
 import * as playerAction from '../actions/playerAction';
+import * as wordAction from '../actions/wordAction';
 import {browserHistory}  from 'react-router';
 
 let connectedToRoom = false;
@@ -87,6 +88,7 @@ export function ServerUpdate(store) {
    * **/
   socket.on(header.DIST_WORD, function (wrd) {
     //TODO
+    wordAction.updateWord(wrd,store);
   });
 
   /**

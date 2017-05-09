@@ -8,6 +8,7 @@ export default {
   players: [],
   room: {},
   word: {},
+  wordList: [],
   answers: [],
   myself: {}
 };

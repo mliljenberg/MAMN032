@@ -2,12 +2,13 @@ import io from 'socket.io-client';
 import * as header from '../headerConstants';
 import * as playerAction from '../actions/playerAction';
 import * as answerAction from '../actions/answerAction';
+import * as wordAction from '../actions/wordAction';
 
 let state = null;
 
 let nbrOfPlayers;
 const maxNbrPlayers = 4;
-
+let storen = null;
 let socket = io.connect();
 
 /**
@@ -15,12 +16,16 @@ let socket = io.connect();
  * @param:
  * @return
  * **/
+
+
 export function CreateRoom() {
   socket.emit(header.CREATE_ROOM_REQ);
   return new Promise((resolve) => {
     socket.on(header.CREATE_ROOM_ANS, function (ans, wordlist) {
       nbrOfPlayers = 0;
       state = header.STATE_WAIT_4_PLAYERS;
+      console.log(wordlist.default);
+      wordAction.updateWordList(wordlist.default,storen);
       resolve(Object.assign({}, {id: ans}));
     });
   });
@@ -31,10 +36,10 @@ export function CreateRoom() {
  * @param: word, desc, username
  * @return:
  * **/
-export function DistributeWord(word, desc, username) {
+export function DistributeWord(word, def, username) {
   let wrd = {
     "word": word,
-    "desc": desc,
+    "def": def,
     "username": username
   };
   return new Promise((resolve) => {
@@ -42,6 +47,8 @@ export function DistributeWord(word, desc, username) {
     resolve(true);
   });
 }
+
+
 
 /**
  * @desc: Method for the host to change state.
@@ -55,7 +62,6 @@ export function ChangeState(url) {
   });
 }
 
-
 export function ServerUpdate(store) {
   /**
    * @desc: Host allows/denies a player to join the game.
@@ -63,6 +69,8 @@ export function ServerUpdate(store) {
    * @return: true/false.
    *
    * **/
+
+ storen = store;
   socket.on(header.JOIN_ROOM_REQ, function (username) {
     if (nbrOfPlayers < maxNbrPlayers && state == header.STATE_WAIT_4_PLAYERS) {
       let plr = {

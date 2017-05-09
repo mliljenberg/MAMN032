@@ -49,7 +49,7 @@ handleChange(event){
     return (
       <div>
         <div id="answerContainer" className="hideFromStart">
-          <AnswerContainer onClick={this.submitted} onChange={this.handleChange}/>
+          <AnswerContainer onClick={this.submitted} onChange={this.handleChange} word={this.props.word.word}/>
         </div>
         <div id="waitingContainer" className="hideFromStart">
           <WaitingContainer ready={this.state.ready}/>
