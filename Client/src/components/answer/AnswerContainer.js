@@ -7,7 +7,7 @@ const AnswerContainer = ({onChange,onClick}) => {
         <div className="myLargeText">Word</div>
         <div className="col-xs-12">
           <div className="col-xs-0 col-md-2"></div>
-          <textarea className="descriptionInput col-xs-12 col-md-8" onChange={onChange}></textarea>
+          <textarea className="writeDescriptionInput col-xs-12 col-md-8" onChange={onChange}></textarea>
           <div className="col-xs-0 col-md-2"></div>
         </div>
         <CenteredButton color="Green" label="Submit" onClick={onClick}/>
