@@ -51,9 +51,9 @@ class PlayersContainer extends React.Component{
           <div className="horizontalList col-xs-12 col-md-8">
             {leftOverRow1}
             {players.map(player =>
-              <div className={leftOverClass} key={player.value}>
+              <div className={leftOverClass} key={player.username}>
 
-                <div className="mySmallText"> {player.value}</div>
+                <div className="mySmallText"> {player.username}</div>
 
               </div>
             )}
