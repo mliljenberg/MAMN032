@@ -3,6 +3,7 @@ import webpack from 'webpack';
 import path from 'path';
 import config from '../webpack.config.dev';
 import * as header from '../src/headerConstants';
+import * as words from './words';
 
 /* eslint-disable no-console */
 const port = 3000;
@@ -57,7 +58,8 @@ io.sockets.on('connection', function (socket) {
 
         hostRoom.set(socket, key);
         roomHost.set(key, socket);
-        socket.emit(header.CREATE_ROOM_ANS, key);
+        console.log("Nbr of rooms: " + hostRoom.size + "/" + roomHost.size);
+        socket.emit(header.CREATE_ROOM_ANS, key, words);
       }
     } catch (err) {
       console.log(err.message);
@@ -178,12 +180,13 @@ io.sockets.on('connection', function (socket) {
    * @param:
    * @return:
    * **/
-  socket.on('disconnection', function () {
+  socket.on('disconnect', function () {
     try {
       if (hostRoom.has(socket)) {
         roomHost.delete(hostRoom.get(socket));
         hostRoom.delete(socket);
       }
+      console.log("Nbr of rooms: " + hostRoom.size + "/" + roomHost.size);
     } catch (err) {
       console.log(err.message);
     }
