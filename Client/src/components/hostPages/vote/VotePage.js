@@ -23,10 +23,30 @@ class VotePage extends React.Component {
   componentDidMount() {
     $("#voteContainer").slideToggle("slow", function () {
       setTimeout(function () {
-        for (let i = 0; i < 4; i++) {
+
+        var numberOfVotes = 4;
+        var voteWidth="";
+        switch(numberOfVotes) {
+          case 1:
+            voteWidth = "col-xs-12";
+            break;
+          case 2:
+            voteWidth = "col-xs-12 col-md-6"
+            break;
+          case 3:
+            voteWidth = "col-xs-12 col-md-4"
+            break;
+          case 4:
+            voteWidth = "col-xs-12 col-md-6"
+            break;
+          default:
+        }
+
+
+        for (let i = 0; i < numberOfVotes; i++) {
           setTimeout(function () {
             $("#listOfAnswers").append($("<div/>", {
-              class: 'col-md-6 col-xs-12 voteBox',
+              class: voteWidth+ ' voteBox',
               id: 'voteBox' + i,
               cursor: 'pointer',
               display: 'none'
@@ -35,17 +55,17 @@ class VotePage extends React.Component {
               text: "HEJ Hej Hej HEJ Hej Hej HEJ Hej Hej HEJ Hej Hej"
             })));
             $("#voteBox" + i).slideToggle("slow", function () {
-
+              if(i==numberOfVotes-1){
+                $("#timer").slideToggle("slow", function () {
+                });
+              }
             });
+
           }, i * 3000);
 
         }
 
       }, 1000);
-      setTimeout(function () {
-        $("#timerContainer").slideToggle("slow", function () {
-        });
-      }, 12000);
 
 
     });
@@ -62,7 +82,7 @@ class VotePage extends React.Component {
     if (this.state.secondsLeft == 0) {
       setTimeout(function () {
         $("#voteContainer").slideToggle("slow", function () {
-          browserHistory.push("host/score");
+          //browserHistory.push("host/score");
 
         });
 
@@ -81,12 +101,11 @@ class VotePage extends React.Component {
           <div id="listOfAnswers" className="col-xs-12">
 
 
-          </div>
 
+          </div>
+          <div id="timer" className="myMediumText hideFromStart">{this.state.secondsLeft}</div>
         </div>
-        <div id="timerContainer" className="hideFromStart">
-          <div id="timer" className="myMediumText">{this.state.secondsLeft}</div>
-        </div>
+
       </div>
     );
   }

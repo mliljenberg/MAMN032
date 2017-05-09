@@ -9,7 +9,6 @@ import * as playerActions from '../../actions/playerAction';
 class PlayersContainer extends React.Component{
   constructor(props, context) {
     super(props, context);
-    this.state = { leftOver: 0};
     this.render = this.render.bind(this);
   }
 
@@ -20,21 +19,27 @@ class PlayersContainer extends React.Component{
     let button="";
     let key="";
 
+    let numberOfPlayers =4;
 
-    this.state.leftOver = players.length % 3;
-    if (this.state.leftOver === 0) {
-      leftOverRow1 = <div className="col-xs-0"></div>;
-
+    var nameWidth="";
+    switch(numberOfPlayers) {
+      case 1:
+        nameWidth = "col-xs-12";
+        break;
+      case 2:
+        nameWidth = "col-xs-6"
+        break;
+      case 3:
+        nameWidth = "col-xs-4"
+        break;
+      case 4:
+        nameWidth = "col-xs-6"
+        break;
+      default:
     }
-    if (this.state.leftOver === 1) {
-      leftOverRow1 = <div className="col-xs-0"></div>;
-      leftOverClass = "horizontalListItem myMargin center-block col-xs-3"
 
-    }
-    if (this.state.leftOver === 2) {
-      leftOverRow1 = <div className="col-xs-2"></div>;
 
-    }
+
 
     if(this.props.button ==="true"){
       button= <div className="col-xs-12 myMargin"><CenteredButton onClick={this.props.onClick} color="White" label="Leave"/></div>;
@@ -49,13 +54,9 @@ class PlayersContainer extends React.Component{
           <div className="col-xs-0 col-md-2"></div>
           {key}
           <div className="horizontalList col-xs-12 col-md-8">
-            {leftOverRow1}
             {players.map(player =>
-              <div className={leftOverClass} key={player.value}>
 
-                <div className="mySmallText"> {player.value}</div>
-
-              </div>
+                <div className={nameWidth + "mySmallText"}> {player.value}</div>
             )}
 
           </div>
