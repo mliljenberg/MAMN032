@@ -26,7 +26,9 @@ class AnswerPagePlayer extends React.Component {
   }
   submitted() {
       this.props.actions.submitAnswer(this.props.word,this.state.answer);
-    $("#answerContainer").slideToggle("slow", function () {
+    //TODO: Fixa så att bara waiting container visas till hosten pushar ett nytt state.
+      /**
+      $("#answerContainer").slideToggle("slow", function () {
       $("#waitingContainer").slideToggle("slow", function () {
         setTimeout(function () {
           $("#waitingContainer").slideToggle("slow", function () {
@@ -36,6 +38,7 @@ class AnswerPagePlayer extends React.Component {
         }, 3000);
       });
     });
+     **/
   }
 handleChange(event){
     return this.setState({answer:event.target.value});
