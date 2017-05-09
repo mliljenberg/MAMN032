@@ -9,6 +9,7 @@ import * as playerActions from '../../actions/playerAction';
 class PlayersContainer extends React.Component{
   constructor(props, context) {
     super(props, context);
+    this.state = { leftOver: 0};
     this.render = this.render.bind(this);
   }
 
@@ -56,7 +57,7 @@ class PlayersContainer extends React.Component{
           <div className="horizontalList col-xs-12 col-md-8">
             {players.map(player =>
 
-                <div className={nameWidth + "mySmallText"}> {player.value}</div>
+                <div className={nameWidth + "mySmallText"}> {player.username}</div>
             )}
 
           </div>
