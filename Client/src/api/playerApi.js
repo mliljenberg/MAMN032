@@ -112,10 +112,9 @@ export function ServerUpdate(store) {
    * @param:
    * @return:
    * **/
-  socket.on('disconnection', function () {
+  socket.on('disconnect', function () {
     connectedToRoom = false;
     key = '';
-    socket.close();
   });
 
 }

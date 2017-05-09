@@ -18,7 +18,7 @@ let socket = io.connect();
 export function CreateRoom() {
   socket.emit(header.CREATE_ROOM_REQ);
   return new Promise((resolve) => {
-    socket.on(header.CREATE_ROOM_ANS, function (ans) {
+    socket.on(header.CREATE_ROOM_ANS, function (ans, wordlist) {
       nbrOfPlayers = 0;
       state = header.STATE_WAIT_4_PLAYERS;
       resolve(Object.assign({}, {id: ans}));
