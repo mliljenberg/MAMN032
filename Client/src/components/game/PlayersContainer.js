@@ -20,7 +20,8 @@ class PlayersContainer extends React.Component{
     let button="";
     let key="";
 
-    let numberOfPlayers =4;
+    let numberOfPlayers =players.length;
+    console.log(numberOfPlayers);
 
     var nameWidth="";
     switch(numberOfPlayers) {
@@ -57,7 +58,7 @@ class PlayersContainer extends React.Component{
           <div className="horizontalList col-xs-12 col-md-8">
             {players.map(player =>
 
-                <div className={nameWidth + "mySmallText"}> {player.username}</div>
+                <div className={nameWidth + " mySmallText"}> {player.username}</div>
             )}
 
           </div>
