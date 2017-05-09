@@ -1,10 +1,11 @@
 /* Styles */
+
 #app {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #4d4d4d;
-  min-width: 550px;
-  max-width: 850px;
   margin: 0 auto;
+  height: 100%;
+  text-align: center;
 }
 
 a.active {
@@ -14,6 +15,7 @@ a.active {
 nav {
   padding-top: 20px;
 }
+
 .crossRotate {
   background-color: orange;
   -webkit-transition-duration: 1s;
@@ -34,4 +36,367 @@ nav {
 
 }
 
+html, body {
+  height: 100%;
+  background: url("https://i.giphy.com/l46C9Kyx9FtgC4WcM.gif");
+  background-size: cover;
+  text-align: center;
+
+}
+
+.myInput {
+  height: 10vh;
+  margin-top: 15px;
+  border-radius: 5px;
+
+  border-color: black;
+  font-size: 50px;
+}
+
+.container-fluid {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.myGreenButton {
+  height: 10vh;
+  margin-top: 15px;
+  font-size: 50px;
+  border-radius: 5px;
+  background-color: darkseagreen;
+  border-color: black;
+  color: black;
+}
+
+.myBlueButton {
+  height: 10vh;
+  margin-top: 15px;
+  font-size: 50px;
+  border-radius: 5px;
+  background-color: lightblue;
+  border-color: black;
+  color: black;
+}
+
+.myWhiteButton {
+  height: 10vh;
+  margin-top: 15px;
+  font-size: 50px;
+  border-radius: 5px;
+  background-color: #fffefb;
+  border-color: black;
+  color: black;
+}
+
+.myLargeText {
+  font-size: 250px;
+  font-weight: 900;
+  color: white;
+  text-shadow: 7px 7px 0 #000,
+  -7px 7px 0 #000,
+  7px -7px 0 #000,
+  -7px -7px 0 #000,
+  0px 7px 0 #000,
+  0px -7px 0 #000,
+  -7px 0px 0 #000,
+  7px 0px 0 #000,
+  2px 2px 0 #000,
+  -2px 2px 0 #000,
+  2px -2px 0 #000,
+  -2px -2px 0 #000,
+  0px 2px 0 #000,
+  0px -2px 0 #000,
+  -2px 0px 0 #000,
+  2px 0px 0 #000,
+  7px 2px 0 #000,
+  -7px 2px 0 #000,
+  7px -2px 0 #000,
+  -7px -2px 0 #000,
+  2px 7px 0 #000,
+  -2px 7px 0 #000,
+  2px -7px 0 #000,
+  -2px -7px 0 #000;
+}
+
+.myMediumLargeText {
+  font-size: 150px;
+  font-weight: 900;
+  color: white;
+  text-shadow: 7px 7px 0 #000,
+  -7px 7px 0 #000,
+  7px -7px 0 #000,
+  -7px -7px 0 #000,
+  0px 7px 0 #000,
+  0px -7px 0 #000,
+  -7px 0px 0 #000,
+  7px 0px 0 #000,
+  2px 2px 0 #000,
+  -2px 2px 0 #000,
+  2px -2px 0 #000,
+  -2px -2px 0 #000,
+  0px 2px 0 #000,
+  0px -2px 0 #000,
+  -2px 0px 0 #000,
+  2px 0px 0 #000,
+  7px 2px 0 #000,
+  -7px 2px 0 #000,
+  7px -2px 0 #000,
+  -7px -2px 0 #000,
+  2px 7px 0 #000,
+  -2px 7px 0 #000,
+  2px -7px 0 #000,
+  -2px -7px 0 #000;
+}
+
+.myMediumText {
+  font-size: 100px;
+  font-weight: 900;
+  color: white;
+  text-shadow: 7px 7px 0 #000,
+  -7px 7px 0 #000,
+  7px -7px 0 #000,
+  -7px -7px 0 #000,
+  0px 7px 0 #000,
+  0px -7px 0 #000,
+  -7px 0px 0 #000,
+  7px 0px 0 #000,
+  2px 2px 0 #000,
+  -2px 2px 0 #000,
+  2px -2px 0 #000,
+  -2px -2px 0 #000,
+  0px 2px 0 #000,
+  0px -2px 0 #000,
+  -2px 0px 0 #000,
+  2px 0px 0 #000,
+  7px 2px 0 #000,
+  -7px 2px 0 #000,
+  7px -2px 0 #000,
+  -7px -2px 0 #000,
+  2px 7px 0 #000,
+  -2px 7px 0 #000,
+  2px -7px 0 #000,
+  -2px -7px 0 #000;
+}
+
+.mySmallText {
+  font-size: 50px;
+  font-weight: 900;
+  color: white;
+  text-shadow: 7px 7px 0 #000,
+  -7px 7px 0 #000,
+  7px -7px 0 #000,
+  -7px -7px 0 #000,
+  0px 7px 0 #000,
+  0px -7px 0 #000,
+  -7px 0px 0 #000,
+  7px 0px 0 #000,
+  2px 2px 0 #000,
+  -2px 2px 0 #000,
+  2px -2px 0 #000,
+  -2px -2px 0 #000,
+  0px 2px 0 #000,
+  0px -2px 0 #000,
+  -2px 0px 0 #000,
+  2px 0px 0 #000,
+  7px 2px 0 #000,
+  -7px 2px 0 #000,
+  7px -2px 0 #000,
+  -7px -2px 0 #000,
+  2px 7px 0 #000,
+  -2px 7px 0 #000,
+  2px -7px 0 #000,
+  -2px -7px 0 #000;
+}
+
+.myMediumSmallText {
+  font-size: 75px;
+  font-weight: 900;
+  color: white;
+  text-shadow: 7px 7px 0 #000,
+  -7px 7px 0 #000,
+  7px -7px 0 #000,
+  -7px -7px 0 #000,
+  0px 7px 0 #000,
+  0px -7px 0 #000,
+  -7px 0px 0 #000,
+  7px 0px 0 #000,
+  2px 2px 0 #000,
+  -2px 2px 0 #000,
+  2px -2px 0 #000,
+  -2px -2px 0 #000,
+  0px 2px 0 #000,
+  0px -2px 0 #000,
+  -2px 0px 0 #000,
+  2px 0px 0 #000,
+  7px 2px 0 #000,
+  -7px 2px 0 #000,
+  7px -2px 0 #000,
+  -7px -2px 0 #000,
+  2px 7px 0 #000,
+  -2px 7px 0 #000,
+  2px -7px 0 #000,
+  -2px -7px 0 #000;
+}
+
+.horizontalListItem {
+  display: inline-block;
+
+}
+
+.horizontalList {
+  margin-top: 50px;
+  display: inline;
+  float: none;
+}
+
+.description {
+  background: url("http://www.dailyfreepsd.com/wp-content/uploads/2013/06/Broken-scroll-paperparchment-leather-vector.png");
+  background-size: 100% 100%;
+  height: 750px;
+  margin-top: -100px;
+  margin-bottom: -120px;
+}
+
+.descriptionInput {
+  font-size: 28px;
+  margin-top: 150px;
+}
+
+.writeDescriptionInput {
+  height: 30vh;
+  margin-top: 20px;
+  border-radius: 5px;
+
+  border-color: black;
+  font-size: 50px;
+}
+
+.myMargin {
+  margin-top: 50px;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: #3498DB;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.toggle-btn {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  left: 0;
+  margin: auto;
+  width: 80px;
+}
+
+.hideFromStart {
+  display: none;
+}
+
+.voteBox {
+  height: 220px;
+  background: url("http://www.dailyfreepsd.com/wp-content/uploads/2013/06/Broken-scroll-paperparchment-leather-vector.png");
+  background-size: 100% 100%;
+  display: none;
+  font-size: 30px;
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.voteBoxUnhidden {
+  height: 250px;
+  background: url("http://www.dailyfreepsd.com/wp-content/uploads/2013/06/Broken-scroll-paperparchment-leather-vector.png");
+  background-size: 100% 100%;
+  font-size: 30px;
+  text-align: center;
+  cursor: pointer;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.voteBoxUnhiddenWrongAnswer {
+  height: 250px;
+  opacity: 0.3;
+  background: url("http://www.dailyfreepsd.com/wp-content/uploads/2013/06/Broken-scroll-paperparchment-leather-vector.png");
+  background-size: 100% 100%;
+  font-size: 30px;
+  text-align: center;
+  cursor: pointer;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.voteBoxSingle {
+  height: 500px;
+  background: url("http://www.dailyfreepsd.com/wp-content/uploads/2013/06/Broken-scroll-paperparchment-leather-vector.png");
+  background-size: 100% 100%;
+  display: none;
+  font-size: 50px;
+  text-align: center;
+  cursor: pointer;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.myPadding {
+  padding: 10px;
+}
+
+.centeredText {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.voteBoxText {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.authorName {
+  position: absolute;
+  bottom: 40px;
+  right: 60px;
+  width: 100px;
+  text-align: right;
+}
+
+.voteStamp {
+  height: 100px;
+  width: 150px;
+  background: url("http://www.clker.com/cliparts/6/e/w/F/z/s/red-stamp.svg");
+  margin-top: -15px;
+  background-size: 100% 100%;
+  position: absolute;
+  top: 0px;
+  left: 30px;
+
+}
+
+.voteStampText {
+  font-size: 22px;
+  margin-top: 45px;
+  -webkit-transform: rotate(-33deg);
+
+  /* Firefox */
+  -moz-transform: rotate(-33deg);
+
+  /* IE */
+  -ms-transform: rotate(-33deg);
+
+  /* Opera */
+  -o-transform: rotate(-33deg);
+
+  /* Internet Explorer */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
 

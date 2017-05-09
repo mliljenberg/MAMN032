@@ -3,5 +3,11 @@
  */
 export default {
   authors: [],
-  courses: []
+  courses: [],
+  messages: [],
+  players: [],
+  room: {},
+  word: {},
+  answers: [],
+  myself: {}
 };
