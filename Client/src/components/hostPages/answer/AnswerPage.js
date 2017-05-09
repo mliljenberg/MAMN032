@@ -6,7 +6,7 @@ class AnswerPage extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      secondsLeft: 10
+      secondsLeft: 60
     };
 
 

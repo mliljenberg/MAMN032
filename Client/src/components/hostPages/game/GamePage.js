@@ -6,19 +6,37 @@ import * as roomActions from '../../../actions/roomAction';
 import * as stateActions from '../../../actions/stateAction';
 import * as playerAction from '../../../actions/playerAction';
 import {bindActionCreators} from 'redux';
+import {Link, IndexLink, browserHistory} from 'react-router';
 
 class GamePage extends React.Component {
   constructor(props, context) {
     super(props, context);
-    $(document).ready(function () {
-      var audio = $("#clickSound")[0];
+    this.state = {
+      secondsLeft: 10,
+      timerStarted: false
+    };
 
 
 
 
-      audio.play();
+  }
+  tick() {
 
-    });
+    if (this.state.secondsLeft > 0) {
+      this.setState({
+        secondsLeft: this.state.secondsLeft - 1
+      });
+    }
+    if(this.state.secondsLeft==0){
+      setTimeout(function () {
+
+         $("#playersContainer").slideToggle("slow", function () {
+          browserHistory.push("/host/answer");
+         });
+
+      }, 1000);
+
+    }
   }
 
 
@@ -28,8 +46,29 @@ class GamePage extends React.Component {
     });
   }
 
+  startCountdown(){
+    $("#timer").slideToggle("slow", function () {
+
+    });
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
 
   render() {
+    const {players} = this.props;
+    console.log(players.length);
+    if(players.length==4){
+      if(!this.state.timerStarted){
+        this.startCountdown();
+        this.setState({
+          timerStarted: true
+        });
+      }
+
+    }
 
 
     return (
@@ -37,8 +76,9 @@ class GamePage extends React.Component {
       <div>
         <div id="playersContainer" className="hideFromStart">
           <PlayersContainer button="false" room={this.props.room.id}/>
-
-
+          <div id="timer" className="hideFromStart">
+          <div className="myMediumText">{this.state.secondsLeft}</div>
+          </div>
         </div>
       </div>
     );
@@ -46,6 +86,7 @@ class GamePage extends React.Component {
 }
 GamePage.propTypes = {
   actions: PropTypes.object.isRequired,
+  players: PropTypes.array.isRequired,
   room: PropTypes.object.isRequired
 
   //myprop: PropTypes.string.isRequired
@@ -55,7 +96,8 @@ GamePage.propTypes = {
 function mapStateToProps(state, ownProps) {
   console.log(state);
   return {
-    room: state.room
+    room: state.room,
+    players: state.players
   };
 }
 
