@@ -32,9 +32,11 @@ class GamePage extends React.Component {
 
          $("#playersContainer").slideToggle("slow", function () {
           browserHistory.push("/host/answer");
+
          });
 
       }, 1000);
+      this.props.actions.changeState({url: "/answer"});
 
     }
   }
@@ -59,7 +61,7 @@ class GamePage extends React.Component {
 
   render() {
     const {players} = this.props;
-    console.log(players.length);
+
     if(players.length==4){
       if(!this.state.timerStarted){
         this.startCountdown();
