@@ -64,7 +64,7 @@ class VotePagePlayer extends React.Component {
   }
 
 
-  render() {
+  render(){
 
     return (
       <div>
@@ -72,6 +72,12 @@ class VotePagePlayer extends React.Component {
 
           <div className="mySmallText">"The word" means</div>
           <div id="listOfAnswers" className="col-xs-12">
+            <ul>
+              {this.props.answers.map(answer =>
+              <li key={answer.answer}>{answer.answer}</li>)
+              }
+
+            </ul>
 
 
           </div>
@@ -89,12 +95,14 @@ class VotePagePlayer extends React.Component {
 }
 VotePagePlayer.propTypes = {
   //myprop: PropTypes.string.isRequired
+  answers: PropTypes.array.isRequired
 
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     // dina props : state.dina props
+    answers: state.answer
   };
 }
 function mapDispatchToProps(dispatch) {
