@@ -51,7 +51,6 @@ class GamePage extends React.Component {
   leaveGame(){
     $("#playersContainer").slideToggle("slow", function () {
       browserHistory.push("");
-
     });
   }
 
