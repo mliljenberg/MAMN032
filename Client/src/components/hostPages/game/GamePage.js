@@ -15,11 +15,13 @@ class GamePage extends React.Component {
       secondsLeft: 10,
       timerStarted: false
     };
+    this.timerID = null;
     this.tick = this.tick.bind(this);
-
-
+    this.startCountdown = this.startCountdown.bind(this);
 
   }
+
+
   tick() {
 
     if (this.state.secondsLeft > 0) {
@@ -28,6 +30,7 @@ class GamePage extends React.Component {
       });
     }
     if(this.state.secondsLeft==0){
+      clearInterval(this.timerID);
       setTimeout(function () {
 
          $("#playersContainer").slideToggle("slow", function () {
