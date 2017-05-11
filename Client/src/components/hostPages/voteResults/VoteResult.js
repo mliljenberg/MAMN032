@@ -1,9 +1,13 @@
 import React from 'react';
 import $ from 'jquery';
-
+import {browserHistory} from 'react-router';
 class VoteResult extends React.Component {
 
+
+
+
   componentDidMount() {
+
     var rightAnswer = 3;
 
 
@@ -70,13 +74,18 @@ class VoteResult extends React.Component {
     }
 
 
+
     $("#theWordMeans").slideToggle("slow", function () {
       setTimeout(function () {
         $("#voteBox").slideToggle("slow", function () {
           setTimeout(function () {
             $("#voteBox").slideToggle("slow", function () {
               $("#allVotes").slideToggle("slow", function () {
-
+                setTimeout(function () {
+                  $("#totalContainer").slideToggle("slow", function () {
+                    browserHistory.push("/host/score");
+                  });
+                }, 8000);
               });
             });
           }, 8000); //8000
@@ -89,7 +98,7 @@ class VoteResult extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="totalContainer">
         <div className="mySmallText hideFromStart" id="theWordMeans">"The word" means</div>
         <div className="col-xs-12 voteBoxSingle" id="voteBox">
           <div className="centeredText voteBoxText">HEJ</div>
