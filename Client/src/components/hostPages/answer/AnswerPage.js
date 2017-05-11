@@ -5,6 +5,7 @@ import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
 import * as wordAction from '../../../actions/wordAction';
 import * as stateAction from '../../../actions/stateAction';
+import * as hostApi from '../../../api/hostApi';
 
 
 class AnswerPage extends React.Component {
@@ -46,6 +47,8 @@ class AnswerPage extends React.Component {
     }
     if(this.state.secondsLeft==0){
       clearInterval(this.timerID);
+
+        hostApi.DistributeAns(this.props.answers);
         stateAction.changeState({url:'/vote'});
       //this.props.actions.changeState({url:'/vote'});
       setTimeout(function () {
@@ -92,7 +95,8 @@ class AnswerPage extends React.Component {
 AnswerPage.propTypes = {
   actions: PropTypes.object.isRequired,
   wordList: PropTypes.array.isRequired,
-  word: PropTypes.object.isRequired
+  word: PropTypes.object.isRequired,
+  answers: PropTypes.array.isRequired
 
   //myprop: PropTypes.string.isRequired
 
@@ -108,7 +112,8 @@ function mapStateToProps(state, ownProps) {
 
   return {
     word: state.word,
-    wordList: state.wordList
+    wordList: state.wordList,
+    answers: state.answers
   };
 }
 function mapDispatchToProps(dispatch) {

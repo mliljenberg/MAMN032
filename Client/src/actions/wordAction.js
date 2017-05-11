@@ -24,8 +24,6 @@ export function updateWord(word,store) {
 export function newWord(wordList,username) {
   return function (dispatch) {
     let wordList1 = wordList.slice();
-    console.log(wordList1);
-
     let word = Object.assign({},wordList1[0]);
     wordList1.shift();
     dispatch(updateWordListSuccess(wordList1));

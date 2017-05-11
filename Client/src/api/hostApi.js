@@ -47,6 +47,15 @@ export function DistributeWord(word, def, username) {
     resolve(true);
   });
 }
+/**
+ * @desc: Distribute awnser list till alla.
+ * @param: anwserList
+ * @return:
+ * **/
+export function DistributeAns(ansList) {
+  console.log(ansList);
+    socket.emit(header.DIST_ANS, ansList);
+}
 
 
 

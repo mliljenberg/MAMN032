@@ -102,7 +102,7 @@ VotePagePlayer.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     // dina props : state.dina props
-    answers: state.answer
+    answers: state.answers
   };
 }
 function mapDispatchToProps(dispatch) {
