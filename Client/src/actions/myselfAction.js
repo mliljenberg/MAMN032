@@ -1,5 +1,5 @@
 import * as types from './ActionTypes';
-import api from '../api/mockApi';
+//import api from '../api/mockApi';
 
 
 export function addMyselfSuccess(myself) {

@@ -9,6 +9,7 @@ import CenteredButton from '../common/CenteredButton';
 import * as roomActions from '../../actions/roomAction';
 import * as stateActions from '../../actions/stateAction';
 import * as playerAction from '../../actions/playerAction';
+import * as myselfAction from '../../actions/myselfAction';
 
 class JoinGamePage extends React.Component {
   constructor(props, context) {
@@ -38,8 +39,8 @@ class JoinGamePage extends React.Component {
 
   }
   goToGame() {
-
-   this.props.actions.joinRoom(this.state.key, this.state.username);
+    this.props.actions.addMyself({username: this.state.username});
+    this.props.actions.joinRoom(this.state.key, this.state.username);
        $("#joinGamePage").slideToggle("slow", function () {
          browserHistory.push("/game");
        });
@@ -93,7 +94,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Object.assign({}, roomActions, stateActions,playerAction), dispatch)
+    actions: bindActionCreators(Object.assign({}, roomActions, stateActions,playerAction,myselfAction), dispatch)
   };
 }
 

@@ -124,6 +124,21 @@ io.sockets.on('connection', function (socket) {
     }
   });
 
+  /**
+   * @desc: Forward word from host to players.
+   * @param: wrd JSON (word, desc, username)
+   * @return:
+   * **/
+  socket.on(header.DIST_ANS, function (wrd) {
+    try {
+      if (hostRoom.has(socket)) {
+        socket.to(hostRoom.get(socket)).emit(header.DIST_WORD, wrd);
+      }
+    } catch (err) {
+
+    }
+  });
+
 
   /**
    * @desc: Send answer to host.
