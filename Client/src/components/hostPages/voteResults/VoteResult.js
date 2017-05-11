@@ -6,40 +6,65 @@ class VoteResult extends React.Component {
   componentDidMount() {
     var rightAnswer = 3;
 
+
+    //Här skrivs alla svar ut, fadade om det inte är det riktiga, ofadade om det är det riktiga
     for (var i = 0; i < 4; i++) {
       if (i != rightAnswer) {
-        $("#allVotes").append($("<div/>",{class: 'col-md-6 col-xs-12'}).append($("<div/>", {
-            class: 'voteBoxUnhiddenWrongAnswer'
-          }).append($("<div/>", {
-            class: 'centeredText voteBoxText',
-            text: 'HEJHÅ'
-          })).append($("<div/>", {
-            class: 'authorName',
-            text: 'Joel'
-          }))).append($("<div/>", {
-            class: 'voteStamp',
-          }).append($("<div/>", {
-            class: 'voteStampText',
-            text: 'Ludde'
-          })))
+        $("#allVotes").append($("<div/>",{class: 'col-md-6 col-xs-12 ', id: "voteBox"+i})
         );
-      }
 
-      else {
-        $("#allVotes").append($("<div/>", {
-          class: 'voteBoxUnhidden col-xs-12 col-md-6'
+        $("#voteBox"+i).append($("<div/>", {
+          class: 'voteBoxUnhiddenWrongAnswer'
         }).append($("<div/>", {
           class: 'centeredText voteBoxText',
           text: 'HEJHÅ'
         })).append($("<div/>", {
           class: 'authorName',
           text: 'Joel'
-        })).append($("<div/>", {
-          class: 'voteStamp',
+        })));
+
+
+        //Här sätter man stämplar på svaret med namn på alla som röstat på det
+        let votesOnThisAnswer=3;
+        for(var j=1; j<=votesOnThisAnswer;j++){
+          $("#voteBox"+i).append($("<div/>", {
+            class: 'voteStamp stampMargin'+j
+          }).append($("<div/>", {
+            class: 'voteStampText',
+            text: 'Ludde'
+          })));
+        }
+
+
+      }
+
+      else {
+
+        $("#allVotes").append($("<div/>",{class: 'col-md-6 col-xs-12 ', id: "voteBox"+i})
+        );
+
+        $("#voteBox"+i).append($("<div/>", {
+          class: 'voteBoxUnhidden'
         }).append($("<div/>", {
-          class: 'voteStampText',
-          text: 'Ludde'
-        }))));
+          class: 'centeredText voteBoxText',
+          text: 'HEJHÅ'
+        })).append($("<div/>", {
+          class: 'authorName',
+          text: 'Joel'
+        })));
+
+
+        //Här sätter man stämplar på svaret med namn på alla som röstat på det
+        let votesOnThisAnswer=3;
+        for(var j=1; j<=votesOnThisAnswer;j++){
+          $("#voteBox"+i).append($("<div/>", {
+            class: 'voteStamp stampMargin'+j
+          }).append($("<div/>", {
+            class: 'voteStampText',
+            text: 'Ludde'
+          })));
+        }
+
       }
 
     }

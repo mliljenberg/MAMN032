@@ -320,6 +320,7 @@ html, body {
   font-size: 30px;
   text-align: center;
   cursor: pointer;
+
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -332,6 +333,7 @@ html, body {
   font-size: 30px;
   text-align: center;
   cursor: pointer;
+
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -373,14 +375,18 @@ html, body {
 
 .voteStamp {
   height: 100px;
-  width: 150px;
+  width: 25%;
   background: url("http://www.clker.com/cliparts/6/e/w/F/z/s/red-stamp.svg");
   margin-top: -15px;
   background-size: 100% 100%;
   position: absolute;
   top: 0px;
   left: 30px;
+}
 
+.stampContainer{
+  width: 100%;
+  height: 50px;
 }
 
 .voteStampText {
@@ -400,4 +406,19 @@ html, body {
   /* Internet Explorer */
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
+
+
+.stampMargin1{
+  margin-left: 0%;
+}
+.stampMargin2{
+  margin-left: 20%;
+}
+.stampMargin3{
+  margin-left: 40%;
+}
+.stampMargin4{
+  margin-left: 60%;
+}
+
 
