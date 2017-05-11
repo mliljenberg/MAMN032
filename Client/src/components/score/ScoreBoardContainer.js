@@ -26,7 +26,7 @@ class ScoreContainer extends React.Component {
         <div className="myMediumLargeText">ScoreBoard</div>
         <div className="col-xs-12 myMargin"></div>
         {players.map(player =>
-          <PositionAndPointsRow position={players.indexOf(player) + 1 + " . "} name={player.value} points="1"/>
+          <PositionAndPointsRow position={players.indexOf(player) + 1 + " . "} name={player.username} points="1"/>
         )}
 
         {button}
