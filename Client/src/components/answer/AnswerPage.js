@@ -7,6 +7,7 @@ import AnswerContainer from './AnswerContainer';
 import WaitingContainer from './WaitingContainer';
 import RightAnswerContainer from './RightAnswerContainer';
 import * as answerAction from '../../actions/answerAction';
+import * as mySelfActions from '../../actions/myselfAction';
 
 class AnswerPagePlayer extends React.Component {
   constructor(props, context) {
@@ -20,9 +21,17 @@ class AnswerPagePlayer extends React.Component {
 
   componentDidMount() {
 
-    $("#answerContainer").slideToggle("slow", function () {
+    if (this.props.word.username == this.props.mySelf.username) {
+      $("#rightAnswerContainer").slideToggle("slow", function () {
 
-    });
+      });
+
+    } else {
+
+      $("#answerContainer").slideToggle("slow", function () {
+
+      });
+    }
   }
   submitted() {
       this.props.actions.submitAnswer(this.props.word,this.state.answer);
@@ -56,7 +65,7 @@ handleChange(event){
           <WaitingContainer ready={this.state.ready}/>
         </div>
         <div id="rightAnswerContainer" className="hideFromStart">
-          <RightAnswerContainer/>
+          <RightAnswerContainer onClick={this.submitted} word={this.props.word.word}/>
         </div>
       </div>
     );
@@ -66,7 +75,8 @@ handleChange(event){
 }
 AnswerPagePlayer.propTypes = {
   word: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  mySelf: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
