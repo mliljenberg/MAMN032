@@ -72,5 +72,58 @@ export default [
     word:"Jalu",
     def:"Svartsjuk"
   }
+  ,
+  {
+    word:"A priori",
+    def:"Innan sinneserfarenheter har beblandats"
+  },
+  {
+    word:"Abrovink",
+    def:"Tillfällig lösning på ett problem"
+  },
+  {
+    word:"Agitera",
+    def:" Med stor intensitet och kraft försöka vinna över någon eller några till en viss synpunkt"
+  },
+  {
+    word:"Alektopat",
+    def:"Ha svårt att bestämma sig"
+  },
+  {
+    word:"Altruist",
+    def:"Person som tänker mer på omgivningen än sig själv"
+  },
+  {
+    word:"Barnissage",
+    def:"Första gången man visar upp sitt nyfödda barn för släkt och vänner"
+  },
+  {
+    word:"Belletrist",
+    def:"Skönlitterär författare"
+  },
+  {
+    word:"Chacka",
+    def:"Gammalt ord för köpa"
+  },
+  {
+    word:"Changera",
+    def:"Märkbart förändras till det sämre"
+  },
+  {
+    word:"Defenestrera",
+    def:"Händelsen att kasta ut någon/något genom ett fönster."
+  },
+  {
+    word:"Desillusionerad",
+    def:"Besviken eller illusionslös"
+  },
+  {
+    word:"Diastema",
+    def:"Glugg mellan framtänderna"
+  },
+  {
+    word:"Dryfta",
+    def:"Ta upp till diskussion"
+  }
 
 ];
