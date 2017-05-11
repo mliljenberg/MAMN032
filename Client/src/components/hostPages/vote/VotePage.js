@@ -45,16 +45,20 @@ class VotePage extends React.Component {
 
         for (let i = 0; i < numberOfVotes; i++) {
           setTimeout(function () {
-            $("#listOfAnswers").append($("<div/>", {
-              class: voteWidth+ ' voteBox',
-              id: 'voteBox' + i,
-              cursor: 'pointer',
-              display: 'none'
-            }).append($("<text/>", {
+
+            $("#listOfAnswers").append($("<div/>",{class: 'col-md-6 col-xs-12 ', id: "voteBox"+i})
+            );
+
+            $("#voteBox"+i).append($("<div/>", {
+              id: 'vote'+i,
+              class: 'voteBoxUnhidden hideFromStart',
+              cursor: 'pointer'
+
+            }).append($("<div/>", {
               class: 'centeredText voteBoxText',
-              text: "HEJ Hej Hej HEJ Hej Hej HEJ Hej Hej HEJ Hej Hej"
+              text: 'HEJHÅ'
             })));
-            $("#voteBox" + i).slideToggle("slow", function () {
+            $("#vote" + i).slideToggle("slow", function () {
               if(i==numberOfVotes-1){
                 $("#timer").slideToggle("slow", function () {
                 });
@@ -80,13 +84,16 @@ class VotePage extends React.Component {
       });
     }
     if (this.state.secondsLeft == 0) {
+      clearInterval(this.timerID);
       setTimeout(function () {
+
         $("#voteContainer").slideToggle("slow", function () {
-          //browserHistory.push("host/score");
+          browserHistory.push("/host/voteResult");
 
         });
 
       }, 1000);
+
 
     }
   }
