@@ -314,7 +314,7 @@ html, body {
 }
 
 .voteBoxUnhidden {
-  height: 250px;
+  height: 230px;
   background: url("http://www.dailyfreepsd.com/wp-content/uploads/2013/06/Broken-scroll-paperparchment-leather-vector.png");
   background-size: 100% 100%;
   font-size: 30px;
@@ -326,7 +326,7 @@ html, body {
 }
 
 .voteBoxUnhiddenWrongAnswer {
-  height: 250px;
+  height: 230px;
   opacity: 0.3;
   background: url("http://www.dailyfreepsd.com/wp-content/uploads/2013/06/Broken-scroll-paperparchment-leather-vector.png");
   background-size: 100% 100%;
