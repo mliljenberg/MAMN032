@@ -22,6 +22,7 @@ export const SUBMIT_VOTE_ERR = 'SUBMIT_VOTE_ERR';
 export const CHANGE_STATE = 'CHANGE_STATE';
 
 export const DIST_WORD = 'DIST_WORD';
+export const DIST_ANS = 'DIST_WORD';
 export const DIST_WORD_ERR = 'DIST_WORD_ERR';
 
 export const STATE_WAIT_4_PLAYERS = 'STATE_WAIT_4_PLAYERS';

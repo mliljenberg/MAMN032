@@ -4,6 +4,7 @@ import $ from 'jquery';
 import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
 import * as wordAction from '../../../actions/wordAction';
+import * as stateAction from '../../../actions/stateAction';
 
 
 class AnswerPage extends React.Component {
@@ -12,28 +13,30 @@ class AnswerPage extends React.Component {
     this.state = {
       wordList:Object.assign([], ...props.wordList),
       word: Object.assign(({}),props.word),
-      secondsLeft: 120
+      secondsLeft: 20,
+      timerStarted: false
     };
+    this.timerID=null;
 
     //TODO: lägg till inteligens för hur man bestämmer vem som ska få riktiga ordet.
 
     //wordAction.newWord(this.state.wordList,'test');
-  /**
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000
-    );
+
+
     this.tick = this.tick.bind(this);
-*/
+    this.startCountdown = this.startCountdown.bind(this);
+
   }
 
   componentDidMount() {
     $("#container").slideToggle("slow", function () {
 
     });
+    //TODO: fixa färdigt
     this.props.actions.newWord(this.props.wordList,'test');
 
   }
+
 
   tick() {
     if (this.state.secondsLeft > 0) {
@@ -42,18 +45,38 @@ class AnswerPage extends React.Component {
       });
     }
     if(this.state.secondsLeft==0){
+      clearInterval(this.timerID);
+        stateAction.changeState({url:'/vote'});
+      //this.props.actions.changeState({url:'/vote'});
       setTimeout(function () {
         $("#container").slideToggle("slow", function () {
-          browserHistory.push("game");
+          //TODO: Hantera ifall inte alla har skickat in.... kanske inte ska ske här..?
+          browserHistory.push("/host/vote");
         });
 
       }, 1000);
 
     }
   }
+  startCountdown(){
+    $("#timer").slideToggle("slow", function () {
+
+    });
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
 
 
   render() {
+    if(!this.state.timerStarted){
+      this.startCountdown();
+      this.setState({
+        timerStarted: true
+      });
+    }
 
     return (
       <div id="container" className="hideFromStart">
@@ -92,7 +115,7 @@ function mapDispatchToProps(dispatch) {
 
   return {
 
-    actions: bindActionCreators(wordAction, dispatch)
+    actions: bindActionCreators(Object.assign({},wordAction,stateAction), dispatch)
   };
 }
 
