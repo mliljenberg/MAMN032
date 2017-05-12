@@ -10,6 +10,7 @@ import * as roomActions from '../../actions/roomAction';
 import * as stateActions from '../../actions/stateAction';
 import * as playerAction from '../../actions/playerAction';
 import * as myselfAction from '../../actions/myselfAction';
+import DescriptionContainer from '../game/DescriptionContainer';
 
 class JoinGamePage extends React.Component {
   constructor(props, context) {
@@ -20,6 +21,7 @@ class JoinGamePage extends React.Component {
     this.goToGame = this.goToGame.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.goToHost = this.goToHost.bind(this);
+    this.startAnimation = this.startAnimation.bind(this);
   }
 
 
@@ -39,10 +41,12 @@ class JoinGamePage extends React.Component {
 
   }
   goToGame() {
-    this.props.actions.addMyself({username: this.state.username});
-    this.props.actions.joinRoom(this.state.key, this.state.username);
+
+
        $("#joinGamePage").slideToggle("slow", function () {
-         browserHistory.push("/game");
+         $("#descriptionContainer").slideToggle("slow", function () {
+
+         });
        });
 
   }
@@ -57,29 +61,45 @@ class JoinGamePage extends React.Component {
     });
   }
 
+  startAnimation() {
+
+    this.props.actions.addMyself({username: this.state.username});
+    this.props.actions.joinRoom(this.state.key, this.state.username);
+    $("#descriptionContainer").slideToggle("slow", function () {
+      browserHistory.push("/game");
+    });
+  }
+
   render() {
     return (
-      <div id="joinGamePage" className="hideFromStart">
-        <div>
-          <GameTitle/>
+      <div>
+        <div id="descriptionContainer" className="hideFromStart">
+          <DescriptionContainer onClick={this.startAnimation}/>
         </div>
-        <div>
-          <JoinGameInput name="username" label="Name" onChange={this.handleChange}/>
-          <JoinGameInput name="key" label="Room" onChange={this.handleChange}/>
+        <div id="joinGamePage" className="hideFromStart">
+          <div>
+            <GameTitle/>
+          </div>
+          <div>
+            <JoinGameInput name="username" label="Name" onChange={this.handleChange}/>
+            <JoinGameInput name="key" label="Room" onChange={this.handleChange}/>
 
-          <CenteredButton onClick={this.goToGame} label="Join" color="Green"/>
+            <CenteredButton onClick={this.goToGame} label="Join" color="Green"/>
 
 
-          <CenteredButton onClick={this.goToHost} label="Create Game" color="White"/>
+            <CenteredButton onClick={this.goToHost} label="Create Game" color="White"/>
 
+          </div>
         </div>
       </div>
+
     );
   }
 }
 JoinGamePage.propTypes = {
   actions: PropTypes.object.isRequired,
-  room: PropTypes.object.isRequired
+  room: PropTypes.object.isRequired,
+  players: PropTypes.array.isRequired
 
   //myprop: PropTypes.string.isRequired
 
@@ -88,7 +108,8 @@ JoinGamePage.propTypes = {
 function mapStateToProps(state, ownProps) {
   console.log(state);
   return {
-    room: state.room
+    room: state.room,
+    players: state.players
   };
 }
 

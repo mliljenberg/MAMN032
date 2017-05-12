@@ -24,7 +24,6 @@ class GamePage extends React.Component {
     socket.emit('join room', window.location.href.substr(window.location.href.lastIndexOf('/') + 1));
     console.log("Trying to join room/client");
     this.render = this.render.bind(this);
-    this.startAnimation = this.startAnimation.bind(this);
     socket.on('new message', function () {
       $('#list').append('<li> Tryckte på knappen </li>');
     });
@@ -36,17 +35,7 @@ class GamePage extends React.Component {
 
 
 
-  startAnimation() {
 
-
-    $("#descriptionContainer").slideToggle("slow", function () {
-      $("#playersContainer").slideToggle("slow", function () {
-
-      });
-
-
-    });
-  }
 
   leaveGame(){
     $("#playersContainer").slideToggle("slow", function () {
@@ -67,7 +56,7 @@ class GamePage extends React.Component {
   }
 
   componentDidMount(){
-    $("#descriptionContainer").slideToggle("slow", function () {
+    $("#playersContainer").slideToggle("slow", function () {
 
     });
   }
@@ -77,9 +66,7 @@ class GamePage extends React.Component {
 
       return (
         <div>
-          <div id="descriptionContainer" className="hideFromStart">
-          <DescriptionContainer onClick={this.startAnimation}/>
-          </div>
+
 
           <div id="playersContainer" className="hideFromStart">
           <PlayersContainer onClick={this.leaveGame} button="true"/>
