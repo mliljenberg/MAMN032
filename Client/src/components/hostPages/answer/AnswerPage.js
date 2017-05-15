@@ -34,7 +34,7 @@ class AnswerPage extends React.Component {
 
     });
     //TODO: fixa färdigt
-    this.props.actions.newWord(this.props.wordList,'test');
+    this.props.actions.newWord(this.props.wordList,'1');
 
   }
 
