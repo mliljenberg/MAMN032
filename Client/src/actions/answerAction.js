@@ -13,8 +13,8 @@ export function updateAnswersSuccess(answer) {
   return {type: types.UPDATE_ANSWERS_SUCCESS, answer};
 }
 
-export function loadAnswersSuccess(answer) {
-  return {type: types.UPDATE_ANSWERS_SUCCESS, answer};
+export function loadAnswersSuccess(answers) {
+  return {type: types.LOAD_ANSWERS_SUCCESS, answers};
 }
 
 /**
@@ -32,6 +32,10 @@ export function loadAnswers() {
 
 export function addAnswer(answer, store) {
   store.dispatch(addAnswerSuccess(answer));
+}
+
+export function updateAnswerList(ansList, store) {
+  store.dispatch(loadAnswersSuccess(ansList));
 }
 
 export function submitAnswer(word,answer) {

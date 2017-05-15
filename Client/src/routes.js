@@ -10,6 +10,7 @@ import GamePage from './components/game/GamePage';
 import JoinGamePage from './components/joinGame/JoinGamePage';
 import AnswerPage from './components/answer/AnswerPage';
 import VotePagePlayer from './components/vote/VotePagePlayer';
+import VotedPagePlayer from './components/vote/VotedPagePlayer';
 import ScorePage from './components/score/ScorePage';
 import ResultPage from './components/result/ResultPage';
 
@@ -37,6 +38,7 @@ export default (
     <Route path="answer" component={AnswerPage} />
 
     <Route path="vote" component={VotePagePlayer} />
+    <Route path="voted" component={VotedPagePlayer} />
     <Route path="score" component={ScorePage}/>
     <Route path="result" component={ResultPage}/>
 

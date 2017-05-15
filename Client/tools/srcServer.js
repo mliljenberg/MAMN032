@@ -129,10 +129,10 @@ io.sockets.on('connection', function (socket) {
    * @param: wrd JSON (word, desc, username)
    * @return:
    * **/
-  socket.on(header.DIST_ANS, function (wrd) {
+  socket.on(header.DIST_ANS, function (ansList) {
     try {
       if (hostRoom.has(socket)) {
-        socket.to(hostRoom.get(socket)).emit(header.DIST_WORD, wrd);
+        socket.to(hostRoom.get(socket)).emit(header.DIST_ANS, ansList);
       }
     } catch (err) {
 

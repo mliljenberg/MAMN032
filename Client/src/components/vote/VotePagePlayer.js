@@ -6,57 +6,35 @@ import {browserHistory}  from 'react-router';
 import VoteBox from './VoteBox';
 
 class VotePagePlayer extends React.Component {
+
+
   constructor(props, context) {
     super(props, context);
+
     this.componentDidMount = this.componentDidMount.bind(this);
-    $(document).on('click', 'div', function (e) {
 
-      if (e.target.id.startsWith("voteBox")) {
 
-        $("#voteContainer").slideToggle("slow", function () {
-          browserHistory.push("score");
-        });
+    $(document).ready(function () {
 
-      }
+      $(document).on("click", "div", function (event) {
+        if (event.target.id.startsWith("vote")) {
+          console.log(event.target.id.substring(4, event.target.id.length));
+          $("#voteContainer").slideToggle("slow", function () {
+            browserHistory.push('voted');
+          });
+
+
+        }
+      });
+
     });
+
   }
 
   componentDidMount() {
     $("#voteContainer").slideToggle("slow", function () {
       setTimeout(function () {
-        var numberOfVotes = 4;
-        var voteWidth="";
-        switch(numberOfVotes) {
-          case 1:
-            voteWidth = "col-xs-12";
-            break;
-          case 2:
-            voteWidth = "col-xs-12 col-md-6"
-            break;
-          case 3:
-            voteWidth = "col-xs-12 col-md-4"
-            break;
-          case 4:
-            voteWidth = "col-xs-12 col-md-6"
-            break;
-          default:
-        }
 
-
-        for (let i = 0; i < numberOfVotes; i++) {
-          setTimeout(function () {
-            $("#listOfAnswers").append($("<div/>", {
-              class: voteWidth+ ' voteBox',
-              id: 'voteBox' + i,
-              cursor: 'pointer',
-              display: 'none'
-            }).append($("<text/>", {class: 'centeredText voteBoxText', text: "HEJ Hej Hej HEJ Hej Hej HEJ Hej Hej HEJ Hej Hej"})));
-            $("#voteBox" + i).slideToggle("slow", function () {
-
-            });
-          }, i * 3000);
-
-        }
       }, 1000);
     });
 
@@ -64,20 +42,24 @@ class VotePagePlayer extends React.Component {
   }
 
 
-  render(){
+  render() {
+
 
     return (
       <div>
         <div id="voteContainer" className="hideFromStart">
 
-          <div className="mySmallText">"The word" means</div>
+          <div className="mySmallText" id="text">"The word" means</div>
           <div id="listOfAnswers" className="col-xs-12">
-            <ul>
-              {this.props.answers.map(answer =>
-              <li key={answer.answer}>{answer.answer}</li>)
-              }
 
-            </ul>
+            {this.props.answers.map(answer =>
+              <div className="col-md-6 col-xs-12 hej" id={"vote1" + answer.answer}>
+                <div className="voteBoxUnhidden" id={"vote2" + answer.answer}>
+                  <div className="centeredText voteBoxText" id={"vote3" + answer.answer}>{answer.answer}</div>
+                </div>
+              </div>
+            )
+            }
 
 
           </div>
@@ -102,7 +84,7 @@ VotePagePlayer.propTypes = {
 function mapStateToProps(state, ownProps) {
   return {
     // dina props : state.dina props
-    answers: state.answer
+    answers: state.answers
   };
 }
 function mapDispatchToProps(dispatch) {
