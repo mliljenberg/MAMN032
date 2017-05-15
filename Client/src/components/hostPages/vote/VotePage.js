@@ -9,7 +9,7 @@ class VotePage extends React.Component {
     super(props, context);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.state = {
-      secondsLeft: 200//23
+      secondsLeft: 23//23
     };
 
     this.timerID = setInterval(
@@ -28,51 +28,7 @@ class VotePage extends React.Component {
       setTimeout(function () {
         $("#timer").slideToggle("slow", function () {
         });
-        /*
-         var numberOfVotes = 4;
-         var voteWidth="";
-         switch(numberOfVotes) {
-         case 1:
-         voteWidth = "col-xs-12";
-         break;
-         case 2:
-         voteWidth = "col-xs-12 col-md-6"
-         break;
-         case 3:
-         voteWidth = "col-xs-12 col-md-4"
-         break;
-         case 4:
-         voteWidth = "col-xs-12 col-md-6"
-         break;
-         default:
-         }
 
-
-         for (let i = 0; i < numberOfVotes; i++) {
-         setTimeout(function () {
-
-         $("#listOfAnswers").append($("<div/>",{class: 'col-md-6 col-xs-12 ', id: "voteBox"+i})
-         );
-
-         $("#voteBox"+i).append($("<div/>", {
-         id: 'vote'+i,
-         class: 'voteBoxUnhidden hideFromStart'
-
-         }).append($("<div/>", {
-         class: 'centeredText voteBoxText',
-         text: 'HEJHÅ'
-         })));
-         $("#vote" + i).slideToggle("slow", function () {
-         if(i==numberOfVotes-1){
-         $("#timer").slideToggle("slow", function () {
-         });
-         }
-         });
-
-         }, i * 3000);
-
-         }
-         */
       }, 1000);
 
 
