@@ -5,6 +5,7 @@ import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
 import * as wordAction from '../../../actions/wordAction';
 import * as stateAction from '../../../actions/stateAction';
+import * as playerActions from '../../../actions/playerAction';
 import * as hostApi from '../../../api/hostApi';
 
 
@@ -33,8 +34,17 @@ class AnswerPage extends React.Component {
     $("#container").slideToggle("slow", function () {
 
     });
-    //TODO: fixa färdigt
-    this.props.actions.newWord(this.props.wordList,'1');
+    const{players} = this.props;
+
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    const nbr = getRandomInt(0,4)
+    console.log(nbr);
+    console.log(players[nbr].username);
+
+    this.props.actions.newWord(this.props.wordList,players[nbr].username);
+
 
   }
 
@@ -96,7 +106,8 @@ AnswerPage.propTypes = {
   actions: PropTypes.object.isRequired,
   wordList: PropTypes.array.isRequired,
   word: PropTypes.object.isRequired,
-  answers: PropTypes.array.isRequired
+  answers: PropTypes.array.isRequired,
+  players: PropTypes.array.isRequired
 
   //myprop: PropTypes.string.isRequired
 
@@ -113,14 +124,16 @@ function mapStateToProps(state, ownProps) {
   return {
     word: state.word,
     wordList: state.wordList,
-    answers: state.answers
+    answers: state.answers,
+    players: state.players
+
   };
 }
 function mapDispatchToProps(dispatch) {
 
   return {
 
-    actions: bindActionCreators(Object.assign({},wordAction,stateAction), dispatch)
+    actions: bindActionCreators(Object.assign({},wordAction,stateAction, playerActions), dispatch)
   };
 }
 
