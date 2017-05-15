@@ -14,7 +14,7 @@ class AnswerPage extends React.Component {
     this.state = {
       wordList:Object.assign([], ...props.wordList),
       word: Object.assign(({}),props.word),
-      secondsLeft: 20,
+      secondsLeft: 70,
       timerStarted: false
     };
     this.timerID=null;
