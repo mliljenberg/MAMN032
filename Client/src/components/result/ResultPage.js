@@ -13,7 +13,15 @@ class ResultPage extends React.Component {
     super(props, context);
     this.state = {
       player: Object.assign({}, props.player)
+
     };
+
+
+    this.props.players.sort(function(a,b){
+      return a.points - b.points;
+    });
+
+   console.log(this.props.players);
   }
 
   linkToHome(){
@@ -39,7 +47,7 @@ class ResultPage extends React.Component {
       <div id="totalContainer" className="hideFromStart">
         <div className="mySmallText">The winner is</div>
         <br/>
-        <div className="myMediumText">Joel 24p</div>
+        <div className="myMediumText"></div>
         <br/>
 
         {players.map(player =>

@@ -22,6 +22,7 @@ class JoinGamePage extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.goToHost = this.goToHost.bind(this);
     this.startAnimation = this.startAnimation.bind(this);
+
   }
 
 
