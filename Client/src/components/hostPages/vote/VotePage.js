@@ -28,12 +28,6 @@ class VotePage extends React.Component {
 
   componentDidMount() {
     $("#voteContainer").slideToggle("slow", function () {
-      setTimeout(function () {
-        $("#timer").slideToggle("slow", function () {
-        });
-
-      }, 1000);
-
 
     });
 
@@ -67,7 +61,7 @@ class VotePage extends React.Component {
   render() {
     return (
       <div>
-
+        <div id="voteContainer" className="hideFromStart">
 
           <div className="mySmallText">"The word" means</div>
           <div id="listOfAnswers" className="col-xs-12">
@@ -80,10 +74,10 @@ class VotePage extends React.Component {
             )
             }
 
-
+            <div className="myMediumText hideFromStart">{this.state.secondsLeft}</div>
           </div>
-          <div id="timer" className="myMediumText hideFromStart">{this.state.secondsLeft}</div>
 
+        </div>
 
       </div>
     );
