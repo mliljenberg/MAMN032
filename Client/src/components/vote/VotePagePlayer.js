@@ -66,7 +66,7 @@ class VotePagePlayer extends React.Component {
             {this.props.answers.map(answer => {
               if(answer.username !== this.props.myself.username) {
                 return (
-                  <div className="col-md-6 col-xs-12 hej" word={answer.answer} name={answer.username}
+                  <div className="col-md-4 col-xs-12 hej" word={answer.answer} name={answer.username}
                        onClick={() => this.voteClicked(answer)} id={"vote1" + answer.answer}>
                     <div className="voteBoxUnhidden" word={answer.answer} name={answer.username}
                          id={"vote2" + answer.answer}>
