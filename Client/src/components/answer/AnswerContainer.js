@@ -2,6 +2,8 @@ import React from 'react';
 import CenteredButton from '../common/CenteredButton';
 
 const AnswerContainer = ({onChange,onClick,word}) => {
+
+
     return (
       <div>
         <div className="myLargeText">{word}</div>

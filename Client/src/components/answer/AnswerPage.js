@@ -15,6 +15,7 @@ class AnswerPagePlayer extends React.Component {
     this.state = {ready: 0, answer: '', rightAnswerHide: 'hideFromStart', answerHide:'hideFromStart', rightAnswer:false};
     this.submitted = this.submitted.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.numberOfVotes = this.numberOfVotes.bind(this);
   }
 
 
@@ -64,6 +65,17 @@ class AnswerPagePlayer extends React.Component {
 
 
   }
+  numberOfVotes() {
+    let answer = this.props.answers.length;
+    console.log("fan");
+    if (this.props.answers.length >= 4) {
+      browserHistory.push("/score");
+
+    }else{
+      return this.props.answers.length;
+
+    }
+  }
 
   handleChange(event) {
     return this.setState({answer: event.target.value});
@@ -80,7 +92,7 @@ class AnswerPagePlayer extends React.Component {
         </div>
         <div id="waitingContainer" className="hideFromStart">
 
-          <WaitingContainer ready="0 "/>
+          <WaitingContainer ready = {this.numberOfVotes}/>
         </div>
         <div id="rightAnswerContainer" className={this.state.rightAnswerHide}>
           <RightAnswerContainer word={this.props.word.word} def={this.props.word.def} onClick={this.submitted}/>

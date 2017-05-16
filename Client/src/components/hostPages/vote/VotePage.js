@@ -62,7 +62,7 @@ class VotePage extends React.Component {
   render() {
     return (
       <div>
-        <div id="voteContainer" className="hideFromStart">
+
 
           <div className="mySmallText">"The word" means</div>
           <div id="listOfAnswers" className="col-xs-12">
@@ -78,7 +78,7 @@ class VotePage extends React.Component {
 
           </div>
           <div id="timer" className="myMediumText hideFromStart">{this.state.secondsLeft}</div>
-        </div>
+
 
       </div>
     );

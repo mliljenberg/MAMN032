@@ -4,6 +4,8 @@ import {bindActionCreators} from 'redux';
 import $ from 'jquery';
 import {browserHistory}  from 'react-router';
 import VoteBox from './VoteBox';
+import * as wordActions from '../../actions/wordAction';
+import * as answerActions from '../../actions/answerAction';
 
 class VotePagePlayer extends React.Component {
 
@@ -43,13 +45,13 @@ class VotePagePlayer extends React.Component {
 
 
   render() {
-
+    console.log(this.props.word.word);
 
     return (
       <div>
         <div id="voteContainer" className="hideFromStart">
 
-          <div className="mySmallText" id="text">"The word" means</div>
+          <div className="mySmallText" id="text">{this.props.word.word}  means</div>
           <div id="listOfAnswers" className="col-xs-12">
 
             {this.props.answers.map(answer =>
@@ -77,22 +79,21 @@ class VotePagePlayer extends React.Component {
 }
 VotePagePlayer.propTypes = {
   //myprop: PropTypes.string.isRequired
-  answers: PropTypes.array.isRequired
+  answers: PropTypes.array.isRequired,
+  word: PropTypes.object.isRequired
 
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     // dina props : state.dina props
-    answers: state.answers
+    answers: state.answers,
+    word: state.word
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    //här bindar du alla dina actiones tror inte du behöver ändra den
-
-    //actions: bindActionCreators(actions, dispatch)
-
+    actions: bindActionCreators(Object.assign({}, answerActions, wordActions), dispatch)
   };
 }
 

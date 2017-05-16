@@ -39,7 +39,7 @@ class AnswerPage extends React.Component {
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    const nbr = getRandomInt(0,4)
+    const nbr = getRandomInt(0,3)
     console.log(nbr);
     console.log(players[nbr].username);
 
