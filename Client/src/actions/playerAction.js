@@ -57,11 +57,10 @@ export function updatePlayerVote(vote,store) {
  let list =[...players.filter((player) => player.username === vote.author)];
  let temp = Object.assign({},list[0]);
   temp.points += 1;
+  console.log(temp);
   store.dispatch(updatePlayersSuccess(Object.assign({},temp)));
 }
 
 export function submitVote(author, word) {
-  return function(dispatch) {
     playerApi.SubmitVote(author, word);
-  }
 }
