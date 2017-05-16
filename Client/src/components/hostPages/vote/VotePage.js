@@ -12,15 +12,15 @@ class VotePage extends React.Component {
     super(props, context);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.state = {
-      secondsLeft: 23,
-      points:0
+      secondsLeft: 23
+
     };
 
     this.timerID = setInterval(
       () => this.tick(),
       1000
     );
-    this.calculatePointsDiff = this.calculatePointsDiff.bind(this);
+    //this.calculatePointsDiff = this.calculatePointsDiff.bind(this);
   }
 
 
@@ -28,15 +28,15 @@ class VotePage extends React.Component {
     $("#voteContainer").slideToggle("slow", function () {
 
     });
-    let points = 0;
+   /* let points = 0;
     this.props.players.map(player=>{
       points += player.points;
     });
     this.setState({points:points});
-
+*/
 
   }
-  shouldComponentUpdate(){
+  /*shouldComponentUpdate(){
     this.calculatePointsDiff();
     return true;
   }
@@ -60,14 +60,14 @@ class VotePage extends React.Component {
       }, 1000);
     }
   }
-
+*/
   tick() {
     if (this.state.secondsLeft > 0) {
       this.setState({
         secondsLeft: this.state.secondsLeft - 1
       });
     }
-    if (this.state.secondsLeft <= 0) {
+    if (this.state.secondsLeft == 0) {
       clearInterval(this.timerID);
       setTimeout(function () {
 

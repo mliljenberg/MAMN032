@@ -12,38 +12,40 @@ import * as myselfActions from '../../actions/myselfAction';
 class AnswerPagePlayer extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this.state = {ready: 0, answer: '', rightAnswerHide: 'hideFromStart', answerHide:'hideFromStart', rightAnswer:false};
+    this.state = {ready: 0, answer: ''};
     this.submitted = this.submitted.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.submitTrueAnswer = this.submitTrueAnswer.bind(this);
-  }
-
-
-
-
-  componentWillMount(){
-    console.log("word: "+this.props.word.username);
+    /*console.log("word: "+this.props.word.username);
     console.log("myself: "+ this.props.myself.username);
 
 
 
     if(this.props.word.username===this.props.myself.username){
-      return this.setState({
+      console.log("fick rätt!");
+
+      this.setState({
+        rightAnswerHide: 'hideFromStart',
+        answerHide: ''
+      });
+
+
+
+    }
+    else{
+      console.log("fick fel!");
+      this.setState({
         rightAnswerHide: '',
         answerHide: 'hideFromStart',
         rightAnswer: true
 
       });
-
-
-    }
-    else{
-      return this.setState({
-        rightAnswerHide: 'hideFromStart',
-        answerHide: ''
-      });
-    }
+*/
+    //}
   }
+
+
+
 
 
 
@@ -130,19 +132,20 @@ function Container(props){
     );
   }
   else if(props.rightAnswer){
-
-    return(
-      <div id="answerContainer">
-        <AnswerContainer onClick={props.submitted} onChange={props.handleChange} word={props.word.word}/>
-      </div>
-    );
-  }
-  else{
     props.submitTrueAnswer();
     return(
       <div id="rightAnswerContainer">
         <RightAnswerContainer word={props.word.word} def={props.word.def} onClick={props.submitted}/>
       </div>
     );
+
+  }
+  else{
+    return(
+      <div id="answerContainer">
+        <AnswerContainer onClick={props.submitted} onChange={props.handleChange} word={props.word.word}/>
+      </div>
+    );
+
   }
 }
