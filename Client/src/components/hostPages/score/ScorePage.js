@@ -33,7 +33,6 @@ class ScorePage extends React.Component {
 
   goToNextPage() {
     clearInterval(this.timerID);
-
     hostApi.DistributeAns(this.props.answers);
     this.props.actions.clearAnswers();
     //this.props.actions.changeState({url:'/vote'});
@@ -56,7 +55,14 @@ class ScorePage extends React.Component {
       });
     }
     if (this.state.secondsLeft == 0) {
-      this.goToNextPage();
+      this.props.actions.clearAnswers();
+      setTimeout(function () {
+        $("#container").slideToggle("slow", function () {
+          //TODO: Hantera ifall inte alla har skickat in.... kanske inte ska ske här..?
+          browserHistory.push("/host/answer");
+        });
+
+      }, 1000);
 
     }
   }
