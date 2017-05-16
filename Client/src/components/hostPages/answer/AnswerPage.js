@@ -9,45 +9,62 @@ import * as playerActions from '../../../actions/playerAction';
 import * as hostApi from '../../../api/hostApi';
 
 
+
 class AnswerPage extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       wordList:Object.assign([], ...props.wordList),
       word: Object.assign(({}),props.word),
-      secondsLeft: 70,
+      secondsLeft: 10,
       timerStarted: false
     };
     this.timerID=null;
 
-    //TODO: lägg till inteligens för hur man bestämmer vem som ska få riktiga ordet.
-
-    //wordAction.newWord(this.state.wordList,'test');
 
 
     this.tick = this.tick.bind(this);
     this.startCountdown = this.startCountdown.bind(this);
-
+    this.goToNextPage = this.goToNextPage.bind(this);
   }
 
   componentDidMount() {
     $("#container").slideToggle("slow", function () {
 
     });
-    const{players} = this.props;
 
+    const{players} = this.props;
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    const nbr = getRandomInt(0,3)
+    const nbr = getRandomInt(0,1)
     console.log(nbr);
     console.log(players[nbr].username);
 
     this.props.actions.newWord(this.props.wordList,players[nbr].username);
+    hostApi.ChangeState("/answer");
+
+    //TODO: lägg till inteligens för hur man bestämmer vem som ska få riktiga ordet.
+
+    //wordAction.newWord(this.state.wordList,'test');
 
 
   }
 
+  goToNextPage(){
+    clearInterval(this.timerID);
+
+    hostApi.DistributeAns(this.props.answers);
+    stateAction.changeState({url:'/vote'});
+    //this.props.actions.changeState({url:'/vote'});
+    setTimeout(function () {
+      $("#container").slideToggle("slow", function () {
+        //TODO: Hantera ifall inte alla har skickat in.... kanske inte ska ske här..?
+        browserHistory.push("/host/vote");
+      });
+
+    }, 1000);
+  }
 
   tick() {
     if (this.state.secondsLeft > 0) {
@@ -56,18 +73,7 @@ class AnswerPage extends React.Component {
       });
     }
     if(this.state.secondsLeft==0){
-      clearInterval(this.timerID);
-
-        hostApi.DistributeAns(this.props.answers);
-        stateAction.changeState({url:'/vote'});
-      //this.props.actions.changeState({url:'/vote'});
-      setTimeout(function () {
-        $("#container").slideToggle("slow", function () {
-          //TODO: Hantera ifall inte alla har skickat in.... kanske inte ska ske här..?
-          browserHistory.push("/host/vote");
-        });
-
-      }, 1000);
+      this.goToNextPage;
 
     }
   }
@@ -90,13 +96,16 @@ class AnswerPage extends React.Component {
         timerStarted: true
       });
     }
+    if(this.props.answers.length==2){
+      this.goToNextPage();
+    }
 
     return (
       <div id="container" className="hideFromStart">
         <div className="myMediumLargeText">{this.props.word.word}</div>
 
         <div className="myMediumText">{this.state.secondsLeft}</div>
-
+        <div className="mySmallText">{this.props.answers.length+" /4 submitted"}</div>
       </div>
     );
   }

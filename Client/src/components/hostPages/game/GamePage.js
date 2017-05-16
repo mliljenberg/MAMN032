@@ -39,7 +39,7 @@ class GamePage extends React.Component {
          });
 
       }, 1000);
-      this.props.actions.changeState({url: "/answer"});
+
 
     }
   }
