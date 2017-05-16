@@ -4,30 +4,33 @@ import {bindActionCreators} from 'redux';
 import $ from 'jquery';
 import {browserHistory}  from 'react-router';
 import VoteBox from './VoteBox';
+import * as playerAction from '../../actions/playerAction';
 
 class VotePagePlayer extends React.Component {
-
-
   constructor(props, context) {
     super(props, context);
 
     this.componentDidMount = this.componentDidMount.bind(this);
+    this.state = {
+      answers: Object.assign([], props.answers)
 
+    };
+    this.voteClicked = this.voteClicked.bind(this);
 
-    $(document).ready(function () {
+    //$(document).ready(function () {
 
-      $(document).on("click", "div", function (event) {
-        if (event.target.id.startsWith("vote")) {
-          console.log(event.target.id.substring(4, event.target.id.length));
-          $("#voteContainer").slideToggle("slow", function () {
-            browserHistory.push('voted');
-          });
+      // $(document).on("click", "div", function (event) {
+      //   if (event.target.id.startsWith("vote")) {
+      //     console.log(event.target.id.substring(4, event.target.id.length));
+      //     $("#voteContainer").slideToggle("slow", function () {
+      //       browserHistory.push('voted');
+      //     });
+      //
+      //
+      //   }
+      // });
 
-
-        }
-      });
-
-    });
+   // });
 
   }
 
@@ -41,21 +44,26 @@ class VotePagePlayer extends React.Component {
 
   }
 
+  voteClicked(event){
+    event.preventDefault();
+    console.log(event.target);
+    console.log(event.target.word);
+  this.props.actions.submitVote(event.target.name, event.target.word);
+
+  }
+
 
   render() {
-
-
     return (
       <div>
         <div id="voteContainer" className="hideFromStart">
 
           <div className="mySmallText" id="text">"The word" means</div>
           <div id="listOfAnswers" className="col-xs-12">
-
             {this.props.answers.map(answer =>
-              <div className="col-md-6 col-xs-12 hej" id={"vote1" + answer.answer}>
-                <div className="voteBoxUnhidden" id={"vote2" + answer.answer}>
-                  <div className="centeredText voteBoxText" id={"vote3" + answer.answer}>{answer.answer}</div>
+              <div className="col-md-6 col-xs-12 hej" word={answer.answer} name={answer.username} onClick={this.voteClicked} id={"vote1" + answer.answer}>
+                <div className="voteBoxUnhidden" word={answer.answer} name={answer.username} id={"vote2" + answer.answer}>
+                  <div className="centeredText voteBoxText" word={answer.answer} name={answer.username} id={"vote3" + answer.answer}>{answer.answer}</div>
                 </div>
               </div>
             )
@@ -77,7 +85,8 @@ class VotePagePlayer extends React.Component {
 }
 VotePagePlayer.propTypes = {
   //myprop: PropTypes.string.isRequired
-  answers: PropTypes.array.isRequired
+  answers: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired
 
 };
 
@@ -89,9 +98,9 @@ function mapStateToProps(state, ownProps) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    //här bindar du alla dina actiones tror inte du behöver ändra den
+    //här bindar du alla dina actions tror inte du behöver ändra den
 
-    //actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(Object.assign({}, playerAction), dispatch)
 
   };
 }
