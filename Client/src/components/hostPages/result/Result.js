@@ -13,6 +13,13 @@ class ResultPage extends React.Component {
     this.state = {
       player: Object.assign({}, props.player)
     };
+
+
+    this.props.players.sort(function(a,b){
+      return a.points - b.points;
+    });
+
+    console.log(this.props.players);
   }
 
   componentDidMount() {
@@ -26,11 +33,11 @@ class ResultPage extends React.Component {
       <div id="totalContainer" className="hideFromStart">
         <div className="mySmallText">The winner is</div>
         <br/>
-        <div className="myMediumText">Joel 24p</div>
+        <div className="myMediumText">{players[0].username}{players[0].points}</div>
         <br/>
 
         {players.map(player =>
-          <PositionAndPointsRow position={players.indexOf(player) + 2+" . "} name={player.value} points="2"/>
+          <PositionAndPointsRow position={players.indexOf(player+1) + 2+" . "} name={players.indexOf(player +1 ).username} points={players.indexOf(player +1 ).points}/>
         )}
 
       </div>
