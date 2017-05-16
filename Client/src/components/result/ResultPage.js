@@ -47,11 +47,11 @@ class ResultPage extends React.Component {
       <div id="totalContainer" className="hideFromStart">
         <div className="mySmallText">The winner is</div>
         <br/>
-        <div className="myMediumText"></div>
+        <div className="myMediumText">{players[0].username}{players[0].points}</div>
         <br/>
 
         {players.map(player =>
-        <PositionAndPointsRow position={players.indexOf(player) + 2+" . "} name={player.value} points="2"/>
+        <PositionAndPointsRow position={players.indexOf(player+1) + 2+" . "} name={players.indexOf(player +1 ).username} points={players.indexOf(player +1 ).points}/>
         )}
         <TwoButtonsOneRow color1="White" color2="Green" label1="Leave" label2="New Game" onClick1={this.linkToHome} onClick2={this.linkToNewGame}/>
 
