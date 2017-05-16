@@ -56,6 +56,8 @@ class ScorePage extends React.Component {
     }
     if (this.state.secondsLeft == 0) {
       this.props.actions.clearAnswers();
+      clearInterval(this.timerID);
+      console.log("Gå till answer igen");
       setTimeout(function () {
         $("#container").slideToggle("slow", function () {
           //TODO: Hantera ifall inte alla har skickat in.... kanske inte ska ske här..?
