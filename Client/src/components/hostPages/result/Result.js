@@ -48,7 +48,7 @@ class ResultPage extends React.Component {
       <div id="totalContainer" className="hideFromStart">
         <div className="mySmallText">The winner is</div>
         <br/>
-        <div className="myMediumLargeText">{players[players.length-1].username} {players[0].points}p</div>
+        <div className="myMediumLargeText">{players[players.length-1].username} {players[players.length-1].points}p</div>
         <br/>
 
 

@@ -16,7 +16,7 @@ class ScorePage extends React.Component {
     this.state = {
       player: Object.assign({}, props.player),
       secondsLeft: 10,
-      weHaveAWinner:false
+      weHaveAWinner: false
     };
     this.timerID = null;
 
@@ -25,8 +25,6 @@ class ScorePage extends React.Component {
     this.startCountdown = this.startCountdown.bind(this);
     this.goToNextPage = this.goToNextPage.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
-
-
 
 
   }
@@ -55,16 +53,29 @@ class ScorePage extends React.Component {
       });
     }
     if (this.state.secondsLeft == 0) {
-      this.props.actions.clearAnswers();
-      clearInterval(this.timerID);
-      console.log("Gå till answer igen");
-      setTimeout(function () {
-        $("#container").slideToggle("slow", function () {
-          //TODO: Hantera ifall inte alla har skickat in.... kanske inte ska ske här..?
-          browserHistory.push("/host/answer");
-        });
+      if (!this.state.weHaveAWinner) {
+        this.props.actions.clearAnswers();
+        clearInterval(this.timerID);
+        console.log("Gå till answer igen");
+        setTimeout(function () {
+          $("#container").slideToggle("slow", function () {
+            //TODO: Hantera ifall inte alla har skickat in.... kanske inte ska ske här..?
+            browserHistory.push("/host/answer");
+          });
 
-      }, 1000);
+        }, 1000);
+      }
+      else {
+        console.log("Vi har en vinnare");
+        clearInterval(this.timerID);
+        setTimeout(function () {
+          $("#container").slideToggle("slow", function () {
+            //TODO: Hantera ifall inte alla har skickat in.... kanske inte ska ske här..?
+            browserHistory.push("/host/result");
+          });
+
+        }, 1000);
+      }
 
     }
   }
@@ -79,20 +90,21 @@ class ScorePage extends React.Component {
 
   componentDidMount() {
 
-    for(let i =0; i<this.props.players.length; i++){
-      if(Number(this.props.players[i].points)>=15){
-        clearInterval(this.timerID);
-        console.log("Ska finnas en vinnare");
-        browserHistory.push('/host/result');
+    for (let i = 0; i < this.props.players.length; i++) {
+      if (Number(this.props.players[i].points) >= 15) {
+        this.setState({
+          weHaveAWinner: true
+        });
       }
+
     }
+
+    $("#scoreBoardContainer").slideToggle("slow", function () {
+
+    });
 
 
     this.startCountdown();
-    $("#scoreBoardContainer").slideToggle("slow", function () {
-
-
-    });
 
 
   }

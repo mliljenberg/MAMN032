@@ -2,6 +2,7 @@ import React, {PropTypes}  from 'react';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 import * as stateAction from '../../../actions/stateAction';
+import * as wordAction from '../../../actions/wordAction';
 import $ from 'jquery';
 import * as hostApi from '../../../api/hostApi';
 import {bindActionCreators} from 'redux';
@@ -12,8 +13,8 @@ class VotePage extends React.Component {
     super(props, context);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.state = {
-      secondsLeft: 23
-
+      secondsLeft: 23,
+      word: Object.assign(({}),props.word)
     };
 
     this.timerID = setInterval(
@@ -90,7 +91,7 @@ class VotePage extends React.Component {
       <div>
         <div id="voteContainer" className="hideFromStart">
 
-          <div className="mySmallText">"The word" means</div>
+          <div className="mySmallText">"{this.props.word.word}" means</div>
           <div id="listOfAnswers" className="col-xs-12">
             {this.props.answers.map(answer =>
               <div className="col-md-6 col-xs-12"id={answer.answer} >
@@ -114,13 +115,15 @@ class VotePage extends React.Component {
 VotePage.propTypes = {
   //myprop: PropTypes.string.isRequired
   answers: PropTypes.array.isRequired,
-  players: PropTypes.array.isRequired
+  players: PropTypes.array.isRequired,
+  word: PropTypes.object.isRequired
 
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     // dina props : state.dina props
+    word: state.word,
     answers: state.answers,
     players: state.players
   };
@@ -130,7 +133,7 @@ function mapDispatchToProps(dispatch) {
     //här bindar du alla dina actiones tror inte du behöver ändra den
 
     //actions: bindActionCreators(actions, dispatch)
-    actions: bindActionCreators(Object.assign({},stateAction), dispatch)
+    actions: bindActionCreators(Object.assign({},stateAction,wordAction), dispatch)
   };
 }
 
