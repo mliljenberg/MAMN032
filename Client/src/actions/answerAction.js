@@ -16,6 +16,9 @@ export function updateAnswersSuccess(answer) {
 export function loadAnswersSuccess(answers) {
   return {type: types.LOAD_ANSWERS_SUCCESS, answers};
 }
+export function clearAnswersSuccess() {
+  return {type: types.CLEAR_ANSWER_SUCCESS};
+}
 
 /**
 export function loadAnswers() {
@@ -39,9 +42,16 @@ export function updateAnswerList(ansList, store) {
 }
 
 export function submitAnswer(word,answer) {
- return function(dispatch) {
-   playerApi.SubmitAnswer(word, answer);
- }
+  return function (dispatch) {
+    playerApi.SubmitAnswer(word, answer);
+  }
+}
+
+
+  export function clearAnswers() {
+    return function (dispatch) {
+      dispatch(clearAnswersSuccess());
+    }
 }
 
 

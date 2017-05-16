@@ -13,7 +13,7 @@ export function addPlayerSuccess(player) {
 export function updatePlayersSuccess(player) {
   return {type: types.UPDATE_PLAYERS_SUCCESS, player};
 }
-export function updateAnswersSuccess(answer) {
+export function updateAnswerSuccess(answer) {
   return {type: types.UPDATE_ANSWERS_SUCCESS, answer};
 }
 export function updatePlayerVoteSuccess(vote) {
@@ -57,19 +57,21 @@ export function updatePlayer(player) {
 
 export function updatePlayerVote(vote,store) {
  let answers = store.getState().answers;
- let ansList =[...answers.filter((answer) => answer.username === vote.author)];
- let temp = Object.assign({},ansList[0]);
- temp.voted.push(vote.username);
- updateAnswersSuccess(Object.assign({},temp))
-
-
  let players =  store.getState().players;
+ let ansList =[...answers.filter((answer) => answer.username === vote.author)];
+ let tempAns = Object.assign({},ansList[0]);
+
+
+
  let list =[...players.filter((player) => player.username === vote.author)];
- temp = Object.assign({},list[0]);
+ let temp = Object.assign({},list[0]);
   temp.points += 1;
   console.log(temp);
   store.dispatch(updatePlayersSuccess(Object.assign({},temp)));
+  tempAns.voted=tempAns.voted.push(vote.username);
+  store.dispatch(updateAnswerSuccess(Object.assign({},tempAns)));
 }
+
 
 export function submitVote(author, word) {
 
