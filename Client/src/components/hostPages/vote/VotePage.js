@@ -1,8 +1,10 @@
 import React, {PropTypes}  from 'react';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
+import * as stateAction from '../../../actions/stateAction';
 import $ from 'jquery';
 import * as hostApi from '../../../api/hostApi';
+import {bindActionCreators} from 'redux';
 
 
 class VotePage extends React.Component {
@@ -50,6 +52,7 @@ class VotePage extends React.Component {
 
         $("#voteContainer").slideToggle("slow", function () {
          // hostApi.ChangeState("")
+          stateAction.changeState({url:'/score'});
           browserHistory.push("/host/voteResult");
 
         });
@@ -104,7 +107,7 @@ function mapDispatchToProps(dispatch) {
     //här bindar du alla dina actiones tror inte du behöver ändra den
 
     //actions: bindActionCreators(actions, dispatch)
-
+    actions: bindActionCreators(Object.assign({},stateAction), dispatch)
   };
 }
 
