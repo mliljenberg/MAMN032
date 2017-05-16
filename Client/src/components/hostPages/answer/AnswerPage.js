@@ -9,6 +9,7 @@ import * as playerActions from '../../../actions/playerAction';
 import * as hostApi from '../../../api/hostApi';
 
 
+
 class AnswerPage extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -20,9 +21,6 @@ class AnswerPage extends React.Component {
     };
     this.timerID=null;
 
-    //TODO: lägg till inteligens för hur man bestämmer vem som ska få riktiga ordet.
-
-    //wordAction.newWord(this.state.wordList,'test');
 
 
     this.tick = this.tick.bind(this);
@@ -34,16 +32,21 @@ class AnswerPage extends React.Component {
     $("#container").slideToggle("slow", function () {
 
     });
-    const{players} = this.props;
 
+    const{players} = this.props;
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    const nbr = getRandomInt(0,4)
+    const nbr = getRandomInt(0,1)
     console.log(nbr);
     console.log(players[nbr].username);
 
     this.props.actions.newWord(this.props.wordList,players[nbr].username);
+   hostApi.ChangeState("/answer");
+
+    //TODO: lägg till inteligens för hur man bestämmer vem som ska få riktiga ordet.
+
+    //wordAction.newWord(this.state.wordList,'test');
 
 
   }
@@ -96,7 +99,7 @@ class AnswerPage extends React.Component {
         <div className="myMediumLargeText">{this.props.word.word}</div>
 
         <div className="myMediumText">{this.state.secondsLeft}</div>
-
+        <div className="mySmallText">{this.props.answers.length+" /4 submitted"}</div>
       </div>
     );
   }

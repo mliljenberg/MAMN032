@@ -48,29 +48,29 @@ class AnswerPagePlayer extends React.Component {
 
   submitted() {
 
-    if(this.state.rightAnswer){
-      $("#rightAnswerContainer").slideToggle("slow", function () {
-        $("#waitingContainer").slideToggle("slow", function () {
-
-        });
-      });
-    }
-    else{
+    //TODO: Fixa så att bara waiting container visas till hosten pushar ett nytt state.
+    if($("#rightAnswerContainer").length==0){
       this.props.actions.submitAnswer(this.props.word, this.state.answer);
-      //TODO: Fixa så att bara waiting container visas till hosten pushar ett nytt state.
-
       $("#answerContainer").slideToggle("slow", function () {
         $("#waitingContainer").slideToggle("slow", function () {
 
         });
       });
     }
+    else{
+      this.props.actions.submitAnswer(this.props.word, this.props.word.def);
 
+      $("#rightAnswerContainer").slideToggle("slow", function () {
+        $("#waitingContainer").slideToggle("slow", function () {
 
+        });
+      });
+    }
 
   }
 
   handleChange(event) {
+
     return this.setState({answer: event.target.value});
 
   }
@@ -83,10 +83,9 @@ class AnswerPagePlayer extends React.Component {
 
     return (
       <div>
-        <Container submitted={this.submitted} hanleChange={this.handleChange} word= {this.props.word}rightAnswer={this.props.word.username===this.props.myself.username}/>
+        <Container submitted={this.submitted} handleChange={this.handleChange} word= {this.props.word} username={this.props.word.username} rightAnswer={this.props.word.username===this.props.myself.username}/>
         <div id="waitingContainer" className="hideFromStart">
-
-          <WaitingContainer ready="0 "/>
+          <div className="myMediumSmallText">Waiting on other players</div>
         </div>
 
       </div>
@@ -118,7 +117,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(AnswerPagePlayer);
 
 
 function Container(props){
-  if(props.rightAnswer){
+  console.log(props.rightAnswer);
+  if(!props.username){
+    return(
+      <div><h1>Vi borde ha en waiting for server container här och kanske en spinner</h1></div>
+    );
+  }
+  else if(props.rightAnswer){
     return(
       <div id="answerContainer">
         <AnswerContainer onClick={props.submitted} onChange={props.handleChange} word={props.word.word}/>
