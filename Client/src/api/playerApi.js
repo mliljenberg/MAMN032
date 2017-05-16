@@ -45,7 +45,8 @@ export function SubmitAnswer(word, answer) {
     let ans = {
       "username": usrn,
       "word": word,
-      "answer": answer
+      "answer": answer,
+      "voted":[]
     };
     socket.emit(header.SUBMIT_ANSWER_REQ, key, ans);
   }

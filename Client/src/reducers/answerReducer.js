@@ -21,7 +21,7 @@ export default function answerReducer(state = initialState.answers,action) {
       return action.answers;
 
     case types.CLEAR_ANSWER_SUCCESS:
-      return Object.assign({});
+      return [];
 
 
     default: return state;

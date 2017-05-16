@@ -2,6 +2,7 @@ import React, {PropTypes}  from 'react';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 import $ from 'jquery';
+import * as hostApi from '../../../api/hostApi';
 
 
 class VotePage extends React.Component {
@@ -48,6 +49,7 @@ class VotePage extends React.Component {
       setTimeout(function () {
 
         $("#voteContainer").slideToggle("slow", function () {
+         // hostApi.ChangeState("")
           browserHistory.push("/host/voteResult");
 
         });

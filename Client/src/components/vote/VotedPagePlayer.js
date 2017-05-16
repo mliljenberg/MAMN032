@@ -27,7 +27,6 @@ class VotedPagePlayer extends React.Component {
     return (
       <div id="Container" className="hideFromStart">
         <div className="myMediumText">Waiting on other players</div><br/>
-        <div className="mySmallText">1/4 voted</div>
       </div>
     );
   }

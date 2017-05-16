@@ -53,7 +53,6 @@ export function DistributeWord(word, def, username) {
  * @return:
  * **/
 export function DistributeAns(ansList) {
-  console.log(ansList);
     socket.emit(header.DIST_ANS, ansList);
 }
 

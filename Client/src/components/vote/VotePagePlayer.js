@@ -5,6 +5,7 @@ import $ from 'jquery';
 import {browserHistory}  from 'react-router';
 import VoteBox from './VoteBox';
 import * as playerAction from '../../actions/playerAction';
+import * as playerApi from '../../api/playerApi';
 
 class VotePagePlayer extends React.Component {
   constructor(props, context) {
@@ -44,11 +45,13 @@ class VotePagePlayer extends React.Component {
 
   }
 
-  voteClicked(event){
+  voteClicked(answer){
     event.preventDefault();
-    console.log(event.target);
-    console.log(event.target.word);
-  this.props.actions.submitVote(event.target.name, event.target.word);
+    playerApi.SubmitVote(answer.username, answer.answer);
+    $("#voteContainer").slideToggle("slow", function () {
+             browserHistory.push('voted');
+          });
+
 
   }
 
@@ -61,7 +64,7 @@ class VotePagePlayer extends React.Component {
           <div className="mySmallText" id="text">"The word" means</div>
           <div id="listOfAnswers" className="col-xs-12">
             {this.props.answers.map(answer =>
-              <div className="col-md-6 col-xs-12 hej" word={answer.answer} name={answer.username} onClick={this.voteClicked} id={"vote1" + answer.answer}>
+              <div className="col-md-6 col-xs-12 hej" word={answer.answer} name={answer.username} onClick={()=>this.voteClicked(answer)} id={"vote1" + answer.answer}>
                 <div className="voteBoxUnhidden" word={answer.answer} name={answer.username} id={"vote2" + answer.answer}>
                   <div className="centeredText voteBoxText" word={answer.answer} name={answer.username} id={"vote3" + answer.answer}>{answer.answer}</div>
                 </div>
