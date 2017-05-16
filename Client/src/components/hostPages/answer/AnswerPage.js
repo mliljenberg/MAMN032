@@ -25,7 +25,7 @@ class AnswerPage extends React.Component {
 
     this.tick = this.tick.bind(this);
     this.startCountdown = this.startCountdown.bind(this);
-
+    this.goToNextPage = this.goToNextPage.bind(this);
   }
 
   componentDidMount() {
@@ -42,7 +42,7 @@ class AnswerPage extends React.Component {
     console.log(players[nbr].username);
 
     this.props.actions.newWord(this.props.wordList,players[nbr].username);
-   hostApi.ChangeState("/answer");
+    hostApi.ChangeState("/answer");
 
     //TODO: lägg till inteligens för hur man bestämmer vem som ska få riktiga ordet.
 
@@ -51,6 +51,20 @@ class AnswerPage extends React.Component {
 
   }
 
+  goToNextPage(){
+    clearInterval(this.timerID);
+
+    hostApi.DistributeAns(this.props.answers);
+    stateAction.changeState({url:'/vote'});
+    //this.props.actions.changeState({url:'/vote'});
+    setTimeout(function () {
+      $("#container").slideToggle("slow", function () {
+        //TODO: Hantera ifall inte alla har skickat in.... kanske inte ska ske här..?
+        browserHistory.push("/host/vote");
+      });
+
+    }, 1000);
+  }
 
   tick() {
     if (this.state.secondsLeft > 0) {
@@ -59,18 +73,7 @@ class AnswerPage extends React.Component {
       });
     }
     if(this.state.secondsLeft==0){
-      clearInterval(this.timerID);
-
-        hostApi.DistributeAns(this.props.answers);
-        stateAction.changeState({url:'/vote'});
-      //this.props.actions.changeState({url:'/vote'});
-      setTimeout(function () {
-        $("#container").slideToggle("slow", function () {
-          //TODO: Hantera ifall inte alla har skickat in.... kanske inte ska ske här..?
-          browserHistory.push("/host/vote");
-        });
-
-      }, 1000);
+      this.goToNextPage;
 
     }
   }
@@ -92,6 +95,9 @@ class AnswerPage extends React.Component {
       this.setState({
         timerStarted: true
       });
+    }
+    if(this.props.answers.length==2){
+      this.goToNextPage();
     }
 
     return (
