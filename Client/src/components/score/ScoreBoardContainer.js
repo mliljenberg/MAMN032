@@ -9,7 +9,8 @@ class ScoreContainer extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      player: Object.assign({}, props.player)
+      player: Object.assign({}, props.player),
+      weHaveAWinner: false
     };
   }
 

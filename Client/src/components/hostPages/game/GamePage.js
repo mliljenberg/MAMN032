@@ -65,7 +65,7 @@ class GamePage extends React.Component {
   render() {
     const {players} = this.props;
 
-    if(players.length==2){
+    if(players.length==3){
       if(!this.state.timerStarted){
         this.startCountdown();
         this.setState({

@@ -16,7 +16,7 @@ class AnswerPage extends React.Component {
     this.state = {
       wordList:Object.assign([], ...props.wordList),
       word: Object.assign(({}),props.word),
-      secondsLeft: 10,
+      secondsLeft: 30,
       timerStarted: false
     };
     this.timerID=null;
@@ -37,7 +37,7 @@ class AnswerPage extends React.Component {
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    const nbr = getRandomInt(0,1)
+    const nbr = getRandomInt(0,2)
     console.log(nbr);
     console.log(players[nbr].username);
 
@@ -89,7 +89,7 @@ class AnswerPage extends React.Component {
         timerStarted: true
       });
     }
-    if(this.props.answers.length==2){
+    if(this.props.answers.length==3){
       this.goToNextPage();
     }
 

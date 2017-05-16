@@ -101,7 +101,7 @@ class VotePage extends React.Component {
             )
             }
 
-            <div className="myMediumText hideFromStart">{this.state.secondsLeft}</div>
+            <div className="myMediumText">{this.state.secondsLeft}</div>
           </div>
 
         </div>

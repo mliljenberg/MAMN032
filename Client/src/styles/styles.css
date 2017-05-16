@@ -36,12 +36,24 @@ nav {
 
 }
 
-html, body {
-  height: 100%;
-  background: url("https://i.giphy.com/l46C9Kyx9FtgC4WcM.gif");
-  background-size: cover;
-  text-align: center;
 
+@media only screen and (min-device-width: 800px) {
+  html, body {
+    height: 100%;
+    background: url("https://i.giphy.com/l46C9Kyx9FtgC4WcM.gif");
+    background-size: cover;
+    text-align: center;
+
+  }
+}
+
+@media only screen and (max-device-width: 800px) {
+  html, body {
+    background: url("https://im.ezgif.com/tmp/ezgif-1-24965bc25c-gif-png/frame_0_delay-0.07s.png");
+    background-size: cover;
+    text-align: center;
+    height: 100%;
+  }
 }
 
 .myInput {
@@ -384,7 +396,7 @@ html, body {
   left: 30px;
 }
 
-.stampContainer{
+.stampContainer {
   width: 100%;
   height: 50px;
 }
@@ -407,20 +419,22 @@ html, body {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
-
-.stampMargin0{
+.stampMargin0 {
   margin-left: 0%;
 }
-.stampMargin1{
+
+.stampMargin1 {
   margin-left: 20%;
 }
-.stampMargin2{
+
+.stampMargin2 {
   margin-left: 40%;
 }
-.stampMargin3{
+
+.stampMargin3 {
   margin-left: 60%;
 }
 
-
-.hej{}
+.hej {
+}
 
