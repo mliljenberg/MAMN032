@@ -18,28 +18,33 @@ class AnswerPagePlayer extends React.Component {
   }
 
 
-  componentDidMount() {
 
-  }
 
-  componentWillUpdate(){
+  componentWillMount(){
+    console.log("word: "+this.props.word.username);
+    console.log("myself: "+ this.props.myself.username);
+
+
+
     if(this.props.word.username===this.props.myself.username){
-      this.setState({
+      return this.setState({
         rightAnswerHide: '',
         answerHide: 'hideFromStart',
         rightAnswer: true
 
       });
 
+
     }
     else{
-      this.setState({
+      return this.setState({
         rightAnswerHide: 'hideFromStart',
         answerHide: ''
       });
     }
-
   }
+
+
 
   submitted() {
 
@@ -70,21 +75,20 @@ class AnswerPagePlayer extends React.Component {
 
   }
 
+
+
   render() {
+
 
 
     return (
       <div>
-        <div id="answerContainer" className={this.state.answerHide}>
-          <AnswerContainer onClick={this.submitted} onChange={this.handleChange} word={this.props.word.word}/>
-        </div>
+        <Container submitted={this.submitted} hanleChange={this.handleChange} word= {this.props.word}rightAnswer={this.props.word.username===this.props.myself.username}/>
         <div id="waitingContainer" className="hideFromStart">
 
           <WaitingContainer ready="0 "/>
         </div>
-        <div id="rightAnswerContainer" className={this.state.rightAnswerHide}>
-          <RightAnswerContainer word={this.props.word.word} def={this.props.word.def} onClick={this.submitted}/>
-        </div>
+
       </div>
     );
   }
@@ -94,14 +98,12 @@ class AnswerPagePlayer extends React.Component {
 AnswerPagePlayer.propTypes = {
   word: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
-  answers: PropTypes.array.isRequired,
   myself: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     word: state.word,
-    answers: state.answers,
     myself: state.myself
   };
 }
@@ -113,3 +115,21 @@ function mapDispatchToProps(dispatch) {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(AnswerPagePlayer);
+
+
+function Container(props){
+  if(props.rightAnswer){
+    return(
+      <div id="answerContainer">
+        <AnswerContainer onClick={props.submitted} onChange={props.handleChange} word={props.word.word}/>
+      </div>
+    );
+  }
+  else{
+    return(
+      <div id="rightAnswerContainer">
+        <RightAnswerContainer word={props.word.word} def={props.word.def} onClick={props.submitted}/>
+      </div>
+    );
+  }
+}

@@ -23,7 +23,7 @@ export function updateWord(word,store) {
 
 export function newWord(wordList,username) {
   return function (dispatch) {
-    var index = Math.floor((Math.random() * wordList.length));
+    var index = 1;
     let wordList1 = wordList.slice();
     let word = Object.assign({},wordList1[index]);
     wordList1.shift();
