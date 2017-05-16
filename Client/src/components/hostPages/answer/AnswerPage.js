@@ -55,11 +55,12 @@ class AnswerPage extends React.Component {
     clearInterval(this.timerID);
 
     hostApi.DistributeAns(this.props.answers);
-    stateAction.changeState({url:'/vote'});
+
     //this.props.actions.changeState({url:'/vote'});
     setTimeout(function () {
       $("#container").slideToggle("slow", function () {
         //TODO: Hantera ifall inte alla har skickat in.... kanske inte ska ske här..?
+        stateAction.changeState({url:'/vote'});
         browserHistory.push("/host/vote");
       });
 

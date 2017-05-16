@@ -9,9 +9,7 @@ const RightAnswerContainer = ({onClick, def}) => {
       <div className="col-xs-12 myMargin">
       </div>
       <div className="mySmallText myMargin">{def}</div>
-      <div className="col-md-3"></div>
-      <CenteredButton color="Green" label="Ready" onClick={onClick}/>
-      <div className="col-md-3"></div>
+
     </div>
   );
 }
