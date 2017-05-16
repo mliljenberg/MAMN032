@@ -63,12 +63,22 @@ class VotePagePlayer extends React.Component {
 
           <div className="mySmallText" id="text">"The word" means</div>
           <div id="listOfAnswers" className="col-xs-12">
-            {this.props.answers.map(answer =>
-              <div className="col-md-6 col-xs-12 hej" word={answer.answer} name={answer.username} onClick={()=>this.voteClicked(answer)} id={"vote1" + answer.answer}>
-                <div className="voteBoxUnhidden" word={answer.answer} name={answer.username} id={"vote2" + answer.answer}>
-                  <div className="centeredText voteBoxText" word={answer.answer} name={answer.username} id={"vote3" + answer.answer}>{answer.answer}</div>
-                </div>
-              </div>
+            {this.props.answers.map(answer => {
+              if(answer.username !== this.props.myself.username) {
+                return (
+                  <div className="col-md-6 col-xs-12 hej" word={answer.answer} name={answer.username}
+                       onClick={() => this.voteClicked(answer)} id={"vote1" + answer.answer}>
+                    <div className="voteBoxUnhidden" word={answer.answer} name={answer.username}
+                         id={"vote2" + answer.answer}>
+                      <div className="centeredText voteBoxText" word={answer.answer} name={answer.username}
+                           id={"vote3" + answer.answer}>{answer.answer}</div>
+                    </div>
+                  </div>
+                )
+              }else{
+                return(<div></div>);
+              }
+              }
             )
             }
 
@@ -89,14 +99,16 @@ class VotePagePlayer extends React.Component {
 VotePagePlayer.propTypes = {
   //myprop: PropTypes.string.isRequired
   answers: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  myself: PropTypes.object.isRequired
 
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     // dina props : state.dina props
-    answers: state.answers
+    answers: state.answers,
+    myself: state.myself
   };
 }
 function mapDispatchToProps(dispatch) {
