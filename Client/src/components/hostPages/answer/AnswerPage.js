@@ -93,7 +93,7 @@ class AnswerPage extends React.Component {
 
     return (
       <div id="container" className="hideFromStart">
-        <div className="myLargeText">{this.props.word.word}</div>
+        <div className="myMediumLargeText">{this.props.word.word}</div>
 
         <div className="myMediumText">{this.state.secondsLeft}</div>
 
