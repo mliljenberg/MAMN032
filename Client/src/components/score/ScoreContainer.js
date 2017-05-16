@@ -20,7 +20,7 @@ class ScoreContainer extends React.Component{
         <div className="myMediumLargeText">Score</div>
         <div className="col-xs-12 myMargin"></div>
         {players.map(player =>
-         <PositionAndPointsRow position="" name={player.username} points={player.points}/>
+         <PositionAndPointsRow position="" name={player.username} points={player.points+" "}/>
         )}
       </div>
     );

@@ -4,8 +4,7 @@ import {bindActionCreators} from 'redux';
 import * as playerActions from '../../actions/playerAction';
 import $ from 'jquery';
 import {browserHistory}  from 'react-router';
-import ScoreContainer from './ScoreContainer';
-import ScoreBoardContainer from './ScoreBoardContainer';
+import * as myselfActions from '../../actions/myselfAction';
 
 
 class ScorePage extends React.Component {
@@ -18,16 +17,7 @@ class ScorePage extends React.Component {
 
   componentDidMount() {
     const {players} = this.props;
-    $("#scoreContainer").slideToggle("slow", function () {
-
-      setTimeout(function () {
-        $("#scoreContainer").slideToggle("slow", function () {
-          $("#scoreBoardContainer").slideToggle("slow", function () {
-
-          });
-
-        });
-      }, 3000);
+    $("#container").slideToggle("slow", function () {
 
 
     });
@@ -35,22 +25,14 @@ class ScorePage extends React.Component {
 
   }
 
-  clickedReady(){
-    $("#scoreBoardContainer").slideToggle("slow", function () {
-      browserHistory.push('/answer');
-    });
 
-  }
 //Detectade ingen förändring..
   render() {
-    const {players} = this.props;
     return (
       <div>
-        <div id="scoreContainer" className="hideFromStart">
-         <ScoreContainer/>
-        </div>
-        <div id="scoreBoardContainer" className="hideFromStart">
-         <ScoreBoardContainer show="yes" onClick={this.clickedReady}/>
+        <div id="container" className="hideFromStart">
+          <div className="myMediumText">Well done!</div><br/>
+          <div className="mySmallText">The result is displayed at the screen</div>
         </div>
       </div>
     );
@@ -59,21 +41,19 @@ class ScorePage extends React.Component {
 
 }
 ScorePage.propTypes = {
-  players: PropTypes.array.isRequired,
-  player: PropTypes.object.isRequired
+
+  myself: PropTypes.object.isRequired
 
 };
 
 function mapStateToProps(state, ownProps) {
-  const player = {id: '', value: ''};
   return {
-    players: state.players,
-    player: player
+    myself: state.myself
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Object.assign({}, playerActions), dispatch)
+    actions: bindActionCreators(Object.assign({}, myselfActions), dispatch)
 
   };
 }

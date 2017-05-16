@@ -5,28 +5,69 @@ import $ from 'jquery';
 import {browserHistory}  from 'react-router';
 import ScoreContainer from '../../score/ScoreContainer';
 import ScoreBoardContainer from '../../score/ScoreBoardContainer';
+import * as hostApi from '../../../api/hostApi';
+import * as stateAction from '../../../actions/stateAction';
+import * as answerAction from '../../../actions/answerAction';
 
 
 class ScorePage extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      player: Object.assign({}, props.player)
+      player: Object.assign({}, props.player),
+      secondsLeft: 10
     };
+    this.timerID = null;
+
+
+    this.tick = this.tick.bind(this);
+    this.startCountdown = this.startCountdown.bind(this);
+    this.goToNextPage = this.goToNextPage.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+  }
+
+  goToNextPage() {
+    clearInterval(this.timerID);
+
+    hostApi.DistributeAns(this.props.answers);
+    this.props.actions.clearAnswers();
+    //this.props.actions.changeState({url:'/vote'});
+    setTimeout(function () {
+      $("#container").slideToggle("slow", function () {
+        //TODO: Hantera ifall inte alla har skickat in.... kanske inte ska ske här..?
+
+
+        browserHistory.push("/host/answer");
+      });
+
+    }, 1000);
+  }
+
+  tick() {
+    if (this.state.secondsLeft > 0) {
+      this.setState({
+
+        secondsLeft: this.state.secondsLeft - 1
+      });
+      console.log("Tickar på "+ this.state.secondsLeft);
+    }
+    if (this.state.secondsLeft == 0) {
+      this.goToNextPage();
+
+    }
+  }
+
+  startCountdown() {
+
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
   }
 
   componentDidMount() {
-    const {players} = this.props;
-    $("#scoreContainer").slideToggle("slow", function () {
-
-      setTimeout(function () {
-        $("#scoreContainer").slideToggle("slow", function () {
-          $("#scoreBoardContainer").slideToggle("slow", function () {
-
-          });
-
-        });
-      }, 3000);
+    this.startCountdown();
+    $("#scoreBoardContainer").slideToggle("slow", function () {
 
 
     });
@@ -34,23 +75,22 @@ class ScorePage extends React.Component {
 
   }
 
-  clickedReady(){
+  clickedReady() {
     $("#scoreBoardContainer").slideToggle("slow", function () {
       browserHistory.push('/answer');
     });
 
   }
+
 //Detectade ingen förändring..
   render() {
-    const {players} = this.props;
     return (
-      <div>
-        <div id="scoreContainer" className="hideFromStart">
-          <ScoreContainer/>
-        </div>
+      <div id="container">
         <div id="scoreBoardContainer" className="hideFromStart">
           <ScoreBoardContainer show="no" onClick={this.clickedReady}/>
+          <div className="myMediumText">{this.state.secondsLeft}</div>
         </div>
+
       </div>
     );
   }
@@ -59,7 +99,8 @@ class ScorePage extends React.Component {
 }
 ScorePage.propTypes = {
   players: PropTypes.array.isRequired,
-  player: PropTypes.object.isRequired
+  player: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired
 
 };
 
@@ -72,9 +113,9 @@ function mapStateToProps(state, ownProps) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-
-
+    actions: bindActionCreators(Object.assign({}, stateAction, answerAction), dispatch)
   };
+
 }
 
 
