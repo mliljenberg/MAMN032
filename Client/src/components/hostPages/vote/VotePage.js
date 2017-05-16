@@ -26,6 +26,8 @@ class VotePage extends React.Component {
 
 
   componentDidMount() {
+
+
     $("#voteContainer").slideToggle("slow", function () {
 
     });
@@ -63,6 +65,22 @@ class VotePage extends React.Component {
   }
 */
   tick() {
+    let counter =0;
+    for(let i=0; i<this.props.answers.length; i++){
+      counter += this.props.answers[i].voted.length;
+      if(counter>=this.props.players.length){
+        setTimeout(function () {
+
+          clearInterval(this.timerID);
+          $("#voteContainer").slideToggle("slow", function () {
+            stateAction.changeState({url:'/score'});
+            browserHistory.push("/host/voteResult");
+          });
+        }, 1000);
+
+      }
+    }
+
     if (this.state.secondsLeft > 0) {
       this.setState({
         secondsLeft: this.state.secondsLeft - 1
