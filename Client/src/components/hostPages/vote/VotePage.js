@@ -12,17 +12,15 @@ class VotePage extends React.Component {
     super(props, context);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.state = {
-      secondsLeft: 23//23
+      secondsLeft: 23,
+      points:0
     };
 
     this.timerID = setInterval(
       () => this.tick(),
       1000
     );
-
-
-
-
+    this.calculatePointsDiff = this.calculatePointsDiff.bind(this);
   }
 
 
@@ -30,8 +28,37 @@ class VotePage extends React.Component {
     $("#voteContainer").slideToggle("slow", function () {
 
     });
+    let points = 0;
+    this.props.players.map(player=>{
+      points += player.points;
+    });
+    this.setState({points:points});
 
 
+  }
+  shouldComponentUpdate(){
+    this.calculatePointsDiff();
+    return true;
+  }
+
+  calculatePointsDiff(){
+    //inte den mest effekiva lösning men funkar... Alternativ om man orkar är att göra en variabel i redux istället...
+    let points = 0;
+    this.props.players.map(player=>{
+      points += player.points;
+    });
+    if((points-this.state.points)==this.props.players.length){
+      clearInterval(this.timerID);
+      setTimeout(function () {
+
+        $("#voteContainer").slideToggle("slow", function () {
+          browserHistory.push("/host/voteResult");
+          stateAction.changeState({url:'/score'});
+
+        });
+
+      }, 1000);
+    }
   }
 
   tick() {
@@ -40,7 +67,7 @@ class VotePage extends React.Component {
         secondsLeft: this.state.secondsLeft - 1
       });
     }
-    if (this.state.secondsLeft == 0) {
+    if (this.state.secondsLeft <= 0) {
       clearInterval(this.timerID);
       setTimeout(function () {
 
@@ -86,14 +113,16 @@ class VotePage extends React.Component {
 
 VotePage.propTypes = {
   //myprop: PropTypes.string.isRequired
-  answers: PropTypes.array.isRequired
+  answers: PropTypes.array.isRequired,
+  players: PropTypes.array.isRequired
 
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     // dina props : state.dina props
-    answers: state.answers
+    answers: state.answers,
+    players: state.players
   };
 }
 function mapDispatchToProps(dispatch) {

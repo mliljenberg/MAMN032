@@ -43,12 +43,6 @@ class AnswerPage extends React.Component {
 
     this.props.actions.newWord(this.props.wordList,players[nbr].username);
     hostApi.ChangeState("/answer");
-
-    //TODO: lägg till inteligens för hur man bestämmer vem som ska få riktiga ordet.
-
-    //wordAction.newWord(this.state.wordList,'test');
-
-
   }
 
   goToNextPage(){
@@ -56,10 +50,8 @@ class AnswerPage extends React.Component {
 
     hostApi.DistributeAns(this.props.answers);
 
-    //this.props.actions.changeState({url:'/vote'});
     setTimeout(function () {
       $("#container").slideToggle("slow", function () {
-        //TODO: Hantera ifall inte alla har skickat in.... kanske inte ska ske här..?
         stateAction.changeState({url:'/vote'});
         browserHistory.push("/host/vote");
       });
@@ -119,17 +111,10 @@ AnswerPage.propTypes = {
   answers: PropTypes.array.isRequired,
   players: PropTypes.array.isRequired
 
-  //myprop: PropTypes.string.isRequired
 
 };
 
 function mapStateToProps(state, ownProps) {
- /**
-  let word = state.word;
-  if(!state.word.word){
-  word.word = "fel";
-}
-  */
 
   return {
     word: state.word,

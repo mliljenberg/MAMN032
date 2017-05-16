@@ -13,7 +13,8 @@ class VotePagePlayer extends React.Component {
 
     this.componentDidMount = this.componentDidMount.bind(this);
     this.state = {
-      answers: Object.assign([], props.answers)
+      answers: Object.assign([], props.answers),
+      points:0
 
     };
     this.voteClicked = this.voteClicked.bind(this);
@@ -36,6 +37,7 @@ class VotePagePlayer extends React.Component {
   }
 
   componentDidMount() {
+
     $("#voteContainer").slideToggle("slow", function () {
       setTimeout(function () {
 
@@ -44,6 +46,7 @@ class VotePagePlayer extends React.Component {
 
 
   }
+
 
   voteClicked(answer){
     event.preventDefault();
@@ -105,6 +108,7 @@ VotePagePlayer.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
+
   return {
     // dina props : state.dina props
     answers: state.answers,
@@ -114,7 +118,6 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
   return {
     //här bindar du alla dina actions tror inte du behöver ändra den
-
     actions: bindActionCreators(Object.assign({}, playerAction), dispatch)
 
   };
