@@ -56,17 +56,29 @@ export function updatePlayer(player) {
  */
 
 export function updatePlayerVote(vote,store) {
+  //lägger till voted till answer
  let answers = store.getState().answers;
  let players =  store.getState().players;
+ let word = store.getState().word;
  let ansList =[...answers.filter((answer) => answer.username === vote.author)];
  let tempAns = Object.assign({},ansList[0]);
 
 
 
- let list =[...players.filter((player) => player.username === vote.author)];
- let temp = Object.assign({},list[0]);
+console.log(vote);
+console.log(word.word);
+ if(vote.def===word.def){
+   let listTwo =[...players.filter((player) => player.username === vote.username)];
+   let tempTwo = Object.assign({},listTwo[0]);
+   tempTwo.points +=2;
+   console.log("Hände nu!");
+   store.dispatch(updatePlayersSuccess(Object.assign({},tempTwo)));
+ }
+
+  let list =[...players.filter((player) => player.username === vote.author)];
+  let temp = Object.assign({},list[0]);
+ //poängsättning för author
   temp.points += 1;
-  console.log(temp);
   store.dispatch(updatePlayersSuccess(Object.assign({},temp)));
   tempAns.voted=tempAns.voted.push(vote.username);
   store.dispatch(updateAnswerSuccess(Object.assign({},tempAns)));

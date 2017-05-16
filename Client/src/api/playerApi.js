@@ -57,12 +57,12 @@ export function SubmitAnswer(word, answer) {
  * @param: author, word.
  * @return:
  * **/
-export function SubmitVote(author, word) {
+export function SubmitVote(author, def) {
   if (connectedToRoom) {
     let vt = {
       "username": usrn,
       "author": author,
-      "word": word
+      "def": def
     };
     socket.emit(header.SUBMIT_VOTE_REQ, key, vt);
   }

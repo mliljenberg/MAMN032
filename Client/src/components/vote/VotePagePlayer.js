@@ -54,8 +54,6 @@ class VotePagePlayer extends React.Component {
     $("#voteContainer").slideToggle("slow", function () {
              browserHistory.push('voted');
           });
-
-
   }
 
 

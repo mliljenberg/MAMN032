@@ -73,6 +73,7 @@ class AnswerPagePlayer extends React.Component {
   }
 
   submitTrueAnswer(){
+    console.log(this.state.answer);
     this.props.actions.submitAnswer(this.props.word, this.props.word.def);
   }
 
