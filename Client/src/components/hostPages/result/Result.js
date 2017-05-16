@@ -5,13 +5,14 @@ import $ from 'jquery';
 import {browserHistory}  from 'react-router';
 import PositionAndPointsRow from '../../common/PositionAndPointsRow';
 import TwoButtonsOneRow from '../../common/TwoButtonsOneRow';
-
+import * as playerActions from '../../../actions/playerAction';
 
 class ResultPage extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      player: Object.assign({}, props.player)
+      player: Object.assign({}, props.player),
+
     };
 
 
@@ -22,6 +23,18 @@ class ResultPage extends React.Component {
     console.log(this.props.players);
   }
 
+  linkToHome(){
+    $("#totalContainer").slideToggle("slow", function () {
+      browserHistory.push('/joinGame');
+    });
+  }
+
+  linkToNewGame(){
+    $("#totalContainer").slideToggle("slow", function () {
+      browserHistory.push('/game');
+    });
+  }
+
   componentDidMount() {
     $("#totalContainer").slideToggle("slow", function () {
     });
@@ -29,16 +42,16 @@ class ResultPage extends React.Component {
 
   render() {
     const {players} = this.props;
+    let first = true;
+
     return (
       <div id="totalContainer" className="hideFromStart">
         <div className="mySmallText">The winner is</div>
         <br/>
-        <div className="myMediumText">{players[0].username}{players[0].points}</div>
+        <div className="myMediumLargeText">{players[players.length-1].username} {players[0].points}p</div>
         <br/>
 
-        {players.map(player =>
-          <PositionAndPointsRow position={players.indexOf(player+1) + 2+" . "} name={players.indexOf(player +1 ).username} points={players.indexOf(player +1 ).points}/>
-        )}
+
 
       </div>
     );
@@ -61,7 +74,7 @@ function mapStateToProps(state, ownProps) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-
+    actions: bindActionCreators(Object.assign({}, playerActions), dispatch)
 
   };
 }

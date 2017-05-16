@@ -15,7 +15,8 @@ class ScorePage extends React.Component {
     super(props, context);
     this.state = {
       player: Object.assign({}, props.player),
-      secondsLeft: 10
+      secondsLeft: 10,
+      weHaveAWinner:false
     };
     this.timerID = null;
 
@@ -24,6 +25,10 @@ class ScorePage extends React.Component {
     this.startCountdown = this.startCountdown.bind(this);
     this.goToNextPage = this.goToNextPage.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
+
+
+
+
   }
 
   goToNextPage() {
@@ -49,7 +54,6 @@ class ScorePage extends React.Component {
 
         secondsLeft: this.state.secondsLeft - 1
       });
-      console.log("Tickar på "+ this.state.secondsLeft);
     }
     if (this.state.secondsLeft == 0) {
       this.goToNextPage();
@@ -66,6 +70,16 @@ class ScorePage extends React.Component {
   }
 
   componentDidMount() {
+
+    for(let i =0; i<this.props.players.length; i++){
+      if(Number(this.props.players[i].points)>=15){
+        clearInterval(this.timerID);
+        console.log("Ska finnas en vinnare");
+        browserHistory.push('/host/result');
+      }
+    }
+
+
     this.startCountdown();
     $("#scoreBoardContainer").slideToggle("slow", function () {
 

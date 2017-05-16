@@ -12,6 +12,10 @@ class ScoreContainer extends React.Component {
       player: Object.assign({}, props.player),
       weHaveAWinner: false
     };
+
+    this.props.players.sort(function(a,b){
+      return b.points - a.points;
+    });
   }
 
   render() {
@@ -27,10 +31,10 @@ class ScoreContainer extends React.Component {
         <div className="myMediumLargeText">ScoreBoard</div>
         <div className="col-xs-12 myMargin"></div>
         {players.map(player =>
-          <PositionAndPointsRow position={players.indexOf(player) + 1 + " . "} name={player.username} points={player.points+" "}/>
-        )}
 
-        {button}
+
+          <PositionAndPointsRow position={players.indexOf(player) + 1+" . "} name={players[players.indexOf(player)].username} points={players[players.indexOf(player)].points+ " "}/>
+        )}
 
       </div>
     );
