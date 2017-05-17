@@ -22,8 +22,11 @@ export function updateWord(word,store) {
   }
 
 export function newWord(wordList,username) {
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
   return function (dispatch) {
-    var index = 1;
+    var index = getRandomInt(0,wordList.length-1);
     let wordList1 = wordList.slice();
     let word = Object.assign({},wordList1[index]);
     wordList1.shift();
