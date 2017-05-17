@@ -21,6 +21,8 @@ class VotePagePlayer extends React.Component {
       word: Object.assign(({}),props.word)
 
     };
+
+
     this.voteClicked = this.voteClicked.bind(this);
 
 

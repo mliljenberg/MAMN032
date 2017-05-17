@@ -44,14 +44,9 @@ class GamePage extends React.Component {
   }
 
   componentWillMount(){
-
-    if(this.props.room.id == null){
+    if(!this.props.room.id){
       browserHistory.push("/");
       alert("Room does not exist");
-    }
-    if(this.props.players.length > 4){
-      browserHistory.push("/");
-      alert("Room is full");
     }
   }
 

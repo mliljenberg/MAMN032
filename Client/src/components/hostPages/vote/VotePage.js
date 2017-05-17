@@ -12,9 +12,11 @@ class VotePage extends React.Component {
     super(props, context);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.state = {
-      secondsLeft: 23,
+      secondsLeft: 60,
       word: Object.assign(({}),props.word)
     };
+
+
 
     this.timerID = setInterval(
       () => this.tick(),
