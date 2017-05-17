@@ -46,6 +46,22 @@ class VotePagePlayer extends React.Component {
 
 
   render() {
+    let IHaveAnswered=0;
+    for(let i =0; i<this.props.answers.length; i++){
+     if(this.props.answers[i].username==this.props.myself.username){
+       IHaveAnswered=1;
+     }
+    }
+
+    let nmbrOfAnswers=this.props.answers.length-IHaveAnswered;
+    let width= "col-md-6";
+    if(nmbrOfAnswers==1){
+      width="col-md-12";
+    }
+    else if(nmbrOfAnswers==3){
+      width="col-md-4";
+    }
+
     return (
       <div>
         <div id="voteContainer" className="hideFromStart">
@@ -55,7 +71,7 @@ class VotePagePlayer extends React.Component {
             {this.props.answers.map(answer => {
               if(answer.username !== this.props.myself.username) {
                 return (
-                  <div className="col-md-4 col-xs-12 hej" word={answer.answer} name={answer.username}
+                  <div className={width+ " col-xs-12 hej"} word={answer.answer} name={answer.username}
                        onClick={() => this.voteClicked(answer)} id={"vote1" + answer.answer}>
                     <div className="voteBoxUnhidden" word={answer.answer} name={answer.username}
                          id={"vote2" + answer.answer}>

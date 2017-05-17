@@ -98,17 +98,24 @@ class VoteResult extends React.Component {
   }
 
   render() {
-
+    let nmbrOfAnswers=this.props.answers.length;
+    let width= "col-md-6";
+    if(nmbrOfAnswers==1){
+      width="col-md-12";
+    }
+    else if(nmbrOfAnswers==3){
+      width="col-md-4";
+    }
 
     return (
       <div id="totalContainer">
         <div className="mySmallText hideFromStart" id="theWordMeans">"{this.props.word.word}" means</div>
-        <div className="col-xs-12 voteBoxSingle" id="voteBox">
+        <div className=" voteBoxSingle" id="voteBox">
           <div className="centeredText voteBoxText">{this.props.word.def}</div>
         </div>
         <div id="allVotes" className="hideFromStart">
           {this.props.answers.map(answer =>
-            <GetRightOrWrongAnswer votes={answer.voted} def={this.props.word.def} answer={answer}/>
+            <GetRightOrWrongAnswer width={width} votes={answer.voted} def={this.props.word.def} answer={answer}/>
           )
           }
         </div>
@@ -161,7 +168,7 @@ function GetRightOrWrongAnswer(props) {
 
 
     return (
-      <div className="col-md-6 col-xs-12" id={"voteBox" + props.answer.answer}>
+      <div className={props.width+ " col-xs-12"} id={"voteBox" + props.answer.answer}>
 
         <div className="voteBoxUnhidden">
           <div className="centeredText voteBoxText">{props.answer.answer}</div>
@@ -180,7 +187,7 @@ function GetRightOrWrongAnswer(props) {
   }
   else {
     return (
-      <div className="col-md-6 col-xs-12" id={"voteBox" + props.answer.answer}>
+      <div className={props.width+" col-xs-12"} id={"voteBox" + props.answer.answer}>
 
         <div className="voteBoxUnhiddenWrongAnswer">
           <div className="centeredText voteBoxText">{props.answer.answer}</div>

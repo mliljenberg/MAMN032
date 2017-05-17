@@ -107,6 +107,15 @@ class VotePage extends React.Component {
 
 
   render() {
+    let nmbrOfAnswers=this.props.answers.length;
+    let width= "col-md-6";
+    if(nmbrOfAnswers==1){
+      width="col-md-12";
+    }
+    else if(nmbrOfAnswers==3){
+      width="col-md-4";
+    }
+
     return (
       <div>
         <div id="voteContainer" className="hideFromStart">
@@ -114,7 +123,7 @@ class VotePage extends React.Component {
           <div className="mySmallText">"{this.props.word.word}" means</div>
           <div id="listOfAnswers" className="col-xs-12">
             {this.props.answers.map(answer =>
-              <div className="col-md-6 col-xs-12"id={answer.answer} >
+              <div className={width+ " col-xs-12"} id={answer.answer} >
                 <div className="voteBoxUnhidden " >
                   <div className="centeredText voteBoxText" >{answer.answer}</div>
                 </div>

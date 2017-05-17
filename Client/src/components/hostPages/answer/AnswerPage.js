@@ -66,7 +66,8 @@ class AnswerPage extends React.Component {
       });
     }
     if(this.state.secondsLeft==0){
-      this.goToNextPage;
+      console.log("Nere på 0");
+      this.goToNextPage();
 
     }
   }
