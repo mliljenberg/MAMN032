@@ -2,7 +2,6 @@ import React, {PropTypes}  from 'react';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 import * as stateAction from '../../../actions/stateAction';
-import * as wordAction from '../../../actions/wordAction';
 import $ from 'jquery';
 import * as hostApi from '../../../api/hostApi';
 import {bindActionCreators} from 'redux';
@@ -162,7 +161,7 @@ function mapDispatchToProps(dispatch) {
     //här bindar du alla dina actiones tror inte du behöver ändra den
 
     //actions: bindActionCreators(actions, dispatch)
-    actions: bindActionCreators(Object.assign({},stateAction,wordAction), dispatch)
+    actions: bindActionCreators(Object.assign({},stateAction), dispatch)
   };
 }
 

@@ -24,7 +24,6 @@ export function CreateRoom() {
     socket.on(header.CREATE_ROOM_ANS, function (ans, wordlist) {
       nbrOfPlayers = 0;
       state = header.STATE_WAIT_4_PLAYERS;
-      console.log(wordlist.default);
       wordAction.updateWordList(wordlist.default,storen);
       resolve(Object.assign({}, {id: ans}));
     });

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import $ from 'jquery';
 import {browserHistory} from 'react-router';
-import * as wordAction from '../../../actions/wordAction';
+
 class VoteResult extends React.Component {
 
 
@@ -152,7 +152,7 @@ function mapDispatchToProps(dispatch) {
 
   return {
 
-    actions: bindActionCreators(Object.assign({}, wordAction), dispatch)
+    actions: bindActionCreators(Object.assign({}), dispatch)
   };
 }
 

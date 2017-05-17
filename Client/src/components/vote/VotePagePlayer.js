@@ -5,7 +5,6 @@ import $ from 'jquery';
 import {browserHistory}  from 'react-router';
 import VoteBox from './VoteBox';
 import * as playerAction from '../../actions/playerAction';
-import * as wordAction from '../../actions/wordAction';
 import * as playerApi from '../../api/playerApi';
 
 class VotePagePlayer extends React.Component {
@@ -23,6 +22,15 @@ class VotePagePlayer extends React.Component {
 
 
   }
+/*
+  componentWillMount(){
+    console.log("------------------------------");
+    console.log(this.props);
+    if(this.props.myself.username === this.props.word.username){
+
+
+    }
+  }*/
 
   componentDidMount() {
 
@@ -122,7 +130,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
   return {
     //här bindar du alla dina actions tror inte du behöver ändra den
-    actions: bindActionCreators(Object.assign({}, playerAction,wordAction), dispatch)
+    actions: bindActionCreators(Object.assign({}, playerAction), dispatch)
 
   };
 }

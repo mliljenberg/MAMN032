@@ -16,32 +16,7 @@ class AnswerPagePlayer extends React.Component {
     this.submitted = this.submitted.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.submitTrueAnswer = this.submitTrueAnswer.bind(this);
-    /*console.log("word: "+this.props.word.username);
-    console.log("myself: "+ this.props.myself.username);
 
-
-
-    if(this.props.word.username===this.props.myself.username){
-      console.log("fick rätt!");
-
-      this.setState({
-        rightAnswerHide: 'hideFromStart',
-        answerHide: ''
-      });
-
-
-
-    }
-    else{
-      console.log("fick fel!");
-      this.setState({
-        rightAnswerHide: '',
-        answerHide: 'hideFromStart',
-        rightAnswer: true
-
-      });
-*/
-    //}
   }
 
 

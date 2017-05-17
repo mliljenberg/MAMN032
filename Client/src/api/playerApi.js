@@ -92,6 +92,8 @@ export function ServerUpdate(store) {
     //TODO
     wordAction.updateWord(wrd,store);
   });
+
+
   socket.on(header.DIST_ANS, function (ansList) {
     //TODO
     console.log(ansList);

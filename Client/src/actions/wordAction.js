@@ -13,6 +13,8 @@ export function updateWordListSuccess(wordList) {
 }
 
 export function updateWord(word,store) {
+  console.log("hör kanske??-----------------");
+  console.log(word);
     store.dispatch(updateWordSuccess(word));
 
 }
@@ -30,6 +32,9 @@ export function newWord(wordList,username) {
     let wordList1 = wordList.slice();
     let word = Object.assign({},wordList1[index]);
     wordList1.shift();
+    console.log(wordList1);
+    console.log("----------------------------");
+    console.log(word);
     dispatch(updateWordListSuccess(wordList1));
     dispatch(updateWordSuccess(word));
     hostApi.DistributeWord(word.word, word.def, username);
