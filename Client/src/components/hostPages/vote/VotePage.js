@@ -64,7 +64,7 @@ class VotePage extends React.Component {
   }
 */
   tick() {
-    let counter =0;
+    let counter =1;
     console.log("Answers: "+ this.props.answers.length);
     for(let i=0; i<this.props.answers.length; i++){
 

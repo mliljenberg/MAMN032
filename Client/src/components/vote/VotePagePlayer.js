@@ -10,6 +10,9 @@ import * as playerApi from '../../api/playerApi';
 class VotePagePlayer extends React.Component {
   constructor(props, context) {
     super(props, context);
+    if(props.word.username == props.myself.username){
+      browserHistory.push('voted');
+    }
 
     this.componentDidMount = this.componentDidMount.bind(this);
     this.state = {

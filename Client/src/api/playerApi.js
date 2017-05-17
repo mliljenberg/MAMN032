@@ -80,6 +80,7 @@ export function ServerUpdate(store) {
    * @return:
    * **/
   socket.on(header.CHANGE_STATE, function (url) {
+
     browserHistory.push(url);
   });
 
