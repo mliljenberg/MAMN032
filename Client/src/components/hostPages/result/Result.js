@@ -50,7 +50,9 @@ class ResultPage extends React.Component {
         <br/>
         <div className="myMediumLargeText">{players[players.length-1].username} {players[players.length-1].points}p</div>
         <br/>
-
+        <PositionAndPointsRow position={"2. "} name={players[players.length-2].username} points={players[players.length-2].points+ " "}/>
+        <PositionAndPointsRow position={"3. "} name={players[players.length-3].username} points={players[players.length-3].points+ " "}/>
+        <PositionAndPointsRow position={"4. "} name={players[players.length-4].username} points={players[players.length-4].points+ " "}/>
 
 
       </div>

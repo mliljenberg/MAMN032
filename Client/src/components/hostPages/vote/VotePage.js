@@ -66,12 +66,14 @@ class VotePage extends React.Component {
 */
   tick() {
     let counter =0;
+    console.log("Answers: "+ this.props.answers.length);
     for(let i=0; i<this.props.answers.length; i++){
-      counter += this.props.answers[i].voted.length;
-      if(counter>=this.props.players.length){
-        setTimeout(function () {
 
-          clearInterval(this.timerID);
+      counter += this.props.answers[i].voted.length;
+      console.log("Counter: "+counter);
+      if(counter>=this.props.players.length){
+        clearInterval(this.timerID);
+        setTimeout(function () {
           $("#voteContainer").slideToggle("slow", function () {
             stateAction.changeState({url:'/score'});
             browserHistory.push("/host/voteResult");
