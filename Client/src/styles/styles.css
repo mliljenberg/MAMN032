@@ -101,36 +101,73 @@ nav {
   color: black;
 }
 
-.myLargeText {
-  font-size: 250px;
-  font-weight: 900;
-  margin-bottom: -50px;
-  color: white;
-  text-shadow: 7px 7px 0 #000,
-  -7px 7px 0 #000,
-  7px -7px 0 #000,
-  -7px -7px 0 #000,
-  0px 7px 0 #000,
-  0px -7px 0 #000,
-  -7px 0px 0 #000,
-  7px 0px 0 #000,
-  2px 2px 0 #000,
-  -2px 2px 0 #000,
-  2px -2px 0 #000,
-  -2px -2px 0 #000,
-  0px 2px 0 #000,
-  0px -2px 0 #000,
-  -2px 0px 0 #000,
-  2px 0px 0 #000,
-  7px 2px 0 #000,
-  -7px 2px 0 #000,
-  7px -2px 0 #000,
-  -7px -2px 0 #000,
-  2px 7px 0 #000,
-  -2px 7px 0 #000,
-  2px -7px 0 #000,
-  -2px -7px 0 #000;
+@media only screen and (min-device-width: 800px) {
+  .myLargeText {
+    font-size: 250px;
+    font-weight: 900;
+    margin-bottom: -50px;
+    color: white;
+    text-shadow: 7px 7px 0 #000,
+    -7px 7px 0 #000,
+    7px -7px 0 #000,
+    -7px -7px 0 #000,
+    0px 7px 0 #000,
+    0px -7px 0 #000,
+    -7px 0px 0 #000,
+    7px 0px 0 #000,
+    2px 2px 0 #000,
+    -2px 2px 0 #000,
+    2px -2px 0 #000,
+    -2px -2px 0 #000,
+    0px 2px 0 #000,
+    0px -2px 0 #000,
+    -2px 0px 0 #000,
+    2px 0px 0 #000,
+    7px 2px 0 #000,
+    -7px 2px 0 #000,
+    7px -2px 0 #000,
+    -7px -2px 0 #000,
+    2px 7px 0 #000,
+    -2px 7px 0 #000,
+    2px -7px 0 #000,
+    -2px -7px 0 #000;
+
+  }
 }
+@media only screen and (max-device-width: 800px) {
+  .myLargeText {
+    font-size: 200px;
+    font-weight: 900;
+    margin-bottom: -50px;
+    color: white;
+    text-shadow: 7px 7px 0 #000,
+    -7px 7px 0 #000,
+    7px -7px 0 #000,
+    -7px -7px 0 #000,
+    0px 7px 0 #000,
+    0px -7px 0 #000,
+    -7px 0px 0 #000,
+    7px 0px 0 #000,
+    2px 2px 0 #000,
+    -2px 2px 0 #000,
+    2px -2px 0 #000,
+    -2px -2px 0 #000,
+    0px 2px 0 #000,
+    0px -2px 0 #000,
+    -2px 0px 0 #000,
+    2px 0px 0 #000,
+    7px 2px 0 #000,
+    -7px 2px 0 #000,
+    7px -2px 0 #000,
+    -7px -2px 0 #000,
+    2px 7px 0 #000,
+    -2px 7px 0 #000,
+    2px -7px 0 #000,
+    -2px -7px 0 #000;
+
+  }
+}
+
 
 .myMediumLargeText {
   font-size: 150px;
