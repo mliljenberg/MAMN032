@@ -17,6 +17,9 @@ class AnswerPagePlayer extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.submitTrueAnswer = this.submitTrueAnswer.bind(this);
 
+    if(this.props.word.username==this.props.myself.username){
+      this.props.actions.submitAnswer(this.props.word, this.props.word.def);
+    }
   }
 
 
@@ -108,7 +111,7 @@ function Container(props){
     );
   }
   else if(props.rightAnswer){
-    props.submitTrueAnswer();
+    //props.submitTrueAnswer();
     return(
       <div id="rightAnswerContainer">
         <RightAnswerContainer word={props.word.word} def={props.word.def} onClick={props.submitted}/>

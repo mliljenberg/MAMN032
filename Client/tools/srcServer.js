@@ -35,7 +35,7 @@ let roomHost = new Map(); //Key: room key Value: hostSocket
 let hostRoom = new Map(); //Key: hostSocket. Value: room key
 
 let pending = new Map(); //Key: key+username. Value: socket
-let legalChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+let legalChars = "abcdefghijklmnopqrstuvwxyz0123456789";
 
 io.sockets.on('connection', function (socket) {
   console.log("New connection");
