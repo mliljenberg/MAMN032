@@ -18,7 +18,8 @@ class VotePagePlayer extends React.Component {
     this.state = {
       answers: Object.assign([], props.answers),
       points:0,
-      word: Object.assign(({}),props.word)
+      word: Object.assign(({}),props.word),
+      shuffledList:[]
 
     };
 
@@ -38,7 +39,7 @@ class VotePagePlayer extends React.Component {
   }*/
 
   componentDidMount() {
-
+    this.shuffle(this.props.answers)
     $("#voteContainer").slideToggle("slow", function () {
       setTimeout(function () {
 
@@ -48,6 +49,13 @@ class VotePagePlayer extends React.Component {
 
   }
 
+  shuffle(a) {
+    for (let i = a.length; i; i--) {
+      let j = Math.floor(Math.random() * i);
+      [a[i - 1], a[j]] = [a[j], a[i - 1]];
+    }
+    this.setState({shuffledList:a});
+  }
 
   voteClicked(answer){
     event.preventDefault();
@@ -81,7 +89,7 @@ class VotePagePlayer extends React.Component {
 
           <div className="mySmallText" id="text">"{this.props.word.word}" means</div>
           <div id="listOfAnswers" className="col-xs-12">
-            {this.props.answers.map(answer => {
+            {this.state.shuffledList.map(answer => {
               if(answer.username !== this.props.myself.username) {
                 return (
                   <div className={width+ " col-xs-12 hej"} word={answer.answer} name={answer.username}

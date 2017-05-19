@@ -13,8 +13,10 @@ class VotePage extends React.Component {
     this.componentDidMount = this.componentDidMount.bind(this);
     this.state = {
       secondsLeft: 60,
-      word: Object.assign(({}),props.word)
+      word: Object.assign(({}),props.word),
+      shuffledList: []
     };
+    this.shuffle = this.shuffle.bind(this);
 
 
 
@@ -27,44 +29,14 @@ class VotePage extends React.Component {
 
 
   componentDidMount() {
-
+    this.shuffle(this.props.answers);
 
     $("#voteContainer").slideToggle("slow", function () {
 
     });
-   /* let points = 0;
-    this.props.players.map(player=>{
-      points += player.points;
-    });
-    this.setState({points:points});
-*/
 
   }
-  /*shouldComponentUpdate(){
-    this.calculatePointsDiff();
-    return true;
-  }
 
-  calculatePointsDiff(){
-    //inte den mest effekiva lösning men funkar... Alternativ om man orkar är att göra en variabel i redux istället...
-    let points = 0;
-    this.props.players.map(player=>{
-      points += player.points;
-    });
-    if((points-this.state.points)==this.props.players.length){
-      clearInterval(this.timerID);
-      setTimeout(function () {
-
-        $("#voteContainer").slideToggle("slow", function () {
-          browserHistory.push("/host/voteResult");
-          stateAction.changeState({url:'/score'});
-
-        });
-
-      }, 1000);
-    }
-  }
-*/
   tick() {
     let counter =1;
     console.log("Answers: "+ this.props.answers.length);
@@ -107,6 +79,15 @@ class VotePage extends React.Component {
   }
 
 
+  shuffle(a) {
+  for (let i = a.length; i; i--) {
+    let j = Math.floor(Math.random() * i);
+    [a[i - 1], a[j]] = [a[j], a[i - 1]];
+  }
+  this.setState({shuffledList:a});
+}
+
+
   render() {
     let nmbrOfAnswers=this.props.answers.length;
     let width= "col-md-6";
@@ -123,7 +104,7 @@ class VotePage extends React.Component {
 
           <div className="mySmallText">"{this.props.word.word}" means</div>
           <div id="listOfAnswers" className="col-xs-12">
-            {this.props.answers.map(answer =>
+            {this.state.shuffledList.map(answer =>
               <div className={width+ " col-xs-12"} id={answer.answer} >
                 <div className="voteBoxUnhidden " >
                   <div className="centeredText voteBoxText" >{answer.answer}</div>
