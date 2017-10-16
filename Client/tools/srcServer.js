@@ -6,7 +6,7 @@ import * as header from '../src/headerConstants';
 import * as words from './words';
 
 /* eslint-disable no-console */
-const port = 80;
+const port = 3000;
 const app = express();
 const compiler = webpack(config);
 const server = require('http').createServer(app);
